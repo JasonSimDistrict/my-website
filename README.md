@@ -103,7 +103,7 @@ The site is fully static — deploy `dist/` to any static host:
 | Vercel          | Connect repo — Astro is auto-detected                             |
 | GitHub Pages    | Add `@astrojs/github-pages` adapter, or push `dist/` to `gh-pages` |
 
-After deploy, update `site` in `astro.config.mjs` to your final domain (currently `https://projecthome.sg`).
+After deploy, update `site` in `astro.config.mjs` to your final domain (currently `https://my-website-af3.pages.dev`).
 
 ## Wiring the lead form
 

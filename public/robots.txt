@@ -1,5 +1,5 @@
 # robots.txt for ProjectHome.sg
-# https://projecthome.sg/robots.txt
+# https://my-website-af3.pages.dev/robots.txt
 
 User-agent: *
 Allow: /
@@ -10,4 +10,4 @@ Allow: /
 # User-agent: CCBot
 # Disallow: /
 
-Sitemap: https://projecthome.sg/sitemap-index.xml
+Sitemap: https://my-website-af3.pages.dev/sitemap-index.xml

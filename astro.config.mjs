@@ -3,7 +3,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://projecthome.sg',
+  site: 'https://my-website-af3.pages.dev',
   integrations: [
     sitemap({
       changefreq: 'weekly',

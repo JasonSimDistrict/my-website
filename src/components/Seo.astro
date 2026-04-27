@@ -24,7 +24,7 @@ const {
   articleSection,
 } = Astro.props;
 
-const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://projecthome.sg';
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://my-website-af3.pages.dev';
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site ?? siteUrl).toString();
 const fullOgImage = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
 ---

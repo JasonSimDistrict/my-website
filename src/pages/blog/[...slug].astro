@@ -29,15 +29,15 @@ const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-const canonical = `https://projecthome.sg/blog/${post.slug}`;
+const canonical = `https://my-website-af3.pages.dev/blog/${post.slug}`;
 
 const articleJsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
-      { '@type': 'ListItem', position: 2, name: 'Insights & News', item: 'https://projecthome.sg/blog' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://my-website-af3.pages.dev/' },
+      { '@type': 'ListItem', position: 2, name: 'Insights & News', item: 'https://my-website-af3.pages.dev/blog' },
       { '@type': 'ListItem', position: 3, name: data.title, item: canonical },
     ],
   },
@@ -52,8 +52,8 @@ const articleJsonLd = [
     dateModified: (data.updatedDate ?? data.pubDate).toISOString(),
     articleSection: data.categoryLabel,
     inLanguage: 'en-SG',
-    author: { '@type': 'Organization', name: 'ProjectHome.sg', url: 'https://projecthome.sg/' },
-    publisher: { '@id': 'https://projecthome.sg/#organization' },
+    author: { '@type': 'Organization', name: 'ProjectHome.sg', url: 'https://my-website-af3.pages.dev/' },
+    publisher: { '@id': 'https://my-website-af3.pages.dev/#organization' },
     mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
   },
 ];
