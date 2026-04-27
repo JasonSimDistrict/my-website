@@ -9,10 +9,6 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.8,
       lastmod: new Date(),
-      i18n: {
-        defaultLocale: 'en',
-        locales: { en: 'en-SG' },
-      },
     }),
   ],
   trailingSlash: 'ignore',
