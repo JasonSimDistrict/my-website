@@ -1,0 +1,20 @@
+{
+  "name": "projecthome-sg",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "ProjectHome.sg — Singapore property advisory site, built with Astro.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^4.16.18",
+    "typescript": "^5.6.3"
+  }
+}

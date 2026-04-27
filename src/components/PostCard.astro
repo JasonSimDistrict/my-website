@@ -1,0 +1,35 @@
+---
+export interface Props {
+  href: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  categorySlug?: string;
+  date: string;
+  readingTime?: string;
+  coverImage: string;
+}
+
+const {
+  href,
+  title,
+  excerpt,
+  category,
+  categorySlug = 'all',
+  date,
+  readingTime = '5 min read',
+  coverImage,
+} = Astro.props;
+---
+
+<article class="post-card" data-category={categorySlug}>
+  <div class="post-thumb" style={`background-image:url('${coverImage}');`} role="img" aria-label={title}>
+    <span class="tag">{category}</span>
+  </div>
+  <div class="post-body">
+    <div class="post-meta">{date} · {readingTime}</div>
+    <h3>{title}</h3>
+    <p>{excerpt}</p>
+    <a href={href} class="read-more">Read article <span class="arrow">→</span></a>
+  </div>
+</article>

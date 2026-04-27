@@ -1,0 +1,41 @@
+---
+export interface Props {
+  active?: 'home' | 'guides' | 'blog' | 'contact';
+}
+
+const { active = 'home' } = Astro.props;
+
+const links = [
+  { href: '/', label: 'Home', key: 'home' as const },
+  { href: '/guides', label: 'Buying Guides', key: 'guides' as const },
+  { href: '/blog', label: 'Insights & News', key: 'blog' as const },
+  { href: '/contact', label: 'Contact', key: 'contact' as const },
+];
+---
+
+<header class="site-header">
+  <nav class="nav" aria-label="Main">
+    <a href="/" class="brand">
+      <img src="/assets/images/logo.png" alt="ProjectHome.sg logo" />
+      <span class="brand-text">
+        <span class="name">ProjectHome.sg</span>
+        <span class="tag">Your Singapore Home, Guided</span>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      {
+        links.map((link) => (
+          <li>
+            <a href={link.href} class={active === link.key ? 'active' : ''}>
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      <li><a href="/contact" class="nav-cta">Get Started</a></li>
+    </ul>
+  </nav>
+</header>

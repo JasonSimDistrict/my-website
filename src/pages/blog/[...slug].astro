@@ -1,0 +1,136 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Breadcrumbs from '~/components/Breadcrumbs.astro';
+import PostCard from '~/components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { data } = post;
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' });
+
+// Three other posts for the "related" rail
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .filter((p) => p.slug !== post.slug)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const canonical = `https://projecthome.sg/blog/${post.slug}`;
+
+const articleJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
+      { '@type': 'ListItem', position: 2, name: 'Insights & News', item: 'https://projecthome.sg/blog' },
+      { '@type': 'ListItem', position: 3, name: data.title, item: canonical },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${canonical}#article`,
+    headline: data.title,
+    description: data.description,
+    image: data.coverImage,
+    datePublished: data.pubDate.toISOString(),
+    dateModified: (data.updatedDate ?? data.pubDate).toISOString(),
+    articleSection: data.categoryLabel,
+    inLanguage: 'en-SG',
+    author: { '@type': 'Organization', name: 'ProjectHome.sg', url: 'https://projecthome.sg/' },
+    publisher: { '@id': 'https://projecthome.sg/#organization' },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+  },
+];
+---
+
+<BaseLayout
+  title={`${data.title} | ProjectHome.sg`}
+  description={data.description}
+  ogType="article"
+  ogImage={data.coverImage}
+  canonical={canonical}
+  publishedTime={data.pubDate.toISOString()}
+  modifiedTime={(data.updatedDate ?? data.pubDate).toISOString()}
+  articleSection={data.categoryLabel}
+  active="blog"
+  jsonLd={articleJsonLd}
+>
+  <section class="post-hero">
+    <div class="container">
+      <Breadcrumbs
+        crumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Insights & News', href: '/blog' },
+          { label: data.title.length > 40 ? data.title.slice(0, 40) + '…' : data.title },
+        ]}
+      />
+      <div class="post-meta">
+        {data.categoryLabel} · {formatDate(data.pubDate)} · {data.readingTime}
+      </div>
+      <h1>{data.title}</h1>
+    </div>
+  </section>
+
+  <article class="post-content">
+    <Content />
+
+    <div
+      style="margin-top:50px; padding:32px; background:var(--paper); border-radius:var(--radius-lg); border-left:4px solid var(--copper); text-align:center;"
+    >
+      <h3 style="margin-bottom:10px;">Have a question on this article?</h3>
+      <p style="color:var(--muted); margin-bottom:24px;">
+        WhatsApp directly for a quick reply, or drop your email and I'll send a personal note.
+      </p>
+      <a
+        href={`https://wa.me/6582822486?text=${encodeURIComponent('Hi I read your article: ' + data.title)}`}
+        target="_blank"
+        rel="noopener"
+        class="btn btn-whatsapp"
+      >
+        Chat on WhatsApp
+      </a>
+      <a href="/contact" class="btn btn-outline" style="margin-left:8px;">Send Email Enquiry</a>
+    </div>
+  </article>
+
+  {allPosts.length > 0 && (
+    <section class="blog-section" style="padding-top:30px;">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Keep Reading</span>
+          <h2>Related articles</h2>
+        </div>
+        <div class="blog-grid">
+          {allPosts.map((p) => (
+            <PostCard
+              href={`/blog/${p.slug}`}
+              title={p.data.title}
+              excerpt={p.data.description}
+              category={p.data.categoryLabel}
+              categorySlug={p.data.category}
+              date={formatDate(p.data.pubDate)}
+              readingTime={p.data.readingTime}
+              coverImage={p.data.coverImage}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
