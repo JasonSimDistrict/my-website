@@ -1,0 +1,14 @@
+# robots.txt for ProjectHome.sg
+# https://projecthome.sg/robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /assets/js/
+
+# Block AI scrapers that don't add user value (optional — comment out if you want AI inclusion)
+# User-agent: GPTBot
+# Disallow: /
+# User-agent: CCBot
+# Disallow: /
+
+Sitemap: https://projecthome.sg/sitemap.xml

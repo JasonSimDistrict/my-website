@@ -1,10 +1,17 @@
-# ProjectHome.sg — Astro
+# ProjectHome.sg
 
-Singapore property advisory website built with [Astro](https://astro.build).
+Singapore property advisory website. Two implementations live in this repo:
 
-## Stack
+| Version | Location | Purpose |
+| --- | --- | --- |
+| **Astro** (production) | repo root | The live site, deployed to Cloudflare Pages |
+| **Static HTML** (archive) | [`static-version/`](./static-version/) | The original hand-written version — kept for reference, not deployed |
 
-- **Astro 4** — static-first, zero JS by default
+Both share the same design system, copy, and assets. The Astro version adds content collections, type-safe blog posts, auto-generated sitemap, and component-based architecture.
+
+## Stack (Astro version — root of repo)
+
+- **Astro 5** — static-first, zero JS by default
 - **TypeScript** strict mode
 - **Content Collections** for type-safe blog posts (markdown)
 - **@astrojs/sitemap** auto-generated sitemap-index
@@ -14,7 +21,7 @@ Singapore property advisory website built with [Astro](https://astro.build).
 ## Project structure
 
 ```
-projecthome-sg-astro/
+my-website/
 ├── public/
 │   ├── assets/images/logo.png
 │   └── robots.txt
@@ -44,10 +51,21 @@ projecthome-sg-astro/
 │   ├── styles/
 │   │   └── global.css
 │   └── env.d.ts
+├── static-version/                    # Original static HTML (archive)
+│   ├── index.html
+│   ├── guides.html
+│   ├── blog.html
+│   ├── blog-post.html
+│   ├── contact.html
+│   ├── assets/
+│   ├── robots.txt
+│   └── sitemap.xml
 ├── astro.config.mjs
 ├── package.json
 └── tsconfig.json
 ```
+
+Astro completely ignores `static-version/` because it's outside `src/` and `public/`. The folder is preserved in the repo for reference but is not part of any deployed build.
 
 ## Getting started
 
