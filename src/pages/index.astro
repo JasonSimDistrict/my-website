@@ -1,0 +1,294 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import LeadForm from '~/components/LeadForm.astro';
+import CtaStrip from '~/components/CtaStrip.astro';
+import PostCard from '~/components/PostCard.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' });
+
+const features = [
+  { icon: '🧭', title: 'Step-by-Step Roadmap', body: 'From budgeting and TDSR to OTP, walk through every milestone with checklists you can actually use.' },
+  { icon: '📊', title: 'Market Reports', body: 'Quarterly performance data, district trends, and rental yields — distilled so you can spot the right window to enter.' },
+  { icon: '🏗️', title: 'New Launch Coverage', body: 'Honest takes on every major launch — pricing, layouts, and the long-term outlook beyond the marketing spin.' },
+  { icon: '💬', title: 'Direct Access to Jason', body: 'Stuck on a specific decision? WhatsApp Jason directly for fast, private answers to your real questions.' },
+  { icon: '🔍', title: 'Independent Insights', body: "No fluff, no pressure. The information you'd want a friend in the industry to share with you." },
+  { icon: '📩', title: 'Curated Updates', body: 'Subscribe to receive launch alerts and market notes — no spam, only what genuinely moves your decision.' },
+];
+
+const steps = [
+  { num: 1, title: 'Define Your Why & Budget', body: 'Clarify whether this is a home for living, an investment, or both — then nail down your real affordability using TDSR and MSR.' },
+  { num: 2, title: 'Understand HDB, EC, or Private', body: 'Eligibility rules, resale levy, MOP, and the tradeoffs between each property class — explained without the jargon.' },
+  { num: 3, title: 'Shortlist by Location & Lifestyle', body: 'Use a structured framework to weigh schools, transport, future URA plans, and your daily routine — not just price.' },
+  { num: 4, title: 'Evaluate Like an Investor', body: 'Even owner-occupiers should think about exit. Learn the metrics that matter: PSF trends, rental yield, and 10-year outlook.' },
+];
+
+const testimonials = [
+  {
+    initials: 'JL',
+    quote: "Jason's 7-step roadmap saved us from rushing into the wrong launch. We finally felt like we were buying with a strategy, not a sales pitch.",
+    name: 'Jonathan & Li-Anne',
+    role: 'First-time buyers · Tampines',
+  },
+  {
+    initials: 'PR',
+    quote: 'Honest take on the launch I was eyeing. WhatsApp reply within an hour, no pressure to engage anything else. Refreshing.',
+    name: 'Priya R.',
+    role: 'HDB upgrader · Bishan',
+  },
+  {
+    initials: 'DK',
+    quote: "The market reports are the only ones I actually read end-to-end. Data-led, no fluff, and Jason's Q1 call on RCR was spot on.",
+    name: 'Daniel K.',
+    role: 'Investor · CCR portfolio',
+  },
+];
+
+const faqs = [
+  { q: 'Is ProjectHome.sg free to use?', a: 'Yes. The full 7-step buying guide, all blog posts, and market reports are free to read. WhatsApp enquiries are also free — no obligation to engage Jason as your agent.' },
+  { q: 'Do you cover HDB and ECs, or only private property?', a: 'All three. The roadmap is property-class agnostic — and we publish dedicated guides on BTO vs. resale, EC eligibility, decoupling for couples, and CCR/RCR/OCR private launches.' },
+  { q: 'How quickly does Jason respond on WhatsApp?', a: "Within one business day for sure — usually within a few hours during Singapore working hours. Late nights and weekends, you'll get a reply the next morning." },
+  { q: 'Is Jason an independent advisor?', a: "Jason is a District Director at Huttons Asia, one of Singapore's largest private real estate agencies. The content here is independent of any specific developer's marketing — opinions on launches, districts, and pricing are his own." },
+  { q: "I'm not buying for another year. Is it too early to reach out?", a: 'Not at all — early is better. The buyers who get the best outcomes typically start 12–18 months before purchase, so they can watch the market, refine their criteria, and act when the right opportunity appears.' },
+];
+
+const homeJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://projecthome.sg/#webpage',
+  url: 'https://projecthome.sg/',
+  name: 'ProjectHome.sg | Singapore Property Guides, New Launches & Market Reports',
+  isPartOf: { '@id': 'https://projecthome.sg/#website' },
+  about: { '@id': 'https://projecthome.sg/#organization' },
+  inLanguage: 'en-SG',
+};
+---
+
+<BaseLayout
+  title="ProjectHome.sg | Singapore Property Guides by Jason Sim, Huttons Asia"
+  description="Independent Singapore property advisory by Jason Sim, District Director at Huttons Asia. Step-by-step home buying guides, new launch reviews, and quarterly market reports for HDB, EC, and private property buyers."
+  keywords="Singapore property, home buying guide Singapore, new launch Singapore, HDB resale, EC, private property, Jason Sim Huttons, Singapore real estate"
+  active="home"
+  jsonLd={homeJsonLd}
+>
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-ornament" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12L12 3l9 9" /><path d="M5 10v10h14V10" />
+        </svg>
+      </span>
+      <span class="eyebrow">Singapore Property · Self-Guided Advisory</span>
+      <h1>Find Your <em>Ideal Home</em><br />Without the Guesswork</h1>
+      <p class="lead">
+        ProjectHome.sg gives you the playbook used by experienced buyers — step-by-step guides,
+        market data, and curated new launch updates so you can move with clarity and confidence.
+      </p>
+      <div class="hero-actions">
+        <a href="/guides" class="btn btn-primary">Start the Buyer Roadmap <span class="arrow">→</span></a>
+        <a href="/blog" class="btn btn-outline" style="color:#f7f1e8; border-color:#d19557;">Latest Market Reports</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="num" data-counter="7">0</div>
+          <div class="label">Guided Steps</div>
+        </div>
+        <div class="stat">
+          <div class="num" data-counter="100" data-suffix="+">0</div>
+          <div class="label">New Launches Tracked</div>
+        </div>
+        <div class="stat">
+          <div class="num" data-counter="24" data-suffix="h">0</div>
+          <div class="label">Reply Promise</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-strip" aria-label="What we cover">
+    <div class="container">
+      <div class="trust-inner">
+        <div class="trust-label">Coverage across</div>
+        <div class="trust-pills">
+          <span class="trust-pill"><span class="dot"></span>HDB BTO &amp; Resale</span>
+          <span class="trust-pill"><span class="dot"></span>Executive Condos</span>
+          <span class="trust-pill"><span class="dot"></span>Private Property</span>
+          <span class="trust-pill"><span class="dot"></span>New Launches</span>
+          <span class="trust-pill"><span class="dot"></span>All 28 Districts</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What You Get</span>
+        <h2>Everything you need to buy with confidence</h2>
+        <p>Three pillars to help you go from "just looking" to keys in hand — built for Singapore's HDB, EC, and private property landscape.</p>
+      </div>
+      <div class="feature-grid">
+        {features.map((f) => (
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">{f.icon}</div>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="guides">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">The Buyer Roadmap</span>
+        <h2>A clear path from "thinking about it" to handover</h2>
+        <p>The home-buying journey, broken into seven structured stages. Start at step one or jump to the milestone you're stuck on.</p>
+      </div>
+
+      <div class="steps">
+        {steps.map((s) => (
+          <article class="step">
+            <div class="step-num">{s.num}</div>
+            <div class="step-body">
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+              <a href={`/guides#step-${s.num}`} class="step-link">Open this step <span class="arrow">→</span></a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p style="text-align:center; margin-top:40px;">
+        <a href="/guides" class="btn btn-secondary">See All 7 Steps</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="blog-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">From the Journal</span>
+        <h2>Latest Insights & Market Notes</h2>
+        <p>New launch reviews, quarterly market reports, and timely commentary on what's shaping Singapore's property scene.</p>
+      </div>
+      <div class="blog-grid">
+        {posts.map((post) => (
+          <PostCard
+            href={`/blog/${post.slug}`}
+            title={post.data.title}
+            excerpt={post.data.description}
+            category={post.data.categoryLabel}
+            categorySlug={post.data.category}
+            date={formatDate(post.data.pubDate)}
+            readingTime={post.data.readingTime}
+            coverImage={post.data.coverImage}
+            coverImageAlt={post.data.coverImageAlt}
+          />
+        ))}
+      </div>
+      <p style="text-align:center; margin-top:40px;">
+        <a href="/blog" class="btn btn-outline">Browse All Articles</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="container">
+      <div class="section-head">
+        <div class="divider-ornament" aria-hidden="true">
+          <span class="line"></span><span class="glyph"></span><span class="line"></span>
+        </div>
+        <span class="eyebrow">From Buyers Like You</span>
+        <h2>Clarity, in their words</h2>
+        <p>What readers and clients say after working through the roadmap or chatting on WhatsApp.</p>
+      </div>
+      <div class="testimonial-grid">
+        {testimonials.map((t) => (
+          <article class="testimonial-card">
+            <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+            <p class="testimonial-quote">"{t.quote}"</p>
+            <div class="testimonial-attribution">
+              <div class="testimonial-avatar" aria-hidden="true">{t.initials}</div>
+              <div class="testimonial-meta">
+                <div class="name">{t.name}</div>
+                <div class="role">{t.role}</div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Frequently Asked</span>
+        <h2>The questions buyers ask first</h2>
+        <p>Quick answers to the things people enquire about most. Need more depth? <a href="/contact">Drop a message</a>.</p>
+      </div>
+      <div class="faq-list">
+        {faqs.map((faq) => (
+          <details class="faq-item">
+            <summary class="faq-summary">
+              {faq.q}
+              <span class="icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="faq-body">{faq.a}</div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <span class="eyebrow" style="color:#d19557; letter-spacing:0.22em; text-transform:uppercase; font-size:0.8rem; font-weight:600;">Get In Touch</span>
+          <h2 style="margin-top:14px;">Have a question? Two ways to reach Jason.</h2>
+          <p>Whether you're months away from buying or just sense-checking an article you read, Jason would love to hear from you. No pressure, no auto-responder.</p>
+          <div class="contact-channels">
+            <a href="https://wa.me/6582822486?text=Hi%20Jason%2C%20I%27m%20enquiring%20about%20property%20in%20Singapore" target="_blank" rel="noopener" class="channel">
+              <div class="channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4l-2.4-1.1c-.3-.1-.7-.1-.9.2l-1.1 1.4c-1.7-.8-3.1-2.2-3.9-3.9l1.4-1.1c.3-.2.4-.6.2-.9L9.6 6.5c-.2-.4-.6-.6-1-.5l-2 .5c-.4.1-.7.5-.7.9 0 4.7 3.8 8.5 8.5 8.5.4 0 .8-.3.9-.7l.5-2c.1-.4-.1-.8-.3-.8z" /></svg>
+              </div>
+              <div class="channel-text">
+                <span class="label">Quick Chat</span>
+                <span class="value">WhatsApp +65 8282 2486</span>
+              </div>
+            </a>
+            <div class="channel">
+              <div class="channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+              </div>
+              <div class="channel-text">
+                <span class="label">Email Updates</span>
+                <span class="value">Use the form to subscribe →</span>
+              </div>
+            </div>
+            <div class="channel">
+              <div class="channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+              </div>
+              <div class="channel-text">
+                <span class="label">Reply Time</span>
+                <span class="value">Within one business day</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <LeadForm />
+      </div>
+    </div>
+  </section>
+
+  <CtaStrip />
+</BaseLayout>

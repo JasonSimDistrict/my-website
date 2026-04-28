@@ -1,0 +1,181 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Breadcrumbs from '~/components/Breadcrumbs.astro';
+import CtaStrip from '~/components/CtaStrip.astro';
+
+const aboutJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
+      { '@type': 'ListItem', position: 2, name: 'About', item: 'https://projecthome.sg/about' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    '@id': 'https://projecthome.sg/about#aboutpage',
+    url: 'https://projecthome.sg/about',
+    name: 'About Jason Sim — ProjectHome.sg',
+    inLanguage: 'en-SG',
+    isPartOf: { '@id': 'https://projecthome.sg/#website' },
+    about: { '@id': 'https://projecthome.sg/about#jason-sim' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': 'https://projecthome.sg/about#jason-sim',
+    name: 'Jason Sim',
+    jobTitle: 'District Director',
+    image: 'https://projecthome.sg/assets/images/jason-sim.png',
+    url: 'https://projecthome.sg/about',
+    telephone: '+65 8282 2486',
+    description:
+      "District Director at Huttons Asia. Independent Singapore property advisor helping families, upgraders, and investors navigate HDB, EC, and private property decisions through ProjectHome.sg's self-help guides and direct consultative engagement.",
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Huttons Asia Pte Ltd',
+      identifier: 'L3008899K',
+    },
+    identifier: 'R052528Z',
+    knowsAbout: [
+      'Singapore real estate',
+      'HDB resale',
+      'Executive Condominium',
+      'Private property',
+      'New launch advisory',
+      'Property investment',
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="About Jason Sim | District Director, Huttons Asia — ProjectHome.sg"
+  description="Meet Jason Sim, District Director at Huttons Asia and the voice behind ProjectHome.sg. Singapore property advisory built on transparency, data, and consultative engagement."
+  keywords="Jason Sim Huttons, District Director Huttons Asia, Singapore property advisor, R052528Z, Jason Sim real estate, ProjectHome.sg"
+  ogType="profile"
+  ogImage="/assets/images/jason-sim.png"
+  active="about"
+  jsonLd={aboutJsonLd}
+  whatsappMessage="Hi Jason, I read your about page and would like to chat"
+>
+  <section class="about-hero">
+    <div class="container">
+      <Breadcrumbs crumbs={[{ label: 'Home', href: '/' }, { label: 'About' }]} />
+    </div>
+    <div class="about-grid">
+      <div class="about-photo-frame">
+        <img
+          src="/assets/images/jason-sim.png"
+          alt="Jason Sim, District Director at Huttons Asia"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+      <div class="about-text">
+        <span class="eyebrow">About ProjectHome.sg</span>
+        <h1>Jason Sim</h1>
+        <div class="about-title">District Director · Huttons Asia</div>
+        <p>
+          ProjectHome.sg is the independent advisory I built to share — openly and free of charge —
+          the same playbook I walk through with my clients. The Singapore property market is
+          complex, fast-moving, and full of marketing noise. Buyers deserve clarity, not pressure.
+        </p>
+        <p>
+          Whether you're months from your first home, weighing an upgrade from HDB, or sense-checking
+          a new launch, you'll find the structured frameworks and honest market commentary here that
+          you'd hope to get from a friend in the industry.
+        </p>
+        <div class="about-creds">
+          <div class="about-cred-item">
+            <strong>RES Reg No</strong>
+            R052528Z
+          </div>
+          <div class="about-cred-item">
+            <strong>Agency Licence No</strong>
+            L3008899K
+          </div>
+          <img
+            src="/assets/images/huttons-logo.png"
+            alt="Huttons Asia — Singapore's Largest Private Real Estate Agency"
+            class="about-huttons-logo"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-body">
+    <div class="about-body-inner">
+      <h2>Why ProjectHome.sg exists</h2>
+      <p>
+        Most Singaporean buyers I meet describe the same problem: too much information, too little
+        clarity. Property listings, agent calls, market reports, social media gurus, government
+        cooling-measure announcements — all coming at once, often contradicting each other. The
+        decisions that follow are some of the largest financial commitments a household will ever
+        make.
+      </p>
+      <p>
+        ProjectHome.sg is my answer to that. It's structured, honest, and free. The 7-step buyer
+        roadmap, the quarterly market reports, the new launch reviews — they're built so that even
+        if we never meet, you can move with confidence.
+      </p>
+
+      <h2>How I work</h2>
+      <p>
+        My approach with private clients is consultative, not transactional. That means:
+      </p>
+      <ul>
+        <li>
+          <strong>I start with your why.</strong> Whether you're buying a home for the next decade
+          or building a portfolio for the next thirty years changes everything that follows.
+        </li>
+        <li>
+          <strong>Data over opinions.</strong> I'll show you the URA caveats, the 5-year and
+          10-year PSF trends, and the unsold-inventory picture — not just my view.
+        </li>
+        <li>
+          <strong>Long-term lens.</strong> Every recommendation considers your exit, even if you
+          plan to stay forever. Optionality is value.
+        </li>
+        <li>
+          <strong>No pressure.</strong> The right property at the wrong moment is still the wrong
+          property. If the answer is "wait", I'll tell you.
+        </li>
+      </ul>
+
+      <h2>Areas of focus</h2>
+      <p>
+        I cover the full Singapore residential spectrum — HDB resale and BTO, Executive Condos,
+        and private property across CCR, RCR, and OCR. My specific areas of focus include:
+      </p>
+      <ul>
+        <li>First-time HDB and EC buyers planning their long-term path</li>
+        <li>HDB upgraders moving into private property</li>
+        <li>Decoupling and second-property strategy for married couples</li>
+        <li>New launch evaluation and unit selection</li>
+        <li>Investment-grade district and project analysis</li>
+      </ul>
+
+      <h2>Get in touch</h2>
+      <p>
+        The best way to reach me is WhatsApp at <a href="https://wa.me/6582822486" target="_blank" rel="noopener">+65 8282 2486</a> — I personally read every message and aim to reply within one business day. You can also <a href="/contact">drop a message</a> through the contact form, and I'll come back to you with a personal note.
+      </p>
+
+      <div class="about-disclosure">
+        <strong>Professional Disclosure</strong>
+        Jason Sim is a registered Real Estate Salesperson with the Council for Estate Agencies (CEA), Singapore. RES Registration Number: R052528Z. He is licensed to practise estate agency work under Huttons Asia Pte Ltd, Estate Agent Licence Number: L3008899K. Content on ProjectHome.sg is provided for educational and informational purposes and does not constitute personalised financial, legal, or investment advice. Property decisions should be made in consultation with qualified professionals based on your individual circumstances.
+      </div>
+    </div>
+  </section>
+
+  <CtaStrip
+    heading="Ready to start a conversation?"
+    body="WhatsApp is the fastest way to reach Jason for a real-person reply on a specific listing, launch, or decision."
+    whatsappMessage="Hi Jason, I'd like to talk through my Singapore property plans"
+  />
+</BaseLayout>

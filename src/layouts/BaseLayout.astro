@@ -1,0 +1,265 @@
+---
+import '~/styles/global.css';
+import Header from '~/components/Header.astro';
+import Footer from '~/components/Footer.astro';
+import WhatsAppFab from '~/components/WhatsAppFab.astro';
+import Seo from '~/components/Seo.astro';
+import JsonLd from '~/components/JsonLd.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  ogType?: 'website' | 'article' | 'profile';
+  ogImage?: string;
+  canonical?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  articleSection?: string;
+  active?: 'home' | 'guides' | 'blog' | 'about' | 'contact';
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  whatsappMessage?: string;
+}
+
+const {
+  title,
+  description,
+  keywords,
+  ogType,
+  ogImage,
+  canonical,
+  publishedTime,
+  modifiedTime,
+  articleSection,
+  active,
+  jsonLd,
+  whatsappMessage,
+} = Astro.props;
+
+// Site-wide JSON-LD: real estate professional + website
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'RealEstateAgent',
+      '@id': 'https://projecthome.sg/#organization',
+      name: 'ProjectHome.sg',
+      alternateName: 'Jason Sim — Huttons Asia',
+      url: 'https://projecthome.sg/',
+      logo: 'https://projecthome.sg/assets/images/logo.png',
+      image: 'https://projecthome.sg/assets/images/logo.png',
+      description:
+        'Independent Singapore property advisory by Jason Sim, District Director at Huttons Asia. Step-by-step home buying guides, new launch reviews, and quarterly market reports.',
+      telephone: '+65 8282 2486',
+      areaServed: { '@type': 'Country', name: 'Singapore' },
+      address: { '@type': 'PostalAddress', addressCountry: 'SG', addressLocality: 'Singapore' },
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+65 8282 2486',
+        contactType: 'customer service',
+        areaServed: 'SG',
+        availableLanguage: ['English'],
+      },
+      employee: {
+        '@type': 'Person',
+        '@id': 'https://projecthome.sg/about/#jason-sim',
+        name: 'Jason Sim',
+        jobTitle: 'District Director',
+        worksFor: {
+          '@type': 'Organization',
+          name: 'Huttons Asia Pte Ltd',
+          identifier: 'L3008899K',
+        },
+        identifier: 'R052528Z',
+        telephone: '+65 8282 2486',
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://projecthome.sg/#website',
+      url: 'https://projecthome.sg/',
+      name: 'ProjectHome.sg',
+      publisher: { '@id': 'https://projecthome.sg/#organization' },
+      inLanguage: 'en-SG',
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en-SG">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+    <link rel="apple-touch-icon" href="/assets/images/logo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+
+    <Seo
+      title={title}
+      description={description}
+      keywords={keywords}
+      ogType={ogType}
+      ogImage={ogImage}
+      canonical={canonical}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+      articleSection={articleSection}
+    />
+
+    <JsonLd data={orgSchema} />
+    {jsonLd && <JsonLd data={jsonLd} />}
+
+    <slot name="head" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header active={active} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFab message={whatsappMessage} />
+
+    <script>
+      // ProjectHome.sg — site interactions
+      (() => {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Mobile nav toggle
+        const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+        const links = document.querySelector<HTMLElement>('.nav-links');
+        if (toggle && links) {
+          toggle.addEventListener('click', () => {
+            links.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', String(links.classList.contains('open')));
+          });
+        }
+
+        // Lead form: client-side validation + simulated submit
+        const form = document.querySelector<HTMLFormElement>('#lead-form');
+        if (form) {
+          const success = form.querySelector<HTMLElement>('.form-success');
+          form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = form.querySelector<HTMLInputElement>('[name="email"]');
+            const email = emailInput?.value.trim() ?? '';
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+              emailInput?.focus();
+              return;
+            }
+            if (success) {
+              success.classList.add('show');
+              success.textContent =
+                'Thank you! Your message has been received. Jason will reach out within one business day.';
+            }
+            form.reset();
+            window.setTimeout(() => success?.classList.remove('show'), 6000);
+          });
+        }
+
+        // Blog category filter
+        const chips = document.querySelectorAll<HTMLButtonElement>('.chip[data-filter]');
+        const cards = document.querySelectorAll<HTMLElement>('.post-card[data-category]');
+        if (chips.length && cards.length) {
+          chips.forEach((chip) => {
+            chip.addEventListener('click', () => {
+              chips.forEach((c) => c.classList.remove('active'));
+              chip.classList.add('active');
+              const filter = chip.dataset.filter;
+              cards.forEach((card) => {
+                const cat = card.dataset.category;
+                card.style.display = filter === 'all' || cat === filter ? '' : 'none';
+              });
+            });
+          });
+        }
+
+        // Reveal-on-scroll
+        if ('IntersectionObserver' in window && !prefersReducedMotion) {
+          const revealObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  const el = entry.target as HTMLElement;
+                  el.style.opacity = '1';
+                  el.style.transform = 'translateY(0)';
+                  revealObserver.unobserve(el);
+                }
+              });
+            },
+            { threshold: 0.12 }
+          );
+
+          document
+            .querySelectorAll<HTMLElement>(
+              '.feature-card, .step, .post-card, .testimonial-card, .faq-item'
+            )
+            .forEach((el) => {
+              el.style.opacity = '0';
+              el.style.transform = 'translateY(20px)';
+              el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+              revealObserver.observe(el);
+            });
+        }
+
+        // Animated counters
+        const counters = document.querySelectorAll<HTMLElement>('[data-counter]');
+        if (counters.length) {
+          const animate = (el: HTMLElement) => {
+            const target = parseInt(el.dataset.counter ?? '0', 10);
+            const suffix = el.dataset.suffix ?? '';
+            if (prefersReducedMotion) {
+              el.textContent = target + suffix;
+              return;
+            }
+            const duration = 1400;
+            const startTime = performance.now();
+            const tick = (now: number) => {
+              const progress = Math.min((now - startTime) / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const current = Math.round(target * eased);
+              el.textContent = current + suffix;
+              if (progress < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+          };
+
+          if ('IntersectionObserver' in window) {
+            const counterObs = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    animate(entry.target as HTMLElement);
+                    counterObs.unobserve(entry.target);
+                  }
+                });
+              },
+              { threshold: 0.4 }
+            );
+            counters.forEach((el) => counterObs.observe(el));
+          } else {
+            counters.forEach(animate);
+          }
+        }
+
+        // FAQ accordion: only one open at a time per list
+        document.querySelectorAll<HTMLElement>('.faq-list').forEach((list) => {
+          const items = list.querySelectorAll<HTMLDetailsElement>('.faq-item');
+          items.forEach((item) => {
+            item.addEventListener('toggle', () => {
+              if (item.open) {
+                items.forEach((other) => {
+                  if (other !== item && other.open) other.open = false;
+                });
+              }
+            });
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

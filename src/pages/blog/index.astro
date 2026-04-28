@@ -1,0 +1,127 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Breadcrumbs from '~/components/Breadcrumbs.astro';
+import PostCard from '~/components/PostCard.astro';
+import LeadForm from '~/components/LeadForm.astro';
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const featured = allPosts.find((p) => p.data.featured) ?? allPosts[0];
+const rest = featured ? allPosts.filter((p) => p.slug !== featured.slug) : allPosts;
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('en-SG', { month: 'short', year: 'numeric' });
+
+const blogJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
+      { '@type': 'ListItem', position: 2, name: 'Insights & News', item: 'https://projecthome.sg/blog' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': 'https://projecthome.sg/blog#blog',
+    url: 'https://projecthome.sg/blog',
+    name: 'ProjectHome.sg Insights',
+    description: 'Singapore property insights, new launch reviews, and quarterly market reports.',
+    publisher: { '@id': 'https://projecthome.sg/#organization' },
+    inLanguage: 'en-SG',
+  },
+];
+---
+
+<BaseLayout
+  title="Singapore Property Blog: New Launches & Market Reports | ProjectHome.sg"
+  description="Read the latest Singapore property insights — new launch reviews, quarterly market reports, district spotlights, and practical buyer guides from Jason Sim."
+  keywords="Singapore property blog, new launch review Singapore, property market report Singapore, HDB resale index, district spotlight, EC launch review"
+  active="blog"
+  jsonLd={blogJsonLd}
+>
+  <section class="page-banner">
+    <div class="page-banner-inner">
+      <Breadcrumbs crumbs={[{ label: 'Home', href: '/' }, { label: 'Insights & News' }]} />
+      <span class="eyebrow">Insights & News</span>
+      <h1>Singapore Property: Reports, Launches, Reads</h1>
+      <p>Independent commentary on new launches, quarterly market performance, and the questions buyers are actually asking right now.</p>
+    </div>
+  </section>
+
+  <section class="blog-section">
+    <div class="container">
+      {featured && (
+        <a href={`/blog/${featured.slug}`} class="featured-post" aria-label={`Read featured article: ${featured.data.title}`}>
+          <div
+            class="post-thumb"
+            style={`background-image:url('${featured.data.coverImage}');`}
+            role="img"
+            aria-label={featured.data.coverImageAlt}
+          />
+          <div class="post-body">
+            <div class="post-meta">
+              <span class="featured-tag">Featured</span>
+              <span>{featured.data.categoryLabel} · {formatDate(featured.data.pubDate)} · {featured.data.readingTime}</span>
+            </div>
+            <h2>{featured.data.title}</h2>
+            <p class="summary">{featured.data.description}</p>
+            <span class="read-more">Read the full report <span class="arrow">→</span></span>
+          </div>
+        </a>
+      )}
+
+      <div class="filter-chips" role="tablist">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="launch">New Launches</button>
+        <button class="chip" data-filter="report">Market Reports</button>
+        <button class="chip" data-filter="guide">Buyer Guides</button>
+        <button class="chip" data-filter="district">District Spotlights</button>
+      </div>
+
+      <div class="blog-grid">
+        {rest.map((post) => (
+          <PostCard
+            href={`/blog/${post.slug}`}
+            title={post.data.title}
+            excerpt={post.data.description}
+            category={post.data.categoryLabel}
+            categorySlug={post.data.category}
+            date={formatDate(post.data.pubDate)}
+            readingTime={post.data.readingTime}
+            coverImage={post.data.coverImage}
+            coverImageAlt={post.data.coverImageAlt}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="subscribe">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <span class="eyebrow" style="color:#d19557; letter-spacing:0.22em; text-transform:uppercase; font-size:0.8rem; font-weight:600;">Stay Informed</span>
+          <h2 style="margin-top:14px;">Get launch alerts before they sell out</h2>
+          <p>Quarterly market reports and timely new launch notes — delivered to your inbox the week they matter. No spam, ever.</p>
+          <div class="contact-channels">
+            <a href="https://wa.me/6582822486" target="_blank" rel="noopener" class="channel">
+              <div class="channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4l-2.4-1.1c-.3-.1-.7-.1-.9.2l-1.1 1.4c-1.7-.8-3.1-2.2-3.9-3.9l1.4-1.1c.3-.2.4-.6.2-.9L9.6 6.5c-.2-.4-.6-.6-1-.5l-2 .5c-.4.1-.7.5-.7.9 0 4.7 3.8 8.5 8.5 8.5.4 0 .8-.3.9-.7l.5-2c.1-.4-.1-.8-.3-.8z" /></svg>
+              </div>
+              <div class="channel-text">
+                <span class="label">Prefer Chat?</span>
+                <span class="value">WhatsApp +65 8282 2486</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <LeadForm variant="subscribe" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

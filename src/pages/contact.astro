@@ -1,0 +1,118 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Breadcrumbs from '~/components/Breadcrumbs.astro';
+import LeadForm from '~/components/LeadForm.astro';
+import CtaStrip from '~/components/CtaStrip.astro';
+
+const contactJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
+      { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://projecthome.sg/contact' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    '@id': 'https://projecthome.sg/contact#contactpage',
+    url: 'https://projecthome.sg/contact',
+    name: 'Contact ProjectHome.sg',
+    inLanguage: 'en-SG',
+    isPartOf: { '@id': 'https://projecthome.sg/#website' },
+    about: { '@id': 'https://projecthome.sg/#organization' },
+  },
+];
+---
+
+<BaseLayout
+  title="Contact Jason Sim | WhatsApp +65 8282 2486 — ProjectHome.sg"
+  description="Get in touch with Jason Sim, District Director at Huttons Asia. WhatsApp +65 8282 2486 for a quick chat, or send an email enquiry. Reply within one business day."
+  keywords="Contact Jason Sim, Singapore property advisor contact, WhatsApp Singapore property, Huttons Asia contact"
+  active="contact"
+  jsonLd={contactJsonLd}
+  whatsappMessage="Hi Jason, I'd like to enquire about property in Singapore"
+>
+  <section class="page-banner">
+    <div class="page-banner-inner">
+      <Breadcrumbs crumbs={[{ label: 'Home', href: '/' }, { label: 'Contact' }]} />
+      <span class="eyebrow">Get In Touch</span>
+      <h1>Two ways to reach Jason — pick whichever feels right</h1>
+      <p>
+        Real questions deserve real answers. WhatsApp directly for the fastest response, or send an
+        email enquiry and Jason will personally reply within one business day.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact" style="padding-top:80px;">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <span class="eyebrow" style="color:#d19557; letter-spacing:0.22em; text-transform:uppercase; font-size:0.8rem; font-weight:600;">Direct Channels</span>
+          <h2 style="margin-top:14px;">A real person, every time</h2>
+          <p>No call centres, no auto-responders. Whether you're sense-checking a launch, comparing two units, or just months from buying — drop Jason a line.</p>
+
+          <div class="contact-channels">
+            <a href="https://wa.me/6582822486?text=Hi%20Jason%2C%20I%27d%20like%20to%20enquire%20about%20property%20in%20Singapore" target="_blank" rel="noopener" class="channel">
+              <div class="channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4l-2.4-1.1c-.3-.1-.7-.1-.9.2l-1.1 1.4c-1.7-.8-3.1-2.2-3.9-3.9l1.4-1.1c.3-.2.4-.6.2-.9L9.6 6.5c-.2-.4-.6-.6-1-.5l-2 .5c-.4.1-.7.5-.7.9 0 4.7 3.8 8.5 8.5 8.5.4 0 .8-.3.9-.7l.5-2c.1-.4-.1-.8-.3-.8z" /></svg>
+              </div>
+              <div class="channel-text">
+                <span class="label">Quickest Reply</span>
+                <span class="value">WhatsApp +65 8282 2486</span>
+              </div>
+            </a>
+
+            <div class="channel">
+              <div class="channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+              </div>
+              <div class="channel-text">
+                <span class="label">Email Enquiry</span>
+                <span class="value">Use the form opposite →</span>
+              </div>
+            </div>
+
+            <div class="channel">
+              <div class="channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+              </div>
+              <div class="channel-text">
+                <span class="label">Reply Time</span>
+                <span class="value">Within one business day</span>
+              </div>
+            </div>
+
+            <div class="channel">
+              <div class="channel-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+              </div>
+              <div class="channel-text">
+                <span class="label">Coverage</span>
+                <span class="value">All of Singapore — HDB, EC, Private</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:34px; padding:22px; background:rgba(247, 241, 232, 0.06); border:1px solid rgba(209, 149, 87, 0.2); border-radius:var(--radius);">
+            <h4 style="color:var(--copper); margin-bottom:8px; font-family:var(--font-sans); letter-spacing:0.08em; text-transform:uppercase; font-size:0.78rem;">A quick note</h4>
+            <p style="color:rgba(247, 241, 232, 0.85); font-size:0.95rem; line-height:1.6; margin:0;">
+              All enquiries are confidential. Jason won't share your details, won't add you to noisy
+              mailing lists, and won't pressure you toward any specific listing or developer.
+            </p>
+          </div>
+        </div>
+
+        <LeadForm />
+      </div>
+    </div>
+  </section>
+
+  <CtaStrip
+    heading="Prefer to chat right now?"
+    body="WhatsApp is the fastest way to get a real-person reply on a specific listing, launch, or decision."
+    ctaLabel="Open WhatsApp Chat"
+  />
+</BaseLayout>

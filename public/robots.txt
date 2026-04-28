@@ -1,0 +1,7 @@
+# robots.txt for ProjectHome.sg
+# https://projecthome.sg/robots.txt
+
+User-agent: *
+Allow: /
+
+Sitemap: https://projecthome.sg/sitemap-index.xml
