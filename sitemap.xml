@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://projecthome.sg/</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://projecthome.sg/assets/images/logo.png</image:loc>
+      <image:title>ProjectHome.sg logo</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/guides.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/blog.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/about.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://projecthome.sg/assets/images/jason-sim.png</image:loc>
+      <image:title>Jason Sim, District Director at Huttons Asia</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/contact.html</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/blog/q1-2026-private-property-review.html</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/blog/q2-2026-new-launch-watchlist.html</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/blog/bto-vs-resale-2026.html</loc>
+    <lastmod>2026-03-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/blog/district-19-spotlight.html</loc>
+    <lastmod>2026-03-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/blog/should-you-decouple-2026.html</loc>
+    <lastmod>2026-02-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/blog/hdb-resale-2025-recap.html</loc>
+    <lastmod>2026-02-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
