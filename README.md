@@ -118,22 +118,57 @@ Use `?auto=format&fit=crop&w=1400&q=80` URL params for hero images, `&w=900` for
 
 ## Lead form wiring
 
-The lead form is currently wired via **`mailto:`** — submissions open the visitor's default email client with a pre-formatted enquiry addressed to **`projecthome.sg@gmail.com`**. The visitor clicks Send in their own client to deliver it.
+The form is wired through a **Cloudflare Pages Function** at `functions/api/lead.js` that posts to **[Resend](https://resend.com)**. Submissions arrive in `projecthome.sg@gmail.com` (or whatever `LEAD_TO_EMAIL` env var is set to) within seconds, sent from `enquiries@projecthome.sg`. The visitor's email address is set as `Reply-To` so hitting Reply in Gmail goes straight to the lead.
 
-How it works (see `assets/js/main.js`, `#lead-form` handler):
+### Architecture
 
-1. Validates the email field client-side
-2. Reads every form field that's present (name, email, phone, interest, timeline, message, updates checkbox)
-3. Builds a structured email body (different format for the full enquiry form vs. the simpler subscribe form on `/blog.html`)
-4. `window.location.href = "mailto:projecthome.sg@gmail.com?subject=...&body=..."` opens the email client
-5. Shows a confirmation message asking the visitor to click Send in their email client, with WhatsApp as a fallback if no client opens
+```
+[ Visitor fills form ]
+          │
+          ▼  POST /api/lead  (JSON body)
+[ functions/api/lead.js ] ──── Cloudflare Pages Function (free tier)
+          │
+          ├── Server-side email validation
+          ├── Honeypot check (silently drops bots)
+          │
+          ▼  POST https://api.resend.com/emails
+[ Resend ] ────── (3,000 free emails/month, sends from verified domain)
+          │
+          ▼
+[ projecthome.sg@gmail.com ]
+```
 
-**Caveat:** users without a configured desktop email client (webmail-only Gmail in a browser, no Outlook/Apple Mail set as default) won't see anything happen. The success message points them at WhatsApp `+65 8282 2486` as the fallback channel.
+### Required environment variables (set in Cloudflare Pages dashboard)
 
-To change the destination email, edit the `mailto:` URL in `assets/js/main.js` (single occurrence). To upgrade to a real backend (so submissions arrive without depending on the visitor's email client), the options are:
+| Variable | Type | Value | Required |
+| --- | --- | --- | --- |
+| `RESEND_API_KEY` | Secret | `re_...` (from https://resend.com/api-keys) | **yes** |
+| `LEAD_TO_EMAIL` | Plaintext | e.g. `projecthome.sg@gmail.com` | no — defaults to `projecthome.sg@gmail.com` |
 
-- **Formspree / Basin / Web3Forms:** Set the form's `action` attribute to your endpoint, change `method="POST"`, and remove the `e.preventDefault()` line
-- **Cloudflare Pages Functions:** Add `functions/api/lead.js` and call it via `fetch()` instead of `mailto:`. Email yourself via Resend or MailChannels.
+Cloudflare Pages → your project → **Settings** → **Variables and Secrets** → add for both **Production** and **Preview** environments.
+
+### Required DNS records (in Cloudflare DNS for `projecthome.sg`)
+
+Verified via the Resend domains dashboard:
+
+- **TXT** `projecthome.sg` — SPF (`v=spf1 include:amazonses.com ~all`)
+- **MX** `send.projecthome.sg` (or similar) — bounce subdomain, value `feedback-smtp.resend.com`
+- **TXT** `resend._domainkey.projecthome.sg` — DKIM public key
+
+DNS records must be **DNS-only** (orange-cloud OFF) — proxying breaks email auth.
+
+### Anti-spam
+
+A hidden `name="website"` field (`.hp-field` CSS class) is rendered into every form. Real users never see it. Bots that auto-fill all inputs trip it, and `functions/api/lead.js` returns `{ ok: true }` without sending an email. No CAPTCHA needed at this scale.
+
+### Failure mode
+
+If Resend is down or the API key is invalid, the function returns `{ ok: false, error: "..." }` and the page surfaces a friendly error message pointing the visitor at WhatsApp `+65 8282 2486` and `projecthome.sg@gmail.com` as backup channels. The submit button re-enables so they can retry.
+
+### Changing the "From" or "To" address
+
+- **From:** edit the `FROM_ADDRESS` constant at the top of `functions/api/lead.js`. Must be `you@projecthome.sg` since that domain is what's verified at Resend.
+- **To:** change the `LEAD_TO_EMAIL` env var in Cloudflare Pages — no code change needed.
 
 WhatsApp `+65 8282 2486` works without any backend changes — the floating action button and inline channels are direct deep links to wa.me.
 

@@ -19,15 +19,32 @@
     });
   }
 
-  // Lead form: client-side validation + open user's mail client with mailto:
-  // submissions are routed to projecthome.sg@gmail.com
+  // Lead form — POSTs JSON to /api/lead (Cloudflare Pages Function),
+  // which then calls Resend to email projecthome.sg@gmail.com.
   var form = document.querySelector('#lead-form');
   if (form) {
     var success = form.querySelector('.form-success');
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var originalLabel = submitBtn ? submitBtn.textContent : '';
 
     var fieldValue = function (name) {
       var el = form.querySelector('[name="' + name + '"]');
       return el ? (el.value || '').trim() : '';
+    };
+
+    var showMessage = function (html, isError) {
+      if (!success) return;
+      success.classList.add('show');
+      if (isError) success.classList.add('is-error');
+      else success.classList.remove('is-error');
+      success.innerHTML = html;
+    };
+
+    var resetSubmitButton = function () {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalLabel;
+      }
     };
 
     form.addEventListener('submit', function (e) {
@@ -40,69 +57,67 @@
         return;
       }
 
-      var name = fieldValue('name');
-      var phone = fieldValue('phone');
-      var interest = fieldValue('interest');
-      var timeline = fieldValue('timeline');
-      var message = fieldValue('message');
-      var updatesEl = form.querySelector('[name="updates"]');
-      var wantsUpdates = updatesEl ? updatesEl.checked : false;
+      var payload = {
+        email: email,
+        name: fieldValue('name'),
+        phone: fieldValue('phone'),
+        interest: fieldValue('interest'),
+        timeline: fieldValue('timeline'),
+        message: fieldValue('message'),
+        website: fieldValue('website'), // honeypot — must stay empty
+        updates: !!(form.querySelector('[name="updates"]') || {}).checked,
+      };
 
-      // Subscribe-variant form has no name/message field
-      var isSubscribe = !form.querySelector('[name="name"]') && !form.querySelector('[name="message"]');
-
-      var subject;
-      var bodyLines = [];
-
-      if (isSubscribe) {
-        subject = 'New newsletter subscription — ProjectHome.sg';
-        bodyLines.push('New subscription submitted via the website.');
-        bodyLines.push('');
-        bodyLines.push('Email: ' + email);
-        if (interest) bodyLines.push('Most interested in: ' + interest);
-        bodyLines.push('Wants updates: ' + (wantsUpdates ? 'Yes' : 'No'));
-      } else {
-        subject = 'New enquiry from ProjectHome.sg' + (name ? ' — ' + name : '');
-        bodyLines.push('New enquiry submitted via the website.');
-        bodyLines.push('');
-        if (name) bodyLines.push('Name: ' + name);
-        bodyLines.push('Email: ' + email);
-        if (phone) bodyLines.push('Phone: ' + phone);
-        if (interest) bodyLines.push('Interested in: ' + interest);
-        if (timeline) bodyLines.push('Timeline: ' + timeline);
-        bodyLines.push('Wants updates: ' + (wantsUpdates ? 'Yes' : 'No'));
-        if (message) {
-          bodyLines.push('');
-          bodyLines.push('Message:');
-          bodyLines.push(message);
-        }
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
       }
-
-      bodyLines.push('');
-      bodyLines.push('---');
-      bodyLines.push('Sent from https://projecthome.sg/');
-
-      var body = bodyLines.join('\n');
-      var mailtoUrl =
-        'mailto:projecthome.sg@gmail.com' +
-        '?subject=' + encodeURIComponent(subject) +
-        '&body=' + encodeURIComponent(body);
-
-      // Open the user's email client. Some browsers block top-level
-      // navigation to mailto: from a script outside a click handler —
-      // we're inside the submit handler so this is allowed.
-      window.location.href = mailtoUrl;
-
       if (success) {
-        success.classList.add('show');
-        success.innerHTML =
-          'Your email client should now open with your enquiry pre-filled — please click <strong>Send</strong> to deliver it. ' +
-          'If nothing opened (some desktops without a default mail client), please WhatsApp <strong>+65 8282 2486</strong> instead.';
+        success.classList.remove('show');
+        success.classList.remove('is-error');
       }
-      form.reset();
+
+      fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(function (resp) {
+          return resp.json().catch(function () { return {}; }).then(function (data) {
+            return { resp: resp, data: data };
+          });
+        })
+        .then(function (result) {
+          if (result.resp.ok && result.data && result.data.ok) {
+            showMessage(
+              'Thank you! Your enquiry has been received. Jason will reach out within one business day.',
+              false
+            );
+            form.reset();
+          } else {
+            var errMsg = (result.data && result.data.error) || 'Something went wrong.';
+            showMessage(
+              "Sorry, we couldn't send your enquiry (" +
+                errMsg +
+                '). Please WhatsApp <strong>+65 8282 2486</strong> or email <strong>projecthome.sg@gmail.com</strong> directly.',
+              true
+            );
+          }
+        })
+        .catch(function () {
+          showMessage(
+            "We couldn't reach our server. Please WhatsApp <strong>+65 8282 2486</strong> or email <strong>projecthome.sg@gmail.com</strong> directly.",
+            true
+          );
+        })
+        .then(resetSubmitButton);
+
       window.setTimeout(function () {
-        if (success) success.classList.remove('show');
-      }, 12000);
+        if (success) {
+          success.classList.remove('show');
+          success.classList.remove('is-error');
+        }
+      }, 14000);
     });
   }
 

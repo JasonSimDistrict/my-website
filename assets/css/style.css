@@ -1416,3 +1416,22 @@ section {
   .brand-text .tag { font-size: 0.65rem; }
   .brand img { height: 44px; }
 }
+
+/* Honeypot — visually hidden field that bots tend to fill.
+   The Cloudflare Pages Function silently drops any submission
+   where this field has any value. */
+.hp-field {
+  position: absolute !important;
+  left: -10000px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+/* Form-success styled as an error when the API returns failure */
+.form-success.is-error {
+  background: #fef2f2;
+  color: #7f1d1d;
+  border-left-color: #dc2626;
+}
