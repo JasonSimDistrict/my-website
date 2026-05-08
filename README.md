@@ -116,15 +116,26 @@ Cover images come from Unsplash with these search themes (free for commercial us
 
 Use `?auto=format&fit=crop&w=1400&q=80` URL params for hero images, `&w=900` for card thumbnails.
 
-## Wiring the lead form
+## Lead form wiring
 
-The lead form in `contact.html` and `index.html` currently shows a confirmation message client-side without sending data anywhere. To accept submissions:
+The lead form is currently wired via **`mailto:`** — submissions open the visitor's default email client with a pre-formatted enquiry addressed to **`projecthome.sg@gmail.com`**. The visitor clicks Send in their own client to deliver it.
 
-- **Formspree / Basin / Web3Forms (easiest):** Set the form's `action` attribute to your endpoint, change `method` to `POST`, and remove the `e.preventDefault()` line in `assets/js/main.js`
-- **Cloudflare Pages Functions:** Add `functions/api/lead.js` to the repo — Pages runs it as a serverless function. Email yourself via Resend or MailChannels
-- **Custom API:** Modify the JS in `assets/js/main.js` to `fetch('/api/lead', { method: 'POST', body: new FormData(form) })`
+How it works (see `assets/js/main.js`, `#lead-form` handler):
 
-WhatsApp `+65 8282 2486` works without any backend changes.
+1. Validates the email field client-side
+2. Reads every form field that's present (name, email, phone, interest, timeline, message, updates checkbox)
+3. Builds a structured email body (different format for the full enquiry form vs. the simpler subscribe form on `/blog.html`)
+4. `window.location.href = "mailto:projecthome.sg@gmail.com?subject=...&body=..."` opens the email client
+5. Shows a confirmation message asking the visitor to click Send in their email client, with WhatsApp as a fallback if no client opens
+
+**Caveat:** users without a configured desktop email client (webmail-only Gmail in a browser, no Outlook/Apple Mail set as default) won't see anything happen. The success message points them at WhatsApp `+65 8282 2486` as the fallback channel.
+
+To change the destination email, edit the `mailto:` URL in `assets/js/main.js` (single occurrence). To upgrade to a real backend (so submissions arrive without depending on the visitor's email client), the options are:
+
+- **Formspree / Basin / Web3Forms:** Set the form's `action` attribute to your endpoint, change `method="POST"`, and remove the `e.preventDefault()` line
+- **Cloudflare Pages Functions:** Add `functions/api/lead.js` and call it via `fetch()` instead of `mailto:`. Email yourself via Resend or MailChannels.
+
+WhatsApp `+65 8282 2486` works without any backend changes — the floating action button and inline channels are direct deep links to wa.me.
 
 ## SEO checklist (already in place)
 

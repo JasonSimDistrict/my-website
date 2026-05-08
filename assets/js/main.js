@@ -19,27 +19,90 @@
     });
   }
 
-  // Lead form: client-side validation + simulated submit
+  // Lead form: client-side validation + open user's mail client with mailto:
+  // submissions are routed to projecthome.sg@gmail.com
   var form = document.querySelector('#lead-form');
   if (form) {
     var success = form.querySelector('.form-success');
+
+    var fieldValue = function (name) {
+      var el = form.querySelector('[name="' + name + '"]');
+      return el ? (el.value || '').trim() : '';
+    };
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+
       var emailInput = form.querySelector('[name="email"]');
       var email = emailInput ? emailInput.value.trim() : '';
       if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         if (emailInput) emailInput.focus();
         return;
       }
+
+      var name = fieldValue('name');
+      var phone = fieldValue('phone');
+      var interest = fieldValue('interest');
+      var timeline = fieldValue('timeline');
+      var message = fieldValue('message');
+      var updatesEl = form.querySelector('[name="updates"]');
+      var wantsUpdates = updatesEl ? updatesEl.checked : false;
+
+      // Subscribe-variant form has no name/message field
+      var isSubscribe = !form.querySelector('[name="name"]') && !form.querySelector('[name="message"]');
+
+      var subject;
+      var bodyLines = [];
+
+      if (isSubscribe) {
+        subject = 'New newsletter subscription — ProjectHome.sg';
+        bodyLines.push('New subscription submitted via the website.');
+        bodyLines.push('');
+        bodyLines.push('Email: ' + email);
+        if (interest) bodyLines.push('Most interested in: ' + interest);
+        bodyLines.push('Wants updates: ' + (wantsUpdates ? 'Yes' : 'No'));
+      } else {
+        subject = 'New enquiry from ProjectHome.sg' + (name ? ' — ' + name : '');
+        bodyLines.push('New enquiry submitted via the website.');
+        bodyLines.push('');
+        if (name) bodyLines.push('Name: ' + name);
+        bodyLines.push('Email: ' + email);
+        if (phone) bodyLines.push('Phone: ' + phone);
+        if (interest) bodyLines.push('Interested in: ' + interest);
+        if (timeline) bodyLines.push('Timeline: ' + timeline);
+        bodyLines.push('Wants updates: ' + (wantsUpdates ? 'Yes' : 'No'));
+        if (message) {
+          bodyLines.push('');
+          bodyLines.push('Message:');
+          bodyLines.push(message);
+        }
+      }
+
+      bodyLines.push('');
+      bodyLines.push('---');
+      bodyLines.push('Sent from https://projecthome.sg/');
+
+      var body = bodyLines.join('\n');
+      var mailtoUrl =
+        'mailto:projecthome.sg@gmail.com' +
+        '?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(body);
+
+      // Open the user's email client. Some browsers block top-level
+      // navigation to mailto: from a script outside a click handler —
+      // we're inside the submit handler so this is allowed.
+      window.location.href = mailtoUrl;
+
       if (success) {
         success.classList.add('show');
-        success.textContent =
-          'Thank you! Your message has been received. Jason will reach out within one business day.';
+        success.innerHTML =
+          'Your email client should now open with your enquiry pre-filled — please click <strong>Send</strong> to deliver it. ' +
+          'If nothing opened (some desktops without a default mail client), please WhatsApp <strong>+65 8282 2486</strong> instead.';
       }
       form.reset();
       window.setTimeout(function () {
         if (success) success.classList.remove('show');
-      }, 6000);
+      }, 12000);
     });
   }
 
