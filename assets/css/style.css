@@ -1456,10 +1456,11 @@ section {
 }
 
 .nav-submenu {
+  display: none;            /* hard hide — cannot be overridden by any inherited rule */
   position: absolute;
   top: calc(100% + 12px);
   left: 50%;
-  transform: translateX(-50%) translateY(6px);
+  transform: translateX(-50%);
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -1467,10 +1468,8 @@ section {
   padding: 8px 0;
   min-width: 200px;
   list-style: none;
+  margin: 0;
   z-index: 110;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.18s ease, transform 0.18s var(--ease), visibility 0.18s linear;
 }
 
 .nav-submenu::before {
@@ -1488,9 +1487,7 @@ section {
 
 .nav-has-submenu:hover .nav-submenu,
 .nav-has-submenu:focus-within .nav-submenu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  display: block;
 }
 
 .nav-submenu li { width: 100%; }
@@ -1519,10 +1516,9 @@ section {
 @media (max-width: 900px) {
   .nav-has-submenu::after { display: none; }
   .nav-submenu {
+    display: block;          /* always shown inside the open mobile menu */
     position: static;
     transform: none;
-    opacity: 1;
-    visibility: visible;
     box-shadow: none;
     border: none;
     background: rgba(6, 57, 67, 0.04);
@@ -1917,4 +1913,38 @@ section {
 
 @media (max-width: 700px) {
   .founders-preview-grid { grid-template-columns: 1fr; }
+}
+
+/* Text-only variant of the founder card — used on /about where the
+   founder portraits would otherwise be oversized within the card. */
+.founder-card-link.is-textonly {
+  flex-direction: row;
+  align-items: stretch;
+}
+.founder-card-link.is-textonly .founder-card-body {
+  padding: 32px 34px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.founder-card-link.is-textonly h3 {
+  font-size: 1.55rem;
+  margin-bottom: 6px;
+}
+.founder-card-link.is-textonly .founder-card-role {
+  margin-bottom: 14px;
+}
+.founder-card-tagline {
+  color: #2a3539;
+  font-size: 0.98rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex: 1;
+}
+/* Copper accent rail on the left edge of each text-only card */
+.founder-card-link.is-textonly {
+  border-left: 4px solid var(--copper);
+}
+.founder-card-link.is-textonly:hover {
+  border-left-color: var(--copper);
 }
