@@ -1437,6 +1437,108 @@ section {
 }
 
 /* =============================================
+   Nav dropdown — "About" reveals Jason / Renee on hover
+   ============================================= */
+
+.nav-has-submenu {
+  position: relative;
+}
+/* Invisible hover-bridge so the cursor can travel from the parent
+   item down to the submenu without losing the hover state */
+.nav-has-submenu::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 14px;
+  pointer-events: auto;
+}
+
+.nav-submenu {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 8px 0;
+  min-width: 200px;
+  list-style: none;
+  z-index: 110;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s ease, transform 0.18s var(--ease), visibility 0.18s linear;
+}
+
+.nav-submenu::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: var(--paper);
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+}
+
+.nav-has-submenu:hover .nav-submenu,
+.nav-has-submenu:focus-within .nav-submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-submenu li { width: 100%; }
+
+.nav-submenu a {
+  display: block;
+  padding: 10px 20px;
+  color: var(--teal) !important;
+  font-size: 0.92rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+  position: relative;
+}
+.nav-submenu a::before { display: none !important; }
+.nav-submenu a:hover {
+  background: var(--copper);
+  color: white !important;
+}
+.nav-submenu a.active {
+  color: var(--copper) !important;
+  background: rgba(209, 149, 87, 0.08);
+}
+
+/* Mobile: render the submenu inline within the open hamburger panel */
+@media (max-width: 900px) {
+  .nav-has-submenu::after { display: none; }
+  .nav-submenu {
+    position: static;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    box-shadow: none;
+    border: none;
+    background: rgba(6, 57, 67, 0.04);
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .nav-submenu::before { display: none; }
+  .nav-submenu a {
+    padding: 12px 40px;
+    font-size: 0.88rem;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+/* =============================================
    About page v1.4 — story block + founder dropdowns
    ============================================= */
 
@@ -1726,4 +1828,93 @@ section {
     aspect-ratio: 3 / 4;
   }
   .founder-meta { grid-template-columns: 1fr 1fr; gap: 14px 20px; }
+}
+
+/* =============================================
+   Founders preview cards on /about — link to full profile pages
+   ============================================= */
+
+.founders-preview {
+  background: var(--paper);
+  padding: 80px 0;
+}
+.founders-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.founder-card-link {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.founder-card-link:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--copper);
+  color: inherit;
+}
+
+.founder-card-photo {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--paper);
+}
+.founder-card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.5s var(--ease);
+}
+.founder-card-link:hover .founder-card-photo img {
+  transform: scale(1.04);
+}
+
+.founder-card-body {
+  padding: 26px 28px 28px;
+}
+.founder-card-eyebrow {
+  display: inline-block;
+  color: var(--copper);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.founder-card-body h3 {
+  font-size: 1.55rem;
+  margin-bottom: 6px;
+  color: var(--teal);
+}
+.founder-card-role {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 18px;
+}
+.founder-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--copper);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.founder-card-link:hover .founder-card-cta .arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 700px) {
+  .founders-preview-grid { grid-template-columns: 1fr; }
 }

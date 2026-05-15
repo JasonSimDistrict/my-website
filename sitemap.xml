@@ -29,12 +29,34 @@
 
   <url>
     <loc>https://projecthome.sg/about.html</loc>
-    <lastmod>2026-04-30</lastmod>
+    <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
+      <image:loc>https://projecthome.sg/assets/images/logo.png</image:loc>
+      <image:title>ProjectHome.sg — The story behind PH.sg</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/jason-sim.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
       <image:loc>https://projecthome.sg/assets/images/jason-sim.png</image:loc>
-      <image:title>Jason Sim, District Director at Huttons Asia</image:title>
+      <image:title>Jason Sim, Co-Founder of ProjectHome.sg and District Director at Huttons Asia</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/renee-lim.html</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://projecthome.sg/assets/images/renee-lim.png</image:loc>
+      <image:title>Renee Lim, Co-Founder of ProjectHome.sg and District Director at Huttons Asia</image:title>
     </image:image>
   </url>
 

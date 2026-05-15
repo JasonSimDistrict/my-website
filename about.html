@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About ProjectHome.sg | Founded by Jason Sim &amp; Renee Lim, Huttons Asia</title>
+  <title>About ProjectHome.sg | The Story Behind PH.sg</title>
   <meta name="description" content="The story behind ProjectHome.sg — co-founded by Jason Sim and Renee Lim, District Directors at Huttons Asia. Independent Singapore property advisory built on clarity, strategy, and trust." />
-  <meta name="keywords" content="Jason Sim Huttons, Renee Lim Huttons, District Director Huttons Asia, Singapore property advisor, R052528Z, R047234H, ProjectHome.sg founders" />
+  <meta name="keywords" content="ProjectHome.sg founders, Jason Sim, Renee Lim, Huttons Asia, Singapore property advisory, PH.sg" />
   <meta name="author" content="ProjectHome.sg" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="theme-color" content="#063943" />
@@ -17,16 +17,16 @@
   <link rel="icon" type="image/png" href="assets/images/logo.png" />
   <link rel="apple-touch-icon" href="assets/images/logo.png" />
 
-  <meta property="og:type" content="profile" />
+  <meta property="og:type" content="website" />
   <meta property="og:site_name" content="ProjectHome.sg" />
   <meta property="og:locale" content="en_SG" />
   <meta property="og:url" content="https://projecthome.sg/about.html" />
-  <meta property="og:title" content="About ProjectHome.sg | Founded by Jason Sim &amp; Renee Lim" />
+  <meta property="og:title" content="About ProjectHome.sg | The Story Behind PH.sg" />
   <meta property="og:description" content="The story behind ProjectHome.sg — co-founded by Jason Sim and Renee Lim at Huttons Asia." />
   <meta property="og:image" content="https://projecthome.sg/assets/images/logo.png" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="About ProjectHome.sg | Founded by Jason Sim &amp; Renee Lim" />
+  <meta name="twitter:title" content="About ProjectHome.sg | The Story Behind PH.sg" />
   <meta name="twitter:description" content="Independent Singapore property advisory by Jason Sim and Renee Lim." />
   <meta name="twitter:image" content="https://projecthome.sg/assets/images/logo.png" />
 
@@ -46,31 +46,21 @@
         "@id": "https://projecthome.sg/about.html#aboutpage",
         "url": "https://projecthome.sg/about.html",
         "name": "About ProjectHome.sg",
-        "inLanguage": "en-SG"
+        "inLanguage": "en-SG",
+        "isPartOf": { "@id": "https://projecthome.sg/#website" },
+        "about": { "@id": "https://projecthome.sg/#organization" }
       },
-      { "@type": "Person",
-        "@id": "https://projecthome.sg/about.html#jason-sim",
-        "name": "Jason Sim",
-        "jobTitle": "District Director",
-        "image": "https://projecthome.sg/assets/images/jason-sim.png",
-        "url": "https://projecthome.sg/about.html#jason-sim",
-        "telephone": "+65 8282 2486",
-        "description": "Co-founder of ProjectHome.sg. District Director at Huttons Asia. Independent Singapore property advisor helping families, upgraders, and investors navigate HDB, EC, and private property decisions.",
-        "worksFor": { "@type": "Organization", "name": "Huttons Asia Pte Ltd", "identifier": "L3008899K" },
-        "identifier": "R052528Z",
-        "knowsAbout": ["Singapore real estate", "HDB resale", "Executive Condominium", "Private property", "New launch advisory", "Property investment"]
-      },
-      { "@type": "Person",
-        "@id": "https://projecthome.sg/about.html#renee-lim",
-        "name": "Renee Lim",
-        "jobTitle": "District Director",
-        "image": "https://projecthome.sg/assets/images/renee-lim.png",
-        "url": "https://projecthome.sg/about.html#renee-lim",
-        "telephone": "+65 8827 5656",
-        "description": "Co-founder of ProjectHome.sg. District Director at Huttons Asia with over 15 years of experience in Singapore's property market. Mentor of real estate professionals and strategist for clients across multiple market cycles.",
-        "worksFor": { "@type": "Organization", "name": "Huttons Asia Pte Ltd", "identifier": "L3008899K" },
-        "identifier": "R047234H",
-        "knowsAbout": ["Singapore real estate", "Property portfolio strategy", "HDB upgrading", "Private property", "First-time buyer advisory", "Team leadership"]
+      { "@type": "Organization",
+        "@id": "https://projecthome.sg/#organization-block",
+        "name": "ProjectHome.sg",
+        "alternateName": "PH.sg",
+        "url": "https://projecthome.sg/",
+        "logo": "https://projecthome.sg/assets/images/logo.png",
+        "foundingDate": "2020",
+        "founder": [
+          { "@id": "https://projecthome.sg/jason-sim.html#person" },
+          { "@id": "https://projecthome.sg/renee-lim.html#person" }
+        ]
       }
     ]
   }
@@ -90,7 +80,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="guides.html">Buying Guides</a></li>
         <li><a href="blog.html">Insights & News</a></li>
-        <li><a href="about.html" class="active">About</a></li>
+        <li class="nav-has-submenu"><a href="about.html" class="active">About</a><ul class="nav-submenu"><li><a href="jason-sim.html">Jason Sim</a></li><li><a href="renee-lim.html">Renee Lim</a></li></ul></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="contact.html" class="nav-cta">Get In Touch</a></li>
       </ul>
@@ -147,122 +137,40 @@
       </div>
     </section>
 
-    <!-- Founders -->
-    <section class="founders-section">
+    <!-- Founders preview cards -->
+    <section class="founders-preview">
       <div class="container">
         <div class="section-head">
           <div class="divider-ornament" aria-hidden="true"><span class="line"></span><span class="glyph"></span><span class="line"></span></div>
           <span class="eyebrow">Meet The Founders</span>
           <h2>The team behind ProjectHome.sg</h2>
-          <p>Click either founder to read their full bio, professional credentials, and direct contact details.</p>
+          <p>Two co-founders, one philosophy: strategy over pressure, clarity over noise.</p>
         </div>
 
-        <div class="founders-list">
-
-          <!-- Jason Sim -->
-          <details class="founder-item" id="jason-sim">
-            <summary class="founder-summary">
-              <div class="founder-avatar"><img src="assets/images/jason-sim.png" alt="Jason Sim" loading="lazy" decoding="async" /></div>
-              <div class="founder-id">
-                <div class="name">Jason Sim</div>
-                <div class="role">Co-Founder · District Director · Huttons Asia</div>
-                <div class="preview">Tap to view profile</div>
-              </div>
-              <span class="founder-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="founder-body">
-              <div class="founder-photo-large">
-                <img src="assets/images/jason-sim.png" alt="Jason Sim, Co-Founder and District Director at Huttons Asia" loading="lazy" decoding="async" />
-              </div>
-              <div class="founder-bio">
-                <p>ProjectHome.sg is the independent property advisory platform, co-founded and built by Jason Sim to help buyers navigate Singapore's real estate market with greater clarity, structure, and confidence.</p>
-                <p>In a market filled with fast-moving trends, aggressive marketing, and overwhelming information, Jason believes property decisions should be guided by strategy — not pressure or emotion. Through ProjectHome.sg's proven frameworks, analytical methods, and market insights, clients are empowered to make sound and informed property decisions aligned with their long-term goals.</p>
-                <p>Whether you are planning for your first home, considering an upgrade from your HDB, exploring investment opportunities, or evaluating a new launch, Jason provides practical guidance grounded in real market experience and strategic planning.</p>
-                <p>More than just buying a property, the focus is on helping clients secure <strong>the right home, the right asset, and the right future</strong>.</p>
-                <p>Connect with Jason Sim to explore a clearer and more strategic approach towards your next property decision.</p>
-
-                <div class="founder-meta">
-                  <div class="founder-meta-item">
-                    <strong>Position</strong>
-                    District Director
-                  </div>
-                  <div class="founder-meta-item">
-                    <strong>Mobile · WhatsApp</strong>
-                    <a href="https://wa.me/6582822486?text=Hi%20Jason%2C%20I%27d%20like%20to%20enquire%20about%20property%20in%20Singapore" target="_blank" rel="noopener">+65 8282 2486</a>
-                  </div>
-                  <div class="founder-meta-item">
-                    <strong>RES Reg No</strong>
-                    <span class="small-print">R052528Z</span>
-                  </div>
-                  <div class="founder-meta-item">
-                    <strong>Agency Licence No</strong>
-                    <span class="small-print">L3008899K</span>
-                  </div>
-                </div>
-
-                <div class="founder-actions">
-                  <a href="https://wa.me/6582822486?text=Hi%20Jason%2C%20I%27d%20like%20to%20enquire%20about%20property%20in%20Singapore" target="_blank" rel="noopener" class="btn btn-whatsapp">Chat with Jason on WhatsApp</a>
-                  <img src="assets/images/huttons-logo.png" alt="Huttons Asia — Singapore's Largest Private Real Estate Agency" class="founder-huttons-logo" loading="lazy" decoding="async" />
-                </div>
-              </div>
+        <div class="founders-preview-grid">
+          <a href="jason-sim.html" class="founder-card-link" aria-label="Read Jason Sim's full profile">
+            <div class="founder-card-photo">
+              <img src="assets/images/jason-sim.png" alt="Jason Sim, Co-Founder of ProjectHome.sg" loading="lazy" decoding="async" />
             </div>
-          </details>
-
-          <!-- Renee Lim -->
-          <details class="founder-item" id="renee-lim">
-            <summary class="founder-summary">
-              <div class="founder-avatar"><img src="assets/images/renee-lim.png" alt="Renee Lim" loading="lazy" decoding="async" /></div>
-              <div class="founder-id">
-                <div class="name">Renee Lim</div>
-                <div class="role">Co-Founder · District Director · Huttons Asia</div>
-                <div class="preview">Tap to view profile</div>
-              </div>
-              <span class="founder-toggle" aria-hidden="true">+</span>
-            </summary>
-            <div class="founder-body">
-              <div class="founder-photo-large">
-                <img src="assets/images/renee-lim.png" alt="Renee Lim, Co-Founder and District Director at Huttons Asia" loading="lazy" decoding="async" />
-              </div>
-              <div class="founder-bio">
-                <p>ProjectHome.sg is co-founded by Renee Lim, a seasoned real estate professional with more than <strong>15 years of experience</strong> in Singapore's property market.</p>
-                <p>Having guided numerous clients through different stages of their property journey, Renee has also led and mentored a team of like-minded real estate professionals who share the same commitment towards professionalism, integrity, and client success. Her experience across changing market cycles has shaped her strategic and grounded approach towards property planning and decision-making.</p>
-                <p>At ProjectHome.sg, Renee believes that successful property decisions begin with <strong>clarity</strong>. In an increasingly complex and competitive market, buyers often face information overload, uncertainty, and emotionally driven choices. Through ProjectHome.sg's structured frameworks and clarity-driven principles, Renee helps clients simplify the decision-making process and focus on what truly matters — finding the right property that aligns with their lifestyle goals, financial plans, and future aspirations.</p>
-                <p>Whether clients are purchasing their first home, upgrading to accommodate a growing family, restructuring their portfolio, or exploring investment opportunities, Renee is dedicated to providing thoughtful guidance backed by experience, market understanding, and strategic planning.</p>
-                <p>For Renee, real estate is not simply about transactions — it is about helping people make confident decisions that create stability, growth, and a better future for themselves and their families.</p>
-                <p>Navigate Singapore's property market with a clearer strategy and structured guidance from Renee Lim and ProjectHome.sg.</p>
-
-                <div class="founder-meta">
-                  <div class="founder-meta-item">
-                    <strong>Position</strong>
-                    District Director
-                  </div>
-                  <div class="founder-meta-item">
-                    <strong>Mobile · WhatsApp</strong>
-                    <a href="https://wa.me/6588275656?text=Hi%20Renee%2C%20I%27d%20like%20to%20enquire%20about%20property%20in%20Singapore" target="_blank" rel="noopener">+65 8827 5656</a>
-                  </div>
-                  <div class="founder-meta-item">
-                    <strong>RES Reg No</strong>
-                    <span class="small-print">R047234H</span>
-                  </div>
-                  <div class="founder-meta-item">
-                    <strong>Agency Licence No</strong>
-                    <span class="small-print">L3008899K</span>
-                  </div>
-                </div>
-
-                <div class="founder-actions">
-                  <a href="https://wa.me/6588275656?text=Hi%20Renee%2C%20I%27d%20like%20to%20enquire%20about%20property%20in%20Singapore" target="_blank" rel="noopener" class="btn btn-whatsapp">Chat with Renee on WhatsApp</a>
-                  <img src="assets/images/huttons-logo.png" alt="Huttons Asia — Singapore's Largest Private Real Estate Agency" class="founder-huttons-logo" loading="lazy" decoding="async" />
-                </div>
-              </div>
+            <div class="founder-card-body">
+              <span class="founder-card-eyebrow">Co-Founder</span>
+              <h3>Jason Sim</h3>
+              <p class="founder-card-role">District Director · Huttons Asia</p>
+              <span class="founder-card-cta">Read Jason's profile <span class="arrow">→</span></span>
             </div>
-          </details>
+          </a>
 
-        </div>
-
-        <div class="about-disclosure" style="max-width:820px; margin:50px auto 0;">
-          <strong>Professional Disclosure</strong>
-          Jason Sim (RES Reg No: R052528Z) and Renee Lim (RES Reg No: R047234H) are registered Real Estate Salespersons with the Council for Estate Agencies (CEA), Singapore. Both are licensed to practise estate agency work under Huttons Asia Pte Ltd, Estate Agent Licence Number: L3008899K. Content on ProjectHome.sg is provided for educational and informational purposes and does not constitute personalised financial, legal, or investment advice. Property decisions should be made in consultation with qualified professionals based on your individual circumstances.
+          <a href="renee-lim.html" class="founder-card-link" aria-label="Read Renee Lim's full profile">
+            <div class="founder-card-photo">
+              <img src="assets/images/renee-lim.png" alt="Renee Lim, Co-Founder of ProjectHome.sg" loading="lazy" decoding="async" />
+            </div>
+            <div class="founder-card-body">
+              <span class="founder-card-eyebrow">Co-Founder</span>
+              <h3>Renee Lim</h3>
+              <p class="founder-card-role">District Director · Huttons Asia</p>
+              <span class="founder-card-cta">Read Renee's profile <span class="arrow">→</span></span>
+            </div>
+          </a>
         </div>
       </div>
     </section>
@@ -278,7 +186,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand"><img src="assets/images/logo.png" alt="ProjectHome.sg" loading="lazy" decoding="async" /><p>Independent Singapore property guidance from Jason Sim and Renee Lim, District Directors at Huttons Asia. Step-by-step buyer roadmaps, market reports, and honest take on every major launch.</p></div>
-        <div class="footer-col"><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="guides.html">Buying Guides</a></li><li><a href="blog.html">Insights &amp; News</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="guides.html">Buying Guides</a></li><li><a href="blog.html">Insights &amp; News</a></li><li><a href="about.html">About</a></li><li><a href="jason-sim.html">Jason Sim</a></li><li><a href="renee-lim.html">Renee Lim</a></li><li><a href="contact.html">Contact</a></li></ul></div>
         <div class="footer-col"><h4>Topics</h4><ul><li><a href="blog.html">New Launches</a></li><li><a href="blog.html">Market Reports</a></li><li><a href="blog.html">Buyer Guides</a></li><li><a href="blog.html">District Spotlights</a></li></ul></div>
         <div class="footer-col"><h4>Get In Touch</h4><ul><li><a href="https://wa.me/6582822486" target="_blank" rel="noopener">Jason · +65 8282 2486</a></li><li><a href="https://wa.me/6588275656" target="_blank" rel="noopener">Renee · +65 8827 5656</a></li><li><a href="contact.html">Email Enquiry</a></li></ul></div>
       </div>

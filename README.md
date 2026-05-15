@@ -14,7 +14,9 @@ Singapore property advisory website co-founded by **Jason Sim** and **Renee Lim*
 | `index.html` | Homepage — hero, services, roadmap preview, latest blog, testimonials, FAQ, contact |
 | `guides.html` | 7-step Singapore home buying roadmap |
 | `blog.html` | Blog index with featured post + category filter |
-| `about.html` | About ProjectHome.sg — the story, founder dropdowns for Jason Sim and Renee Lim, professional disclosure |
+| `about.html` | About ProjectHome.sg — the story behind PH.sg, with founder preview cards linking to the dedicated profile pages |
+| `jason-sim.html` | Jason Sim's full profile page (photo, bio, credentials, professional disclosure) — reached via About → Jason Sim in the nav |
+| `renee-lim.html` | Renee Lim's full profile page (photo, bio, credentials, professional disclosure) — reached via About → Renee Lim in the nav |
 | `contact.html` | Contact form + WhatsApp channels |
 | `blog/*.html` | Individual blog post pages |
 
@@ -25,7 +27,9 @@ projecthome-sg/
 ├── index.html
 ├── guides.html
 ├── blog.html
-├── about.html
+├── about.html             # Story behind PH.sg + founder preview cards
+├── jason-sim.html         # Jason Sim's profile page
+├── renee-lim.html         # Renee Lim's profile page
 ├── contact.html
 ├── blog/
 │   ├── q1-2026-private-property-review.html
