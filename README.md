@@ -1,6 +1,6 @@
 # ProjectHome.sg
 
-Singapore property advisory website by **Jason Sim, District Director at Huttons Asia**. Pure static HTML/CSS/JS — no build step, no framework, no Node.js. Deploy to any static host by uploading the files.
+Singapore property advisory website co-founded by **Jason Sim** and **Renee Lim**, District Directors at Huttons Asia. Pure static HTML/CSS/JS — no build step, no framework, no Node.js. Deploy to any static host by uploading the files.
 
 ## Live site
 
@@ -14,7 +14,7 @@ Singapore property advisory website by **Jason Sim, District Director at Huttons
 | `index.html` | Homepage — hero, services, roadmap preview, latest blog, testimonials, FAQ, contact |
 | `guides.html` | 7-step Singapore home buying roadmap |
 | `blog.html` | Blog index with featured post + category filter |
-| `about.html` | About Jason Sim — bio, credentials, professional disclosure |
+| `about.html` | About ProjectHome.sg — the story, founder dropdowns for Jason Sim and Renee Lim, professional disclosure |
 | `contact.html` | Contact form + WhatsApp channels |
 | `blog/*.html` | Individual blog post pages |
 
@@ -177,17 +177,20 @@ WhatsApp `+65 8282 2486` works without any backend changes — the floating acti
 - Per-page `<title>`, meta description, canonical URL
 - Open Graph + Twitter Card meta tags on every page
 - Geo-targeting: `geo.region=SG`, `content-language=en-SG`, `og:locale=en_SG`
-- JSON-LD structured data: `RealEstateAgent` + `WebSite` + `Person` (Jason Sim) on home; `HowTo` (guides), `Blog` + `BreadcrumbList` (blog index), `BlogPosting` + `BreadcrumbList` (each article), `AboutPage` + `Person` (about), `ContactPage` + `BreadcrumbList` (contact)
+- JSON-LD structured data: `RealEstateAgent` (with `founder` + `employee` arrays for both Jason Sim and Renee Lim) + `WebSite` on home; `HowTo` (guides), `Blog` + `BreadcrumbList` (blog index), `BlogPosting` + `BreadcrumbList` (each article), `AboutPage` + two `Person` entities (about), `ContactPage` + `BreadcrumbList` (contact)
 - `robots.txt` and `sitemap.xml` at the root
 - `prefers-reduced-motion` honored across all CSS animations and JS counter animation
 - Accessible focus rings (`:focus-visible`), skip-to-content link, ARIA labels on icon-only links and interactive elements
 
 ## Professional licence
 
-Jason Sim · District Director · RES Reg No: **R052528Z**
+Jason Sim · District Director · RES Reg No: **R052528Z** · WhatsApp **+65 8282 2486**
+Renee Lim · District Director · RES Reg No: **R047234H** · WhatsApp **+65 8827 5656**
 Huttons Asia Pte Ltd · Agency Licence No: **L3008899K**
 
-WhatsApp: **+65 8282 2486** · [https://wa.me/6582822486](https://wa.me/6582822486)
+Direct WhatsApp deep links:
+- Jason: [https://wa.me/6582822486](https://wa.me/6582822486)
+- Renee: [https://wa.me/6588275656](https://wa.me/6588275656)
 
 ---
 
