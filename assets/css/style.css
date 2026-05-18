@@ -1948,3 +1948,44 @@ section {
 .founder-card-link.is-textonly:hover {
   border-left-color: var(--copper);
 }
+
+/* =============================================
+   Footer — static parent-with-children navigation groups
+   Used for showing sub-pages (like Jason Sim, Renee Lim under
+   About) as always-visible items in the footer's Explore column.
+   Designed to support adding more sub-pages in the future under
+   any parent — just add another <li> inside .footer-nav-sub.
+   ============================================= */
+
+.footer-col .footer-nav-group > a {
+  /* Parent links keep the regular footer link styling — no override needed */
+}
+
+.footer-col .footer-nav-sub {
+  list-style: none;
+  margin: 8px 0 2px;
+  padding-left: 14px;
+  display: grid;
+  gap: 8px;
+  border-left: 2px solid rgba(209, 149, 87, 0.28);
+}
+
+.footer-col .footer-nav-sub a {
+  font-size: 0.88rem;
+  color: rgba(247, 241, 232, 0.62);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-col .footer-nav-sub a::before {
+  content: '›';
+  color: var(--copper);
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+.footer-col .footer-nav-sub a:hover {
+  color: var(--copper);
+}
+.footer-col .footer-nav-sub a:hover::before { opacity: 1; }
