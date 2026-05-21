@@ -33,8 +33,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="preload" as="image" href="assets/images/hero-couple-planning.png" fetchpriority="high" />
 
-  <link rel="stylesheet" href="assets/css/style.css?v=144" />
+  <link rel="stylesheet" href="assets/css/style.css?v=145" />
 
   <script type="application/ld+json">
   {
@@ -153,21 +154,27 @@
   <main id="main">
     <section class="hero">
       <div class="hero-inner">
-        <span class="hero-ornament" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L12 3l9 9"/><path d="M5 10v10h14V10"/></svg>
-        </span>
-        <span class="eyebrow">Singapore Property · Self-Guided Advisory</span>
-        <h1>Find Your <em>Ideal Home</em><br />Without the Guesswork</h1>
-        <p class="lead">ProjectHome.sg gives you the playbook used by experienced buyers — step-by-step guides, market data, and curated new launch updates so you can move with clarity and confidence.</p>
-        <div class="hero-actions">
-          <a href="guides.html" class="btn btn-primary">Start the Buyer Roadmap <span class="arrow">→</span></a>
-          <a href="blog.html" class="btn btn-outline" style="color:#f7f1e8; border-color:#d19557;">Latest Market Reports</a>
+        <div class="hero-copy">
+          <span class="hero-ornament" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L12 3l9 9"/><path d="M5 10v10h14V10"/></svg>
+          </span>
+          <span class="eyebrow">Singapore Property · Self-Guided Advisory</span>
+          <h1>Find Your <em>Ideal Home</em><br />Without the Guesswork</h1>
+          <p class="lead">ProjectHome.sg gives you the playbook used by experienced buyers — step-by-step guides, market data, and curated new launch updates so you can move with clarity and confidence.</p>
+          <div class="hero-actions">
+            <a href="guides.html" class="btn btn-primary">Start the Buyer Roadmap <span class="arrow">→</span></a>
+            <a href="blog.html" class="btn btn-outline" style="color:#f7f1e8; border-color:#d19557;">Latest Market Reports</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><div class="num" data-counter="7">0</div><div class="label">Guided Steps</div></div>
+            <div class="stat"><div class="num" data-counter="100" data-suffix="+">0</div><div class="label">New Launches Tracked</div></div>
+            <div class="stat"><div class="num" data-counter="24" data-suffix="h">0</div><div class="label">Reply Promise</div></div>
+          </div>
         </div>
-        <div class="hero-stats">
-          <div class="stat"><div class="num" data-counter="7">0</div><div class="label">Guided Steps</div></div>
-          <div class="stat"><div class="num" data-counter="100" data-suffix="+">0</div><div class="label">New Launches Tracked</div></div>
-          <div class="stat"><div class="num" data-counter="24" data-suffix="h">0</div><div class="label">Reply Promise</div></div>
-        </div>
+        <figure class="hero-media">
+          <img src="assets/images/hero-couple-planning.png" alt="A Singapore couple reviewing property options together over coffee — the kind of considered decision ProjectHome.sg is built to support." width="1200" height="960" fetchpriority="high" decoding="async" />
+          <span class="hero-badge" aria-hidden="true"><span class="dot"></span>Real buyers, real decisions</span>
+        </figure>
       </div>
     </section>
 
@@ -191,14 +198,14 @@
         <div class="section-head">
           <span class="eyebrow">What You Get</span>
           <h2>Everything you need to buy with confidence</h2>
-          <p>Three pillars to help you go from "just looking" to keys in hand — built for Singapore's HDB, EC, and private property landscape.</p>
+          <p>A few pointers here to help you go from "just looking" to keys in hand — built for Singapore's HDB, EC, and private property landscape.</p>
         </div>
         <div class="feature-grid">
           <article class="feature-card"><div class="feature-icon" aria-hidden="true">🧭</div><h3>Step-by-Step Roadmap</h3><p>From budgeting and TDSR to OTP, walk through every milestone with checklists you can actually use.</p></article>
           <article class="feature-card"><div class="feature-icon" aria-hidden="true">📊</div><h3>Market Reports</h3><p>Quarterly performance data, district trends, and rental yields — distilled so you can spot the right window to enter.</p></article>
           <article class="feature-card"><div class="feature-icon" aria-hidden="true">🏗️</div><h3>New Launch Coverage</h3><p>Honest takes on every major launch — pricing, layouts, and the long-term outlook beyond the marketing spin.</p></article>
           <article class="feature-card"><div class="feature-icon" aria-hidden="true">💬</div><h3>Direct Founder Access</h3><p>Stuck on a specific decision? WhatsApp us directly for fast, private answers to your real questions.</p></article>
-          <article class="feature-card"><div class="feature-icon" aria-hidden="true">🔍</div><h3>Independent Insights</h3><p>No fluff, no pressure. The information you'd want a friend in the industry to share with you.</p></article>
+          <article class="feature-card"><div class="feature-icon" aria-hidden="true">🔍</div><h3>NAVIS PrimeKey Analysis</h3><p>No fluff, no pressure. The information you'd want a friend in the industry to share with you.</p></article>
           <article class="feature-card"><div class="feature-icon" aria-hidden="true">📩</div><h3>Curated Updates</h3><p>Subscribe to receive launch alerts and market notes — no spam, only what genuinely moves your decision.</p></article>
         </div>
       </div>
@@ -273,6 +280,9 @@
           <article class="testimonial-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="testimonial-quote">"the ProjectHome.sg roadmap saved us from rushing into the wrong launch. We finally felt like we were buying with a strategy, not a sales pitch."</p><div class="testimonial-attribution"><div class="testimonial-avatar" aria-hidden="true">JL</div><div class="testimonial-meta"><div class="name">Jonathan &amp; Li-Anne</div><div class="role">First-time buyers · Tampines</div></div></div></article>
           <article class="testimonial-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="testimonial-quote">"Honest take on the launch I was eyeing. WhatsApp reply within an hour, no pressure to engage anything else. Refreshing."</p><div class="testimonial-attribution"><div class="testimonial-avatar" aria-hidden="true">PR</div><div class="testimonial-meta"><div class="name">Priya R.</div><div class="role">HDB upgrader · Bishan</div></div></div></article>
           <article class="testimonial-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="testimonial-quote">"The market reports are the only ones I actually read end-to-end. Data-led, no fluff, and the Q1 call on RCR was spot on."</p><div class="testimonial-attribution"><div class="testimonial-avatar" aria-hidden="true">DK</div><div class="testimonial-meta"><div class="name">Daniel K.</div><div class="role">Investor · CCR portfolio</div></div></div></article>
+          <article class="testimonial-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="testimonial-quote">"The NAVIS PrimeKey Analysis Zoom Consultation was the turning point. In one hour we mapped out our upgrade timeline, the right districts to shortlist, and the financing structure — clearer than three months of solo research."</p><div class="testimonial-attribution"><div class="testimonial-avatar" aria-hidden="true">MT</div><div class="testimonial-meta"><div class="name">Marcus &amp; Tricia</div><div class="role">HDB upgraders · Sengkang to OCR condo</div></div></div></article>
+          <article class="testimonial-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="testimonial-quote">"I shortlisted three projects and asked for the NAVIS PrimeKey Analysis Report on each. The side-by-side on PSF history, unit-mix, and rental comps made my decision obvious. Genuinely useful for anyone purchasing seriously."</p><div class="testimonial-attribution"><div class="testimonial-avatar" aria-hidden="true">SC</div><div class="testimonial-meta"><div class="name">Shannon C.</div><div class="role">Investor · D15 freehold purchase</div></div></div></article>
+          <article class="testimonial-card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p class="testimonial-quote">"We came in thinking we wanted a new launch and walked away with a resale unit that fit us much better. The team asked the right questions and never once pushed a specific listing."</p><div class="testimonial-attribution"><div class="testimonial-avatar" aria-hidden="true">AW</div><div class="testimonial-meta"><div class="name">Adrian W.</div><div class="role">Second-time buyer · East Coast</div></div></div></article>
         </div>
       </div>
     </section>
@@ -285,10 +295,10 @@
           <p>Quick answers to the things people enquire about most. Need more depth? <a href="contact.html">Drop a message</a>.</p>
         </div>
         <div class="faq-list">
-          <details class="faq-item"><summary class="faq-summary">Is ProjectHome.sg free to use?<span class="icon" aria-hidden="true">+</span></summary><div class="faq-body">Yes. The full 7-step buying guide, all blog posts, and market reports are free to read. WhatsApp enquiries are also free — no obligation to engage us as your agent.</div></details>
+          <details class="faq-item"><summary class="faq-summary">Is ProjectHome.sg free to use?<span class="icon" aria-hidden="true">+</span></summary><div class="faq-body">Yes. The full 7-step buying guide, all blog posts, and market reports are free to read. WhatsApp enquiries are also free — no obligation to engage us as your agent, including PrimeKey Analysis Zoom Consultation and Report generation are complimentary.</div></details>
           <details class="faq-item"><summary class="faq-summary">Do you cover HDB and ECs, or only private property?<span class="icon" aria-hidden="true">+</span></summary><div class="faq-body">All three. The roadmap is property-class agnostic — and we publish dedicated guides on BTO vs. resale, EC eligibility, decoupling for couples, and CCR/RCR/OCR private launches.</div></details>
           <details class="faq-item"><summary class="faq-summary">How quickly do you respond on WhatsApp?<span class="icon" aria-hidden="true">+</span></summary><div class="faq-body">Within one business day for sure — usually within a few hours during Singapore working hours. Late nights and weekends, you'll get a reply the next morning.</div></details>
-          <details class="faq-item"><summary class="faq-summary">Is ProjectHome.sg an independent advisor?<span class="icon" aria-hidden="true">+</span></summary><div class="faq-body">ProjectHome.sg is co-founded by two District Directors at Huttons Asia, one of Singapore's largest private real estate agencies. The content here is independent of any specific developer's marketing — opinions on launches, districts, and pricing are his own.</div></details>
+          <details class="faq-item"><summary class="faq-summary">Is ProjectHome.sg an independent advisor?<span class="icon" aria-hidden="true">+</span></summary><div class="faq-body">ProjectHome.sg is co-founded by two District Directors at Huttons Asia, one of Singapore's largest private real estate agencies. The content here is independent of any specific developer's marketing — opinions on launches, districts, and pricing are their own.</div></details>
           <details class="faq-item"><summary class="faq-summary">I'm not buying for another year. Is it too early to reach out?<span class="icon" aria-hidden="true">+</span></summary><div class="faq-body">Not at all — early is better. The buyers who get the best outcomes typically start 12–18 months before purchase, so they can watch the market, refine their criteria, and act when the right opportunity appears.</div></details>
         </div>
       </div>
