@@ -1578,7 +1578,7 @@ section {
 
 .nav-submenu a {
   display: block;
-  padding: 10px 20px;
+  padding: 10px 32px;           /* +12px L/R for visual breathing room */
   color: var(--teal) !important;
   font-size: 0.92rem;
   font-weight: 500;
@@ -2329,4 +2329,51 @@ section {
   .pillar-card { padding: 22px 20px; }
   .navis-cta { grid-template-columns: 1fr; padding: 30px 24px; gap: 24px; }
   .navis-cta h3 { font-size: 1.3rem; }
+}
+
+/* ===== Non-link nav parent (e.g. "About" — submenu trigger only) ===== */
+.nav-parent {
+  color: var(--teal);
+  font-weight: 500;
+  font-size: 0.95rem;
+  position: relative;
+  padding: 6px 0;
+  cursor: default;
+  user-select: none;
+  display: inline-block;
+}
+
+.nav-parent::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--copper);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s var(--ease);
+}
+
+.nav-has-submenu:hover .nav-parent::before,
+.nav-has-submenu:focus-within .nav-parent::before {
+  transform: scaleX(1);
+}
+
+.nav-parent:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+/* Mobile: render parent as a block label (no underline, slightly bolder) */
+@media (max-width: 900px) {
+  .nav-parent {
+    display: block;
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 600;
+  }
+  .nav-parent::before { display: none !important; }
 }
