@@ -14,10 +14,21 @@
   </url>
 
   <url>
-    <loc>https://projecthome.sg/guides.html</loc>
-    <lastmod>2026-04-30</lastmod>
+    <loc>https://projecthome.sg/7-steps-buyer-framework.html</loc>
+    <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://projecthome.sg/navis-primekey-analysis.html</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://projecthome.sg/assets/images/primekey-analysis-cover.png</image:loc>
+      <image:title>NAVIS PrimeKey Analysis — 8-pillar Singapore property scoring</image:title>
+    </image:image>
   </url>
 
   <url>

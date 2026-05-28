@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects — https://developers.cloudflare.com/pages/configuration/redirects/
+# Format: SOURCE DESTINATION [STATUS]
+
+# Old "Buying Guides" page renamed to /7-steps-buyer-framework (May 2026)
+/guides.html       /7-steps-buyer-framework.html    301
+/guides            /7-steps-buyer-framework         301
+/guides/           /7-steps-buyer-framework         301

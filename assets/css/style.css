@@ -2466,3 +2466,67 @@ section {
   .post-download h3 { font-size: 1.1rem; }
   .post-download-action .btn { width: 100%; justify-content: center; }
 }
+
+/* ===== Grading score panels (NAVIS PrimeKey Analysis page) ===== */
+.grade-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 0 auto 60px;
+}
+
+.grade-card {
+  position: relative;
+  padding: 24px 22px 20px;
+  border-radius: var(--radius-lg, 18px);
+  border: 1px solid rgba(247, 241, 232, 0.12);
+  border-left-width: 4px;
+  background: rgba(247, 241, 232, 0.04);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.grade-card:hover { transform: translateY(-3px); }
+
+.grade-card.grade-green {
+  border-left-color: #4ec27d;
+  background: linear-gradient(135deg, rgba(78, 194, 125, 0.16) 0%, rgba(78, 194, 125, 0.04) 100%);
+}
+.grade-card.grade-yellow {
+  border-left-color: #d19557;
+  background: linear-gradient(135deg, rgba(209, 149, 87, 0.18) 0%, rgba(209, 149, 87, 0.04) 100%);
+}
+.grade-card.grade-red {
+  border-left-color: #d96b6b;
+  background: linear-gradient(135deg, rgba(217, 107, 107, 0.16) 0%, rgba(217, 107, 107, 0.04) 100%);
+}
+
+.grade-tag {
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.grade-green .grade-tag { color: #6dd698; }
+.grade-yellow .grade-tag { color: #f0bb84; }
+.grade-red .grade-tag { color: #ec8c8c; }
+
+.grade-label {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--cream);
+  margin-bottom: 10px;
+}
+
+.grade-card p {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: rgba(247, 241, 232, 0.78);
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .grade-grid { grid-template-columns: 1fr; gap: 14px; margin-bottom: 44px; }
+}
