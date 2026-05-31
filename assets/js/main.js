@@ -64,6 +64,7 @@
         interest: fieldValue('interest'),
         timeline: fieldValue('timeline'),
         message: fieldValue('message'),
+        source: fieldValue('source'), // project-specific enquiry context (e.g. "Amberwood at Holland")
         website: fieldValue('website'), // honeypot — must stay empty
         updates: !!(form.querySelector('[name="updates"]') || {}).checked,
       };

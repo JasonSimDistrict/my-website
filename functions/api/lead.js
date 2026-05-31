@@ -61,25 +61,33 @@ export async function onRequestPost(context) {
   const interest = (payload.interest || '').trim();
   const timeline = (payload.timeline || '').trim();
   const message = (payload.message || '').trim();
+  const source = (payload.source || '').trim();
   const wantsUpdates = !!payload.updates;
 
   // The blog subscribe form has no name + no message. Treat as subscribe.
-  const isSubscribe = !name && !message;
+  const isSubscribe = !name && !message && !source;
 
   const to = (env.LEAD_TO_EMAIL || DEFAULT_TO).trim();
 
-  const subject = isSubscribe
-    ? 'New newsletter subscription — ProjectHome.sg'
-    : 'New enquiry from ProjectHome.sg' + (name ? ' — ' + name : '');
+  // Subject priority: source (project-specific page) > name (general enquiry) > subscribe.
+  let subject;
+  if (source) {
+    subject = 'Enquiry on ' + source + ' — ProjectHome.sg';
+  } else if (isSubscribe) {
+    subject = 'New newsletter subscription — ProjectHome.sg';
+  } else {
+    subject = 'New enquiry from ProjectHome.sg' + (name ? ' — ' + name : '');
+  }
 
   // Field rows for both text and HTML versions
   const fieldRows = [];
+  if (source) fieldRows.push(['Enquiry source', source]);
   if (name) fieldRows.push(['Name', name]);
   fieldRows.push(['Email', email]);
   if (phone) fieldRows.push(['Phone', phone]);
   if (interest) fieldRows.push(['Interested in', interest]);
   if (timeline) fieldRows.push(['Timeline', timeline]);
-  fieldRows.push(['Wants updates', wantsUpdates ? 'Yes' : 'No']);
+  if (!source) fieldRows.push(['Wants updates', wantsUpdates ? 'Yes' : 'No']);
 
   // Plain-text version (for email clients without HTML rendering)
   const textParts = [
