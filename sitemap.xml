@@ -122,6 +122,17 @@
   </url>
 
   <url>
+    <loc>https://projecthome.sg/blog/dunearn-house.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://projecthome.sg/assets/images/dunearn-house-cover.jpg</image:loc>
+      <image:title>Dunearn House — Frasers × CSC Land × Sekisui House CCR launch in the Swiss Club enclave</image:title>
+    </image:image>
+  </url>
+
+  <url>
     <loc>https://projecthome.sg/blog/thomson-reserve.html</loc>
     <lastmod>2026-06-01</lastmod>
     <changefreq>monthly</changefreq>
