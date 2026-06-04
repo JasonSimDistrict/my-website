@@ -43,7 +43,8 @@ projecthome-sg/
 │   ├── js/main.js
 │   └── images/
 │       ├── logo.png            # ProjectHome.sg logo
-│       ├── jason-sim.png       # Profile photo
+│       ├── jason-sim.jpg       # Profile photo (Jason Sim)
+│       ├── renee-lim.jpg       # Profile photo (Renee Lim)
 │       └── huttons-logo.png    # Huttons Asia logo
 ├── robots.txt
 ├── sitemap.xml
