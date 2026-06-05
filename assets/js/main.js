@@ -90,8 +90,14 @@
         })
         .then(function (result) {
           if (result.resp.ok && result.data && result.data.ok) {
+            // Project-specific (new-launch) enquiries have a hidden `source` field.
+            // Use a team-attributed message for those; keep "Jason" on the general
+            // contact / newsletter-subscribe forms.
+            var isLaunchEnquiry = !!payload.source;
             showMessage(
-              'Thank you! Your enquiry has been received. Jason will reach out within one business day.',
+              isLaunchEnquiry
+                ? 'Thank you! Your enquiry has been received. The ProjectHome.sg Team will reach out within one business day.'
+                : 'Thank you! Your enquiry has been received. Jason will reach out within one business day.',
               false
             );
             form.reset();
