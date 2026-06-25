@@ -107,6 +107,118 @@
 
     <section class="navis-primekey" id="navis-primekey">
       <div class="container">
+
+        <!-- ===== Gallery ===== -->
+        <div style="text-align:center; margin: 0 auto 28px; max-width: 760px;">
+          <span class="eyebrow" style="color: var(--copper); letter-spacing: 0.22em; text-transform: uppercase; font-size: 0.72rem; font-weight: 700;">Gallery</span>
+          <h2 style="color: var(--cream); margin: 12px 0 10px; font-size: clamp(1.6rem, 3.4vw, 2.2rem); letter-spacing: -0.02em;">See PrimeKey Analysis in action</h2>
+          <p style="color: rgba(247, 241, 232, 0.78); margin: 0; font-size: 1rem; line-height: 1.6;">A look at the NAVIS Atlas tool, the PrimeKey Report, and the 8-pillar scoring framework as buyers actually see them.</p>
+        </div>
+
+        <style>
+          .pka-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 0 auto 12px;
+          }
+          .pka-gallery figure {
+            margin: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(247, 241, 232, 0.04);
+            border: 1px solid rgba(209, 149, 87, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+          }
+          .pka-gallery figure:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+            border-color: var(--copper);
+          }
+          .pka-gallery a { display: block; line-height: 0; }
+          .pka-gallery img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            display: block;
+          }
+          .pka-gallery figcaption {
+            padding: 10px 14px;
+            color: var(--cream);
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            background: rgba(6, 57, 67, 0.55);
+            border-top: 2px solid var(--copper);
+            text-align: center;
+          }
+          .pka-fineprint {
+            color: rgba(247, 241, 232, 0.6);
+            font-size: 0.78rem;
+            font-style: italic;
+            text-align: center;
+            margin: 4px auto 36px;
+            max-width: 760px;
+          }
+          @media (max-width: 480px) {
+            .pka-gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .pka-gallery figcaption { font-size: 0.74rem; padding: 8px 10px; }
+          }
+        </style>
+
+        <div class="pka-gallery" role="group" aria-label="NAVIS PrimeKey Analysis gallery">
+          <figure>
+            <a href="assets/images/primekey-analysis-report-and-app-overview.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis Report and app overview full-size">
+              <img src="assets/images/primekey-analysis-report-and-app-overview.jpg" alt="NAVIS PrimeKey Analysis Report and app overview — the 2026 PrimeKey Analysis Report alongside the in-app radar chart and rewards breakdown" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>PrimeKey Report &amp; Atlas overview</figcaption>
+          </figure>
+          <figure>
+            <a href="assets/images/primekey-analysis-8-pillars-investability-score.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis 8 pillars 1 Investability Score full-size">
+              <img src="assets/images/primekey-analysis-8-pillars-investability-score.jpg" alt="NAVIS PrimeKey Analysis — the 8 pillars that produce a single Investability Score for any Singapore property" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>8 pillars, 1 Investability Score</figcaption>
+          </figure>
+          <figure>
+            <a href="assets/images/primekey-analysis-dashboard-laptop.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis investment-grading dashboard full-size">
+              <img src="assets/images/primekey-analysis-dashboard-laptop.jpg" alt="NAVIS PrimeKey Analysis investment-grading dashboard — instant grading across 3,000+ projects on a laptop view" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>Investment-grading dashboard</figcaption>
+          </figure>
+          <figure>
+            <a href="assets/images/primekey-analysis-tablet-radar-chart.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis tablet radar chart view full-size">
+              <img src="assets/images/primekey-analysis-tablet-radar-chart.jpg" alt="NAVIS PrimeKey Analysis on tablet — analyse a property's risks and rewards in seconds with the 8-pillar radar chart" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>Tablet — radar chart view</figcaption>
+          </figure>
+          <figure>
+            <a href="assets/images/primekey-analysis-project-comparison.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis multi-project comparison full-size">
+              <img src="assets/images/primekey-analysis-project-comparison.jpg" alt="NAVIS PrimeKey Analysis multi-project comparison — Don't Buy Hype, Buy Data — compare multiple Singapore projects on objective merits" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>Multi-project comparison</figcaption>
+          </figure>
+          <figure>
+            <a href="assets/images/primekey-analysis-rewards-and-risks.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis rewards and risks view full-size">
+              <img src="assets/images/primekey-analysis-rewards-and-risks.jpg" alt="NAVIS PrimeKey Analysis Key Rewards and Key Risks — spot growth potential and red flags side-by-side for any Singapore property" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>Rewards &amp; risks at a glance</figcaption>
+          </figure>
+          <figure>
+            <a href="assets/images/primekey-analysis-stop-guessing-blue.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis Stop Guessing blue variant full-size">
+              <img src="assets/images/primekey-analysis-stop-guessing-blue.jpg" alt="NAVIS PrimeKey Analysis Stop Guessing Start Knowing — instant data-backed insights from 3,000+ projects" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>Stop guessing &mdash; blue</figcaption>
+          </figure>
+          <figure>
+            <a href="assets/images/primekey-analysis-stop-guessing-green.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis Stop Guessing green variant full-size">
+              <img src="assets/images/primekey-analysis-stop-guessing-green.jpg" alt="NAVIS PrimeKey Analysis Stop Guessing Start Knowing — alternative green palette variant" loading="lazy" decoding="async" />
+            </a>
+            <figcaption>Stop guessing &mdash; green</figcaption>
+          </figure>
+        </div>
+
+        <p class="pka-fineprint">Marketing collateral provided by NAVIS Atlas. Tap any image to view full-size.</p>
+
         <div class="navis-meta">
           <div class="navis-meta-item"><div class="navis-meta-num">3,000<span>+</span></div><div class="navis-meta-label">Projects analysed</div></div>
           <div class="navis-meta-item"><div class="navis-meta-num">8</div><div class="navis-meta-label">Scoring pillars</div></div>
