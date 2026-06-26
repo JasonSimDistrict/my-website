@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
+        { '@type': 'ListItem', position: 2, name: 'About', item: 'https://projecthome.sg/about' },
+      ],
+    },
+    {
+      '@type': 'AboutPage',
+      '@id': 'https://projecthome.sg/about#aboutpage',
+      url: 'https://projecthome.sg/about',
+      name: 'About ProjectHome.sg',
+      inLanguage: 'en-SG',
+      isPartOf: { '@id': 'https://projecthome.sg/#website' },
+      about: { '@id': 'https://projecthome.sg/#organization' },
+    },
+    {
+      '@type': 'Organization',
+      '@id': 'https://projecthome.sg/#organization-block',
+      name: 'ProjectHome.sg',
+      alternateName: 'PH.sg',
+      url: 'https://projecthome.sg/',
+      logo: 'https://projecthome.sg/assets/images/logo.png',
+      foundingDate: '2020',
+      founder: [
+        { '@id': 'https://projecthome.sg/jason-sim#person' },
+        { '@id': 'https://projecthome.sg/renee-lim#person' },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="About ProjectHome.sg | The Story Behind PH.sg"
+  description="The story behind ProjectHome.sg — co-founded by Jason Sim and Renee Lim, District Directors at Huttons Asia. Independent Singapore property advisory built on clarity, strategy, and trust."
+  keywords="ProjectHome.sg founders, Jason Sim, Renee Lim, Huttons Asia, Singapore property advisory, PH.sg"
+  canonical="https://projecthome.sg/about"
+  ogDescription="The story behind ProjectHome.sg — co-founded by Jason Sim and Renee Lim at Huttons Asia."
+  ogImage="https://projecthome.sg/assets/images/about-cover.png"
+  twitterDescription="Independent Singapore property advisory by Jason Sim and Renee Lim."
+  schema={schema}
+>
+
+  <section class="post-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">›</span>
+        <span class="current" aria-current="page">About</span>
+      </nav>
+      <div class="post-meta">About · ProjectHome.sg</div>
+      <h1>The Story Behind ProjectHome.sg</h1>
+    </div>
+  </section>
+
+  <article class="post-content">
+    <img src="/assets/images/about-cover.png" alt="The story behind ProjectHome.sg — building futures, one home at a time" loading="eager" decoding="async" />
+
+    <p>Every meaningful journey begins with a purpose.</p>
+
+    <p>A project is more than just a task — it is a mission, a goal, and a carefully planned pursuit towards something valuable. A home, on the other hand, is more than just a property. It is where life unfolds, families grow, memories are built, and dreams take shape.</p>
+
+    <p>ProjectHome.sg was created from the belief that finding the right property in Singapore is not simply a transaction — it is a deeply personal journey towards building a future.</p>
+
+    <h2>What the name represents</h2>
+
+    <p>The name "ProjectHome.sg" represents exactly that:</p>
+
+    <blockquote>
+      <strong>Project</strong> symbolises the vision, planning, and strategic journey behind every property decision.<br /><br />
+      <strong>Home</strong> represents the emotional destination — a place of comfort, belonging, stability, and legacy.<br /><br />
+      <strong>.sg</strong> reflects our roots and expertise within Singapore's ever-evolving property landscape.
+    </blockquote>
+
+    <p>Together, ProjectHome.sg embodies the mission of helping individuals and families discover the ideal property in Singapore and transform it into a place they can truly call home.</p>
+
+    <h2>How PH.sg came to be</h2>
+
+    <p>Founded by <strong>Jason Sim</strong> and <strong>Renee Lim</strong>, ProjectHome.sg — also known as PH.sg — evolved from the earlier brand <em>#Mr&amp;MrsSimProperty</em>, established in 2020. What began as a personal branding journey gradually transformed through multiple stages of growth and rebranding, eventually becoming a more refined identity with a clearer purpose and long-term vision.</p>
+
+    <h2>People, not just properties</h2>
+
+    <p>At its core, ProjectHome.sg is built around <strong>people, not just properties</strong>.</p>
+
+    <p>We understand that every client's journey is different. Some are purchasing their first home together as a newly married couple. Others are upgrading for a growing family, restructuring their property portfolio, or searching for a place that better aligns with their future aspirations. Behind every move is a life milestone, and behind every property decision is a story.</p>
+
+    <p>Our mission is to provide strategic real estate expertise, market knowledge, and trusted guidance to help like-minded clients navigate Singapore's property market with clarity and confidence. Beyond buying or selling homes, we aim to help our clients make informed decisions that support their lifestyle goals, financial growth, and long-term future.</p>
+
+    <p>ProjectHome.sg is not just about real estate. It is about <strong>building futures, creating stability, and helping people turn property goals into a place they proudly call home</strong>.</p>
+  </article>
+
+  <section class="founders-preview">
+    <div class="container">
+      <div class="section-head">
+        <div class="divider-ornament" aria-hidden="true"><span class="line"></span><span class="glyph"></span><span class="line"></span></div>
+        <span class="eyebrow">Meet The Founders</span>
+        <h2>The team behind ProjectHome.sg</h2>
+        <p>Two co-founders, one philosophy: strategy over pressure, clarity over noise.</p>
+      </div>
+
+      <div class="founders-preview-grid">
+        <a href="/jason-sim" class="founder-card-link is-textonly" aria-label="Read Jason Sim's full profile">
+          <div class="founder-card-body">
+            <span class="founder-card-eyebrow">Co-Founder</span>
+            <h3>Jason Sim</h3>
+            <p class="founder-card-role">District Director · Huttons Asia</p>
+            <p class="founder-card-tagline">Strategic, structured property guidance for first-time buyers, HDB upgraders, and new-launch decisions. Frameworks, market data, and a long-term lens.</p>
+            <span class="founder-card-cta">Read Jason's profile <span class="arrow">→</span></span>
+          </div>
+        </a>
+
+        <a href="/renee-lim" class="founder-card-link is-textonly" aria-label="Read Renee Lim's full profile">
+          <div class="founder-card-body">
+            <span class="founder-card-eyebrow">Co-Founder</span>
+            <h3>Renee Lim</h3>
+            <p class="founder-card-role">District Director · Huttons Asia</p>
+            <p class="founder-card-tagline">15+ years across changing Singapore property cycles. Clarity-driven approach to portfolio strategy and first-home decisions, with a strong mentor's eye.</p>
+            <span class="founder-card-cta">Read Renee's profile <span class="arrow">→</span></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <h2>Ready to start a conversation?</h2>
+    <p>WhatsApp is the fastest way to reach either Jason or Renee for a real-person reply on a specific listing, launch, or decision.</p>
+    <a href="/contact" class="btn btn-secondary">Get In Touch</a>
+  </section>
+
+</BaseLayout>

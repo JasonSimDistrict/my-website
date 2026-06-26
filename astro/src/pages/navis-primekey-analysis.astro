@@ -1,0 +1,272 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
+        { '@type': 'ListItem', position: 2, name: 'NAVIS PrimeKey Analysis', item: 'https://projecthome.sg/navis-primekey-analysis' },
+      ],
+    },
+    {
+      '@type': 'Service',
+      '@id': 'https://projecthome.sg/navis-primekey-analysis#service',
+      name: 'NAVIS PrimeKey Analysis',
+      alternateName: 'NAVIS PrimeKey 8-Pillar Investment Scoring',
+      serviceType: 'Property research and shortlisting analysis',
+      description: 'A proprietary 8-pillar scoring framework that evaluates new launch and resale condominiums in Singapore across MRT connectivity, growth hotspots, government land sales, project size, remaining tenure, proximity to primary schools, MOP cluster demand, and rental yield. Built on insights from over 3,000 projects.',
+      provider: { '@type': 'Organization', name: 'ProjectHome.sg', url: 'https://projecthome.sg/' },
+      areaServed: { '@type': 'Country', name: 'Singapore' },
+      audience: { '@type': 'Audience', audienceType: 'Singapore property buyers and investors' },
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'SGD',
+        description: 'Complimentary 30-minute Zoom consultation',
+        availability: 'https://schema.org/InStock',
+      },
+      url: 'https://projecthome.sg/navis-primekey-analysis',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="NAVIS PrimeKey Analysis: 8-Pillar Property Scoring | ProjectHome.sg"
+  description="NAVIS PrimeKey Analysis — a proprietary 8-pillar scoring framework that grades any Singapore condominium from 0 to 100%. See the pillars, the Green / Yellow / Red grading, and how to book a complimentary 30-minute consultation."
+  keywords="NAVIS PrimeKey, PrimeKey Analysis, Singapore property scoring, investability score, 8 pillars, ProjectHome.sg, property shortlisting"
+  canonical="https://projecthome.sg/navis-primekey-analysis"
+  ogTitle="NAVIS PrimeKey Analysis: 8-Pillar Property Scoring"
+  ogDescription="An objective 0–100% scoring framework for Singapore condominiums — built on 8 proven growth pillars and visualised with Green / Yellow / Red health scores."
+  ogImage="https://projecthome.sg/assets/images/primekey-analysis-cover.png"
+  twitterTitle="NAVIS PrimeKey Analysis: 8-Pillar Property Scoring"
+  twitterDescription="An objective 0–100% scoring framework for Singapore condominiums."
+  whatsappContext="NAVIS PrimeKey Analysis"
+  schema={schema}
+>
+
+  <style is:global slot="head-extra">
+    .pka-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin: 0 auto 12px;
+    }
+    .pka-gallery figure {
+      margin: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(247, 241, 232, 0.04);
+      border: 1px solid rgba(209, 149, 87, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .pka-gallery figure:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+      border-color: var(--copper);
+    }
+    .pka-gallery a { display: block; line-height: 0; }
+    .pka-gallery img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+    }
+    .pka-gallery figcaption {
+      padding: 10px 14px;
+      color: var(--cream);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      background: rgba(6, 57, 67, 0.55);
+      border-top: 2px solid var(--copper);
+      text-align: center;
+    }
+    .pka-fineprint {
+      color: rgba(247, 241, 232, 0.6);
+      font-size: 0.78rem;
+      font-style: italic;
+      text-align: center;
+      margin: 4px auto 36px;
+      max-width: 760px;
+    }
+    @media (max-width: 480px) {
+      .pka-gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .pka-gallery figcaption { font-size: 0.74rem; padding: 8px 10px; }
+    }
+  </style>
+
+  <section class="page-banner">
+    <div class="page-banner-inner">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">›</span>
+        <span class="current" aria-current="page">NAVIS PrimeKey Analysis</span>
+      </nav>
+      <span class="eyebrow">Proprietary tool · Exclusive to ProjectHome.sg</span>
+      <h1>NAVIS PrimeKey Analysis</h1>
+      <p>An 8-pillar scoring framework that turns Singapore property shortlisting into a quantified, defensible decision — graded from 0 to 100%, colour-coded for risk, and built on insights from over 3,000 projects.</p>
+    </div>
+  </section>
+
+  <section class="navis-primekey" id="navis-primekey">
+    <div class="container">
+
+      <div style="text-align:center; margin: 0 auto 28px; max-width: 760px;">
+        <span class="eyebrow" style="color: var(--copper); letter-spacing: 0.22em; text-transform: uppercase; font-size: 0.72rem; font-weight: 700;">Gallery</span>
+        <h2 style="color: var(--cream); margin: 12px 0 0; font-size: clamp(1.6rem, 3.4vw, 2.2rem); letter-spacing: -0.02em;">Introducing NAVIS PrimeKey Analysis</h2>
+      </div>
+
+      <div class="pka-gallery" role="group" aria-label="NAVIS PrimeKey Analysis gallery">
+        <figure>
+          <a href="/assets/images/primekey-analysis-report-and-app-overview.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis Report and app overview full-size">
+            <img src="/assets/images/primekey-analysis-report-and-app-overview.jpg" alt="NAVIS PrimeKey Analysis Report and app overview — the 2026 PrimeKey Analysis Report alongside the in-app radar chart and rewards breakdown" loading="lazy" decoding="async" />
+          </a>
+          <figcaption>PrimeKey Report &amp; Atlas overview</figcaption>
+        </figure>
+        <figure>
+          <a href="/assets/images/primekey-analysis-8-pillars-investability-score.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis 8 pillars 1 Investability Score full-size">
+            <img src="/assets/images/primekey-analysis-8-pillars-investability-score.jpg" alt="NAVIS PrimeKey Analysis — the 8 pillars that produce a single Investability Score for any Singapore property" loading="lazy" decoding="async" />
+          </a>
+          <figcaption>8 pillars, 1 Investability Score</figcaption>
+        </figure>
+        <figure>
+          <a href="/assets/images/primekey-analysis-dashboard-laptop.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis investment-grading dashboard full-size">
+            <img src="/assets/images/primekey-analysis-dashboard-laptop.jpg" alt="NAVIS PrimeKey Analysis investment-grading dashboard — instant grading across 3,000+ projects on a laptop view" loading="lazy" decoding="async" />
+          </a>
+          <figcaption>Investment-grading dashboard</figcaption>
+        </figure>
+        <figure>
+          <a href="/assets/images/primekey-analysis-tablet-radar-chart.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis tablet radar chart view full-size">
+            <img src="/assets/images/primekey-analysis-tablet-radar-chart.jpg" alt="NAVIS PrimeKey Analysis on tablet — analyse a property's risks and rewards in seconds with the 8-pillar radar chart" loading="lazy" decoding="async" />
+          </a>
+          <figcaption>Tablet — radar chart view</figcaption>
+        </figure>
+        <figure>
+          <a href="/assets/images/primekey-analysis-project-comparison.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis multi-project comparison full-size">
+            <img src="/assets/images/primekey-analysis-project-comparison.jpg" alt="NAVIS PrimeKey Analysis multi-project comparison — Don't Buy Hype, Buy Data — compare multiple Singapore projects on objective merits" loading="lazy" decoding="async" />
+          </a>
+          <figcaption>Multi-project comparison</figcaption>
+        </figure>
+        <figure>
+          <a href="/assets/images/primekey-analysis-rewards-and-risks.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis rewards and risks view full-size">
+            <img src="/assets/images/primekey-analysis-rewards-and-risks.jpg" alt="NAVIS PrimeKey Analysis Key Rewards and Key Risks — spot growth potential and red flags side-by-side for any Singapore property" loading="lazy" decoding="async" />
+          </a>
+          <figcaption>Rewards &amp; risks at a glance</figcaption>
+        </figure>
+        <figure>
+          <a href="/assets/images/primekey-analysis-stop-guessing-blue.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis Stop Guessing blue variant full-size">
+            <img src="/assets/images/primekey-analysis-stop-guessing-blue.jpg" alt="NAVIS PrimeKey Analysis Stop Guessing Start Knowing — instant data-backed insights from 3,000+ projects" loading="lazy" decoding="async" />
+          </a>
+          <figcaption>Stop guessing &mdash; blue</figcaption>
+        </figure>
+        <figure>
+          <a href="/assets/images/primekey-analysis-stop-guessing-green.jpg" target="_blank" rel="noopener" aria-label="Open NAVIS PrimeKey Analysis Stop Guessing green variant full-size">
+            <img src="/assets/images/primekey-analysis-stop-guessing-green.jpg" alt="NAVIS PrimeKey Analysis Stop Guessing Start Knowing — alternative green palette variant" loading="lazy" decoding="async" />
+          </a>
+          <figcaption>Stop guessing &mdash; green</figcaption>
+        </figure>
+      </div>
+
+      <div class="navis-meta">
+        <div class="navis-meta-item"><div class="navis-meta-num">3,000<span>+</span></div><div class="navis-meta-label">Projects analysed</div></div>
+        <div class="navis-meta-item"><div class="navis-meta-num">8</div><div class="navis-meta-label">Scoring pillars</div></div>
+        <div class="navis-meta-item"><div class="navis-meta-num">30<span>min</span></div><div class="navis-meta-label">Zoom consultation</div></div>
+      </div>
+
+      <h2 style="color:var(--cream); text-align:center; margin:0 0 14px; font-size:clamp(1.6rem, 3.4vw, 2.2rem); letter-spacing:-0.02em;">The 8 pillars PrimeKey evaluates</h2>
+      <p style="color:rgba(247, 241, 232, 0.78); text-align:center; max-width:720px; margin:0 auto 40px; font-size:1.02rem; line-height:1.7;">Each pillar is a proven growth factor that materially impacts a Singapore property's safety, liquidity, and long-term value. PrimeKey scores each one objectively, then rolls them up into a single 0–100% <strong style="color:var(--cream);">Investability Score</strong>.</p>
+
+      <div class="pillar-grid" role="list" aria-label="The 8 PrimeKey investment pillars">
+        <article class="pillar-card" role="listitem">
+          <div class="pillar-num">01</div>
+          <h3>MRT Connectivity</h3>
+          <p>Walking distance to the nearest MRT — a proxy for demand and liveability across all 28 districts.</p>
+        </article>
+        <article class="pillar-card" role="listitem">
+          <div class="pillar-num">02</div>
+          <h3>Growth Hotspots &amp; Infrastructure</h3>
+          <p>Proximity to URA growth zones with concentrated public and private infrastructure investment.</p>
+        </article>
+        <article class="pillar-card" role="listitem">
+          <div class="pillar-num">03</div>
+          <h3>Government Land Sales</h3>
+          <p>Upcoming GLS plots that historically lift surrounding resale values over a 5- to 7-year horizon.</p>
+        </article>
+        <article class="pillar-card" role="listitem">
+          <div class="pillar-num">04</div>
+          <h3>Project Size &amp; Liquidity</h3>
+          <p>Larger projects offer richer amenities, scale efficiencies, and meaningfully higher resale liquidity.</p>
+        </article>
+        <article class="pillar-card" role="listitem">
+          <div class="pillar-num">05</div>
+          <h3>Remaining Tenure</h3>
+          <p>Lease length impacts financing, CPF usage, and resale value — particularly for sub-60-year remaining tenure.</p>
+        </article>
+        <article class="pillar-card" role="listitem">
+          <div class="pillar-num">06</div>
+          <h3>Proximity to Primary Schools</h3>
+          <p>Within-1km school catchments drive sustained family demand and demonstrable price premiums.</p>
+        </article>
+        <article class="pillar-card" role="listitem">
+          <div class="pillar-num">07</div>
+          <h3>MOP Cluster &amp; Upgrader Demand</h3>
+          <p>Nearby HDB MOP flats signal future upgrader demand flowing into the surrounding private market.</p>
+        </article>
+        <article class="pillar-card" role="listitem">
+          <div class="pillar-num">08</div>
+          <h3>Rental Demand &amp; Yield</h3>
+          <p>Yield bands by region — a defensive buffer in higher-rate environments and a forward indicator of rentability.</p>
+        </article>
+      </div>
+
+      <h2 style="color:var(--cream); text-align:center; margin:60px 0 14px; font-size:clamp(1.6rem, 3.4vw, 2.2rem); letter-spacing:-0.02em;">The grading score criteria</h2>
+      <p style="color:rgba(247, 241, 232, 0.78); text-align:center; max-width:720px; margin:0 auto 32px; font-size:1.02rem; line-height:1.7;">Once the 8 pillars are scored, PrimeKey rolls them up into a single health score — instantly visualised so you can compare any two projects on the same scale.</p>
+
+      <div class="grade-grid" role="list" aria-label="PrimeKey grading score tiers">
+        <div class="grade-card grade-green" role="listitem">
+          <div class="grade-tag">Green · &gt; 75%</div>
+          <div class="grade-label">Investment Grade</div>
+          <p>Hard-to-fail asset across the 8 pillars. Sign your OTP with peace of mind — the downside is structurally protected.</p>
+        </div>
+        <div class="grade-card grade-yellow" role="listitem">
+          <div class="grade-tag">Yellow · 50–75%</div>
+          <div class="grade-label">Moderate Risk</div>
+          <p>Mixed score profile. Worth a deeper look at the specific pillars that dragged the score down before committing.</p>
+        </div>
+        <div class="grade-card grade-red" role="listitem">
+          <div class="grade-tag">Red · &lt; 25%</div>
+          <div class="grade-label">Proceed with Caution</div>
+          <p>Material risks across multiple pillars. The upside has to be exceptional to justify the structural exposure.</p>
+        </div>
+      </div>
+
+      <aside class="navis-note" role="note" aria-label="Important to know">
+        <div class="navis-note-tag">Important to know</div>
+        <p>NAVIS PrimeKey is a <strong>research and shortlisting tool, not a valuation</strong>. It supplements (not replaces) property-specific considerations like layout, view, scarcity, and unit-level pricing. Use it alongside the <a href="/7-steps-buyer-framework" style="color:var(--copper); text-decoration:underline;">7 Steps Buyer Framework</a> — particularly Steps 3, 4 and 5 — for the sharpest results.</p>
+      </aside>
+
+      <div class="navis-cta">
+        <div class="navis-cta-text">
+          <span class="navis-cta-eyebrow">Free 30-min Zoom consultation</span>
+          <h3>See your shortlist scored across all 8 pillars</h3>
+          <p>Book a complimentary 30-minute NAVIS PrimeKey Analysis consultation over Zoom with a ProjectHome.sg representative, and walk away with a scored, structured view of your shortlist.</p>
+        </div>
+        <div class="navis-cta-actions">
+          <a href="https://wa.me/6582822486?text=Hi%2C%20I%27d%20like%20to%20book%20a%20NAVIS%20PrimeKey%20Analysis%20Zoom%20consultation" target="_blank" rel="noopener" class="btn btn-primary">Book Your 30-min Zoom Session <span class="arrow">→</span></a>
+          <a href="/contact" class="btn btn-outline" style="color:#f7f1e8; border-color:#d19557;">Or send an email enquiry</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <h2>Want to read the introduction first?</h2>
+    <p>This blog will give you a clear understanding of how PrimeKey Analysis works.</p>
+    <a href="/blog/primekey-analysis-introduction" class="btn btn-secondary">Read the introduction</a>
+  </section>
+
+</BaseLayout>

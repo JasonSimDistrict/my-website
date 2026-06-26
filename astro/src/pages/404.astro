@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found · ProjectHome.sg"
+  description="The page you're looking for can't be found. Browse the buyer roadmap, latest market reports, or WhatsApp us directly."
+  canonical="https://projecthome.sg/404"
+  ogDescription="The page you're looking for can't be found. Browse the buyer roadmap, market reports, or WhatsApp us directly."
+>
+
+  <meta slot="head-extra" name="robots" content="noindex, follow" />
+
+  <style is:global slot="head-extra">
+    .nf-hero {
+      position: relative;
+      background: linear-gradient(135deg, rgba(6, 57, 67, 0.97) 0%, rgba(6, 57, 67, 0.88) 100%);
+      color: var(--cream);
+      padding: 110px 24px 90px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .nf-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(209, 149, 87, 0.18), transparent 60%);
+      pointer-events: none;
+    }
+    .nf-inner { position: relative; max-width: 720px; margin: 0 auto; }
+    .nf-eyebrow {
+      display: inline-block;
+      color: var(--copper);
+      font-size: 0.85rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .nf-code {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 16vw, 9rem);
+      line-height: 1;
+      background: linear-gradient(135deg, var(--copper) 0%, #f0bb84 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-bottom: 10px;
+    }
+    .nf-hero h1 { color: var(--cream); margin-bottom: 18px; letter-spacing: -0.02em; }
+    .nf-hero p.lead {
+      font-size: 1.1rem;
+      color: rgba(247, 241, 232, 0.9);
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+    .nf-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .nf-recover { padding: 80px 24px 100px; background: var(--paper, #f7f1e8); }
+    .nf-recover .container { max-width: 1080px; }
+    .nf-recover .section-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+    .nf-recover .section-head .eyebrow {
+      color: var(--copper);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .nf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+    .nf-card {
+      background: #fff;
+      border: 1px solid var(--line, rgba(6, 57, 67, 0.08));
+      border-radius: var(--radius-lg, 18px);
+      padding: 28px 26px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .nf-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px -22px rgba(6, 57, 67, 0.35);
+      border-color: rgba(209, 149, 87, 0.45);
+    }
+    .nf-card .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(6, 57, 67, 0.08), rgba(209, 149, 87, 0.18));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--teal, #063943);
+      margin-bottom: 6px;
+    }
+    .nf-card h3 { font-size: 1.1rem; margin: 0; color: var(--teal, #063943); }
+    .nf-card p { font-size: 0.95rem; color: var(--muted, rgba(6, 57, 67, 0.7)); margin: 0; line-height: 1.55; }
+    .nf-card .arrow {
+      margin-top: 4px;
+      color: var(--copper);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+  </style>
+
+  <script is:inline slot="head-extra">
+    window.addEventListener('DOMContentLoaded', function () {
+      if (typeof gtag === 'function') {
+        gtag('event', 'page_not_found', {
+          event_category: '404',
+          event_label: window.location.pathname + window.location.search,
+          page_path: window.location.pathname,
+        });
+      }
+    });
+  </script>
+
+  <section class="nf-hero">
+    <div class="nf-inner">
+      <span class="nf-eyebrow">Wrong turn</span>
+      <div class="nf-code" aria-hidden="true">404</div>
+      <h1>This page isn't here.</h1>
+      <p class="lead">The link might be outdated, mistyped, or the page may have moved. No worries — here are a few good places to land instead.</p>
+      <div class="nf-actions">
+        <a href="/" class="btn btn-primary">Back to Homepage <span class="arrow">→</span></a>
+        <a href="https://wa.me/6582822486?text=Hi%2C%20I%27m%20enquiring%20via%20ProjectHome.sg%2C%20regarding%20" target="_blank" rel="noopener" class="btn btn-outline" style="color:#f7f1e8; border-color:#d19557;">WhatsApp Us</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="nf-recover">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Popular Destinations</span>
+        <h2>Try one of these instead</h2>
+        <p>The most-visited corners of ProjectHome.sg — pick the one closest to what you were looking for.</p>
+      </div>
+      <div class="nf-grid">
+        <a href="/7-steps-buyer-framework" class="nf-card">
+          <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12L12 3l9 9"/><path d="M5 10v10h14V10"/></svg></span>
+          <h3>The Buyer Roadmap</h3>
+          <p>Seven structured stages from defining your why and budget to handover. Start at step one or jump in mid-journey.</p>
+          <span class="arrow">Open guides →</span>
+        </a>
+        <a href="/blog" class="nf-card">
+          <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+          <h3>Insights &amp; Market Notes</h3>
+          <p>Quarterly market reports, honest launch reviews, and analysis on the rules and trends that move Singapore property.</p>
+          <span class="arrow">Browse articles →</span>
+        </a>
+        <a href="/blog/hdb-resale-q1-2026-first-price-dip" class="nf-card">
+          <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+          <h3>HDB Resale Q1 2026 — First Dip Since 2019</h3>
+          <p>The Q1 2026 HDB resale price index fell 0.1% — the first quarterly decline in seven years. What it actually means.</p>
+          <span class="arrow">Read article →</span>
+        </a>
+        <a href="/blog/ec-rule-changes-2026" class="nf-card">
+          <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+          <h3>EC Rule Shake-Up 2026</h3>
+          <p>10-year MOP, 15-year privatisation, 90% first-timer quota, end of DPS — what the new rules mean for buyers.</p>
+          <span class="arrow">Read article →</span>
+        </a>
+        <a href="/about" class="nf-card">
+          <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <h3>About ProjectHome.sg</h3>
+          <p>Co-founded by two District Directors at Huttons Asia. The story behind the site, and how to work with us.</p>
+          <span class="arrow">Meet the team →</span>
+        </a>
+        <a href="/contact" class="nf-card">
+          <span class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+          <h3>Get in Touch</h3>
+          <p>WhatsApp for the fastest reply, or send an email enquiry. Reply within one business day, every time.</p>
+          <span class="arrow">Contact page →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

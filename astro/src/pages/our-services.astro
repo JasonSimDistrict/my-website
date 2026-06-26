@@ -1,0 +1,313 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
+        { '@type': 'ListItem', position: 2, name: 'About', item: 'https://projecthome.sg/about' },
+        { '@type': 'ListItem', position: 3, name: 'Our Services', item: 'https://projecthome.sg/our-services' },
+      ],
+    },
+    {
+      '@type': 'Service',
+      name: 'ProjectHome.sg Property Advisory',
+      provider: { '@type': 'RealEstateAgent', name: 'ProjectHome.sg', url: 'https://projecthome.sg/' },
+      areaServed: { '@type': 'Country', name: 'Singapore' },
+      serviceType: [
+        'Discovery & Affordability Mapping',
+        'NAVIS PrimeKey Analysis',
+        '7-Steps Buyer Framework',
+        'Upgrading & Asset Progression',
+        'New Launch Advisory',
+        'Seller Strategy & Marketing',
+        'Negotiation & Transaction Representation',
+        'Independent Second Opinion',
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Our Services | ProjectHome.sg — Singapore Property Advisory"
+  description="Independent property advisory services from ProjectHome.sg — discovery, NAVIS PrimeKey shortlisting, the 7-Steps Buyer Framework, upgrading & asset progression, new launch advisory, seller strategy, and transaction representation."
+  keywords="ProjectHome.sg services, Singapore property advisor services, NAVIS PrimeKey, buyer consultation Singapore, seller marketing Singapore, upgrading strategy, new launch advisory"
+  canonical="https://projecthome.sg/our-services"
+  ogDescription="Independent, data-led property advisory for Singapore buyers, upgraders and sellers — co-founded by Jason Sim & Renee Lim, District Directors at Huttons Asia."
+  twitterDescription="Independent, data-led property advisory for Singapore buyers, upgraders and sellers."
+  schema={schema}
+>
+
+  <style is:global slot="head-extra">
+    .svc-section { background: var(--paper); padding: 80px 0 96px; }
+    .svc-intro   { text-align: center; max-width: 740px; margin: 0 auto 50px; }
+    .svc-intro h1 { color: var(--teal); margin-top: 14px; font-size: 2.2rem; line-height: 1.15; }
+    .svc-intro p  { color: #3a4a4d; margin-top: 14px; }
+    .svc-grid    { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:24px; }
+    .svc-card    { background:#ffffff; border:1px solid var(--line); border-radius:var(--radius-lg); overflow:hidden; display:flex; flex-direction:column; }
+    .svc-card .svc-img { width:100%; aspect-ratio: 16/9; object-fit:cover; display:block; }
+    .svc-body    { padding:26px 28px 24px; display:flex; flex-direction:column; flex:1; }
+    .svc-tag     { display:flex; flex-wrap:wrap; align-items:baseline; gap:14px; margin-bottom:8px; }
+    .svc-num     { font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; font-weight:700; color:var(--teal); }
+    .svc-fit     { font-size:0.8rem; color:#3a4a4d; }
+    .svc-card h3 { color: var(--teal); margin-bottom: 10px; font-size: 1.25rem; }
+    .svc-card p  { color: var(--ink); font-size: 0.95rem; line-height: 1.65; margin-bottom: 14px; }
+    .svc-leave   { color:#3a4a4d; font-size:0.86rem; margin: auto 0 0; padding-top: 10px; border-top:1px dashed var(--line); }
+    .svc-leave strong { color: var(--teal); }
+
+    .aud-grid    { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px; margin-top: 30px; }
+    .aud-card    { background:#ffffff; border:1px solid var(--line); border-radius:var(--radius); padding: 24px 26px; }
+    .aud-card h4 { color: var(--teal); margin-bottom: 10px; font-size: 1.02rem; }
+    .aud-card p  { color: var(--ink); font-size: 0.93rem; line-height: 1.6; margin:0; }
+
+    .diff-grid   { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:18px; margin-top: 30px; }
+    .diff-card   { background:rgba(247, 241, 232, 0.08); border:1px solid rgba(209, 149, 87, 0.30); border-left:4px solid var(--copper); border-radius:var(--radius); padding: 22px 24px; }
+    .diff-num    { font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; font-weight:700; color:var(--copper); margin-bottom: 6px; }
+    .diff-card h3 { color: var(--cream); margin-bottom: 8px; font-size: 1.05rem; }
+    .diff-card p  { color: rgba(247, 241, 232, 0.92); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+    .diff-card a  { color: var(--copper); }
+
+    .proc-row    { display:flex; gap:24px; padding:22px 0; border-bottom: 1px solid rgba(247, 241, 232, 0.18); }
+    .proc-row:last-of-type { border-bottom: none; }
+    .proc-num    { flex-shrink:0; width:50px; height:50px; border:2px solid var(--copper); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--copper); font-weight:700; font-family:var(--font-sans); }
+    .proc-row h4 { color: var(--cream); margin-bottom: 6px; font-size: 1.05rem; }
+    .proc-row p  { color: rgba(247, 241, 232, 0.88); font-size: 0.95rem; line-height: 1.65; margin: 0; }
+
+    @media (max-width: 640px) {
+      .svc-intro h1 { font-size: 1.8rem; }
+    }
+  </style>
+
+  <section class="svc-section">
+    <div class="container">
+      <div class="svc-intro">
+        <span class="eyebrow" style="color:var(--teal); letter-spacing:0.22em; text-transform:uppercase; font-size:0.8rem; font-weight:700;">Our Services</span>
+        <h1>How we help Singapore buyers, upgraders &amp; sellers</h1>
+        <p>Eight focused advisory services. Most clients only use two or three &mdash; we&rsquo;ll tell you which ones up-front based on your situation, not push the longest invoice.</p>
+      </div>
+
+      <div class="svc-grid">
+
+        <article class="svc-card">
+          <img class="svc-img" src="/assets/images/svc-discovery-finance.jpg" alt="A buyer running their TDSR and downpayment numbers on a calculator with notes laid out" loading="lazy" decoding="async" />
+          <div class="svc-body">
+            <div class="svc-tag"><span class="svc-num">Service 01</span><span class="svc-fit">Best for: 3&ndash;12 months out</span></div>
+            <h3>Discovery &amp; Affordability Mapping</h3>
+            <p>A 1-on-1 review of what you can actually afford &mdash; not just what the bank will lend you. We model your TDSR and (if applicable) MSR at the 4% stress-test rate, scope your downpayment cash plus BSD/ABSD, and walk you through a realistic timeline.</p>
+            <p class="svc-leave"><strong>You leave with:</strong> a written loan ceiling, a cash-on-hand budget, and a confirmed property class (HDB / EC / Private).</p>
+          </div>
+        </article>
+
+        <article class="svc-card">
+          <img class="svc-img" src="/assets/images/primekey-analysis-cover.png" alt="A buyer reviewing the NAVIS PrimeKey 8-pillar scoring framework on a desk" loading="lazy" decoding="async" />
+          <div class="svc-body">
+            <div class="svc-tag"><span class="svc-num">Service 02</span><span class="svc-fit">Best for: anyone with a shortlist</span></div>
+            <h3>NAVIS PrimeKey Analysis</h3>
+            <p>We score any project &mdash; new launch or resale, HDB / EC / private &mdash; on all 8 pillars of our proprietary investability framework: MRT, growth hotspots, GLS pipeline, project size, tenure, yield, school catchment and MOP demand. Compare two completely different addresses apples-to-apples.</p>
+            <p class="svc-leave"><strong>You leave with:</strong> a 0&ndash;100% Investability Score, a Green / Yellow / Red verdict, and the data behind it. <a href="/navis-primekey-analysis" style="color:var(--copper);">See the framework &rarr;</a></p>
+          </div>
+        </article>
+
+        <article class="svc-card">
+          <img class="svc-img" src="/assets/images/7-step-buyers-framework-cover.png" alt="The ProjectHome.sg 7-Step Buyer's Framework roadmap" loading="lazy" decoding="async" />
+          <div class="svc-body">
+            <div class="svc-tag"><span class="svc-num">Service 03</span><span class="svc-fit">Best for: first-time buyers</span></div>
+            <h3>The 7-Steps Buyer Framework &mdash; Guided Run</h3>
+            <p>A structured, end-to-end walkthrough of our buyer roadmap: define your &ldquo;why&rdquo;, lock in budget, pick the property class, shortlist by location, evaluate like an investor, secure financing and OTP, handover. Done over 2&ndash;3 working sessions across 3&ndash;6 weeks.</p>
+            <p class="svc-leave"><strong>You leave with:</strong> a decision-ready shortlist and a step-by-step timeline to OTP. <a href="/7-steps-buyer-framework" style="color:var(--copper);">See the framework &rarr;</a></p>
+          </div>
+        </article>
+
+        <article class="svc-card">
+          <img class="svc-img" src="/assets/images/stocksnap-architecture-2575443.jpg" alt="Modern Singapore high-rise residential architecture representing asset progression" loading="lazy" decoding="async" />
+          <div class="svc-body">
+            <div class="svc-tag"><span class="svc-num">Service 04</span><span class="svc-fit">Best for: HDB upgraders &amp; 2nd-property buyers</span></div>
+            <h3>Upgrading &amp; Asset Progression Strategy</h3>
+            <p>HDB-to-private path planning, sell-first vs sale-and-purchase, the decoupling math (including ABSD impact, CPF accrued interest, and the legal-fees offset), and timing the moves so your bridging cash and TDSR stay clean.</p>
+            <p class="svc-leave"><strong>You leave with:</strong> a 3&ndash;5 year strategic roadmap, with tax and cashflow sensitivities modelled.</p>
+          </div>
+        </article>
+
+        <article class="svc-card">
+          <img class="svc-img" src="/assets/images/svc-new-launch.jpg" alt="A buyer walking through a Singapore neighbourhood — the new launch shortlist walk" loading="lazy" decoding="async" />
+          <div class="svc-body">
+            <div class="svc-tag"><span class="svc-num">Service 05</span><span class="svc-fit">Best for: new launch shortlisters</span></div>
+            <h3>New Launch Advisory &amp; VVIP Preview</h3>
+            <p>Pre-launch unit selection strategy: stack &amp; floor preference, balance unit chart reading, PSF benchmarking against comparable launches, IPA coordination across 2&ndash;3 banks, and OTP execution on launch day. Includes VVIP preview access where available.</p>
+            <p class="svc-leave"><strong>You leave with:</strong> a ranked unit list, a launch-day execution plan, and a real-person at the showflat with you.</p>
+          </div>
+        </article>
+
+        <article class="svc-card">
+          <img class="svc-img" src="/assets/images/hdb-bukit-merah-cbd-skyline.jpg" alt="Singapore HDB blocks against the CBD skyline — representing seller marketing in the urban market" loading="lazy" decoding="async" />
+          <div class="svc-body">
+            <div class="svc-tag"><span class="svc-num">Service 06</span><span class="svc-fit">Best for: HDB &amp; private sellers</span></div>
+            <h3>Seller Strategy &amp; Marketing Run</h3>
+            <p>Pricing strategy based on recent transacted comparables (not asking prices), professional photography and staging, multi-channel exposure (PropertyGuru, 99.co, EdgeProp, social, video walk-throughs), viewing coordination, and offer negotiation through to OTP.</p>
+            <p class="svc-leave"><strong>You leave with:</strong> a documented marketing reach report, the offers received, and the executed transaction.</p>
+          </div>
+        </article>
+
+        <article class="svc-card">
+          <img class="svc-img" src="/assets/images/svc-negotiation.jpg" alt="A buyer and advisor reviewing the OTP and S&P paperwork at the table" loading="lazy" decoding="async" />
+          <div class="svc-body">
+            <div class="svc-tag"><span class="svc-num">Service 07</span><span class="svc-fit">Best for: every buy or sale</span></div>
+            <h3>Negotiation &amp; Transaction Representation</h3>
+            <p>End-to-end management of the transaction itself &mdash; OTP and S&amp;P timelines, COV / valuation handling, lawyer and banker liaison, CPF withdrawal coordination, completion appointment scheduling. We hold the calendar so you don&rsquo;t miss a clock.</p>
+            <p class="svc-leave"><strong>You leave with:</strong> a closed transaction and a clean paper trail.</p>
+          </div>
+        </article>
+
+        <article class="svc-card">
+          <img class="svc-img" src="/assets/images/svc-second-opinion.jpg" alt="A second-opinion conversation — quiet, considered, no pressure" loading="lazy" decoding="async" />
+          <div class="svc-body">
+            <div class="svc-tag"><span class="svc-num">Service 08</span><span class="svc-fit">Best for: sanity-check moments</span></div>
+            <h3>Independent Second Opinion</h3>
+            <p>A no-strings review of a decision you&rsquo;re already weighing &mdash; should I exercise this OTP, is this PSF reasonable, should I decouple or sell, what&rsquo;s the real downside on this unit? You bring the situation; we bring the data and an honest answer.</p>
+            <p class="svc-leave"><strong>You leave with:</strong> a verdict, the underlying numbers, and (where relevant) alternatives.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="guides" style="background: var(--teal);">
+    <div class="container">
+      <div style="max-width:820px; margin:0 auto;">
+        <span class="eyebrow" style="color:var(--copper); letter-spacing:0.22em; text-transform:uppercase; font-size:0.78rem; font-weight:700;">Our process</span>
+        <h2 style="margin-top:14px; color:var(--cream);">From first message to keys in hand</h2>
+        <p style="color:rgba(247, 241, 232, 0.92); margin-top:14px;">Every service above follows the same four-stage arc. The difference between services is depth and duration.</p>
+
+        <div style="margin-top:36px;">
+          <div class="proc-row">
+            <div class="proc-num">01</div>
+            <div>
+              <h4>Free 30-minute discovery call</h4>
+              <p>Zoom or in-person. We listen first, ask the harder questions, and tell you which one or two services actually fit your situation. No deck, no pitch.</p>
+            </div>
+          </div>
+
+          <div class="proc-row">
+            <div class="proc-num">02</div>
+            <div>
+              <h4>Scoped engagement &amp; data run</h4>
+              <p>A written scope of what we will do. We then put your situation through the relevant frameworks &mdash; NAVIS PrimeKey, affordability model, decoupling math, comparable-sales pull.</p>
+            </div>
+          </div>
+
+          <div class="proc-row">
+            <div class="proc-num">03</div>
+            <div>
+              <h4>Strategy session &amp; executable plan with timeline</h4>
+              <p>We present the findings, you challenge them, and we adjust together. At the end of the strategy session we will have built &mdash; with you &mdash; an executable plan and a clear timeline of the moves to make. We don&rsquo;t do long written recommendations that sit in a drawer; we leave you with something you can act on the next morning.</p>
+            </div>
+          </div>
+
+          <div class="proc-row">
+            <div class="proc-num">04</div>
+            <div>
+              <h4>Execution &amp; post-handover follow-up</h4>
+              <p>If you choose to act, we represent you through to completion &mdash; OTP, financing, conveyancing, handover. We then check in at 3 and 12 months post-handover. Property advisory doesn&rsquo;t end at the key collection.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--paper); padding:96px 0;">
+    <div class="container">
+      <div style="text-align:center; max-width:740px; margin:0 auto 10px;">
+        <span class="eyebrow" style="color:var(--teal); letter-spacing:0.22em; text-transform:uppercase; font-size:0.78rem; font-weight:700;">Who we work with</span>
+        <h2 style="margin-top:14px; color:var(--teal);">Who actually walks through our door</h2>
+        <p style="color:#3a4a4d; margin-top:14px;">Independent advisory is not for everyone. These are the situations where we add the most value.</p>
+      </div>
+
+      <div class="aud-grid">
+        <div class="aud-card">
+          <h4>First-time buyers</h4>
+          <p>3&ndash;12 months out from BTO collection or first private purchase. Want a framework, not a sales pitch.</p>
+        </div>
+        <div class="aud-card">
+          <h4>HDB upgraders</h4>
+          <p>Post-MOP considering condo. Need the sell-first vs sale-and-purchase math done properly before signing anything.</p>
+        </div>
+        <div class="aud-card">
+          <h4>Second-property planners</h4>
+          <p>Existing owners weighing decoupling, ABSD optimisation, and the 5&ndash;10 year asset-progression view.</p>
+        </div>
+        <div class="aud-card">
+          <h4>Multi-generational families</h4>
+          <p>Buying for the next two generations, often with school catchment and accessibility as binding constraints.</p>
+        </div>
+        <div class="aud-card">
+          <h4>Yield-focused investors</h4>
+          <p>Looking for cash-flow-positive setups in OCR / RCR with credible long-term capital growth.</p>
+        </div>
+        <div class="aud-card">
+          <h4>Returning Singaporeans &amp; PRs</h4>
+          <p>Reorienting to the current rule set after years away &mdash; ABSD, cooling measures, HFE, and what&rsquo;s actually changed since you last bought.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="guides" style="background: var(--teal);">
+    <div class="container">
+      <div style="max-width:900px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px;">
+        <a href="/navis-primekey-analysis" style="background:rgba(247,241,232,0.08); border:1px solid rgba(209,149,87,0.30); border-left:4px solid var(--copper); border-radius:var(--radius); padding:28px 28px; display:block; text-decoration:none;">
+          <span style="font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; font-weight:700; color:var(--copper); margin-bottom:6px; display:block;">Proprietary tool</span>
+          <h3 style="color:var(--cream); margin-bottom:10px;">NAVIS PrimeKey Analysis</h3>
+          <p style="color:rgba(247,241,232,0.92); font-size:0.94rem; line-height:1.65; margin:0 0 14px;">An 8-pillar Investability Score from 0&ndash;100%. Compare any two Singapore properties &mdash; apples-to-apples &mdash; on connectivity, growth zones, GLS, project size, tenure, yield, schools and upgrader demand.</p>
+          <span style="color:var(--copper); font-weight:600; font-size:0.92rem;">See the framework &rarr;</span>
+        </a>
+        <a href="/7-steps-buyer-framework" style="background:rgba(247,241,232,0.08); border:1px solid rgba(209,149,87,0.30); border-left:4px solid var(--copper); border-radius:var(--radius); padding:28px 28px; display:block; text-decoration:none;">
+          <span style="font-size:0.72rem; letter-spacing:0.18em; text-transform:uppercase; font-weight:700; color:var(--copper); margin-bottom:6px; display:block;">Buyer roadmap</span>
+          <h3 style="color:var(--cream); margin-bottom:10px;">The 7-Steps Buyer Framework</h3>
+          <p style="color:rgba(247,241,232,0.92); font-size:0.94rem; line-height:1.65; margin:0 0 14px;">A structured walkthrough from the first &ldquo;why&rdquo; to the keys in hand &mdash; budget, eligibility, location, evaluation, inspection, financing &amp; OTP, handover. Free to read. Free PDF. No email gate.</p>
+          <span style="color:var(--copper); font-weight:600; font-size:0.92rem;">See the framework &rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="guides" style="background: var(--teal);">
+    <div class="container">
+      <div style="max-width:820px; margin:0 auto;">
+        <span class="eyebrow" style="color:var(--copper); letter-spacing:0.22em; text-transform:uppercase; font-size:0.78rem; font-weight:700;">Before we start</span>
+        <h2 style="margin-top:14px; color:var(--cream);">Three things you should know about working with us</h2>
+
+        <div class="diff-grid">
+          <div class="diff-card">
+            <div class="diff-num">01</div>
+            <h3>Data before opinion.</h3>
+            <p>Every shortlist and recommendation runs through our proprietary <a href="/navis-primekey-analysis">NAVIS PrimeKey Analysis</a> 8-pillar framework. You see the score, not just our opinion.</p>
+          </div>
+          <div class="diff-card">
+            <div class="diff-num">02</div>
+            <h3>No pressure, ever.</h3>
+            <p>If a project doesn&rsquo;t fit, we&rsquo;ll say so &mdash; even if we&rsquo;re marketing it. Our incentive is your second purchase referral, not your first signature today.</p>
+          </div>
+          <div class="diff-card">
+            <div class="diff-num">03</div>
+            <h3>We believe in: Communication is Key.</h3>
+            <p>From the first &ldquo;just wondering&rdquo; message to the post-handover check-in, the conversation stays open. Reach out anytime &mdash; questions, doubts, numbers you want sense-checked. We don&rsquo;t charge for conversations or advice; we only charge for the structured engagements you choose to take further.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <h2>Start with a conversation</h2>
+    <p>No pitch deck, no obligation. Tell us where you are and what you&rsquo;re weighing &mdash; we&rsquo;ll tell you which one or two services fit, and what to do next.</p>
+    <a href="/contact" class="btn btn-secondary">Get in touch</a>
+    <a href="https://wa.me/6582822486?text=Hi%2C%20I%27d%20like%20to%20have%20a%20chat%20about%20a%20property%20decision%20via%20ProjectHome.sg" target="_blank" rel="noopener" class="btn btn-outline" style="margin-left:8px;">WhatsApp Us</a>
+  </section>
+
+</BaseLayout>

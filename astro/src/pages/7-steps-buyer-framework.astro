@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
+        { '@type': 'ListItem', position: 2, name: '7 Steps Buyer Framework', item: 'https://projecthome.sg/7-steps-buyer-framework' },
+      ],
+    },
+    {
+      '@type': 'HowTo',
+      name: '7 Steps Buyer Framework for Singapore Property',
+      description: 'A self-help roadmap covering budget, eligibility, location, evaluation, financing, OTP, and handover for Singapore property buyers.',
+      image: 'https://projecthome.sg/assets/images/logo.png',
+      totalTime: 'P90D',
+      estimatedCost: { '@type': 'MonetaryAmount', currency: 'SGD', value: '0' },
+      step: [
+        { '@type': 'HowToStep', position: 1, name: 'Define Your Why & Budget', text: 'Clarify whether this is a home for living or investment, then nail down affordability using TDSR (55% cap) and MSR (30% for HDB and EC).', url: 'https://projecthome.sg/7-steps-buyer-framework#step-1' },
+        { '@type': 'HowToStep', position: 2, name: 'Understand HDB, EC, or Private', text: 'Eligibility rules, MOP, ABSD, and the tradeoffs between property classes.', url: 'https://projecthome.sg/7-steps-buyer-framework#step-2' },
+        { '@type': 'HowToStep', position: 3, name: 'Shortlist by Location & Lifestyle', text: 'Use a structured framework weighing schools, transport, URA Master Plan, and routine.', url: 'https://projecthome.sg/7-steps-buyer-framework#step-3' },
+        { '@type': 'HowToStep', position: 4, name: 'Evaluate Like an Investor', text: 'Compare PSF trends, rental yield, and 10-year outlook before committing.', url: 'https://projecthome.sg/7-steps-buyer-framework#step-4' },
+        { '@type': 'HowToStep', position: 5, name: 'Inspect & Compare Showflats', text: 'Measure carefully, ask for unit mix and sold percentages, compare materials spec.', url: 'https://projecthome.sg/7-steps-buyer-framework#step-5' },
+        { '@type': 'HowToStep', position: 6, name: 'Secure Financing & OTP', text: 'Get IPA from multiple banks, compare fixed vs floating, engage a conveyancing lawyer early.', url: 'https://projecthome.sg/7-steps-buyer-framework#step-6' },
+        { '@type': 'HowToStep', position: 7, name: 'Handover, Renovation & Beyond', text: 'Run defects inspection, understand DLP, plan renovation in phases, set 3 and 5-year reviews.', url: 'https://projecthome.sg/7-steps-buyer-framework#step-7' },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="7 Steps Buyer Framework: Singapore Home Buying Roadmap | ProjectHome.sg"
+  description="The free 7-Steps Buyer Framework for Singapore property — budget & TDSR, HDB vs EC vs private, location, investor-grade evaluation, inspection, financing, OTP, and handover."
+  keywords="7 Steps Buyer Framework, Singapore home buying guide, how to buy property Singapore, HDB buying guide, EC eligibility, TDSR MSR, Singapore property OTP, first time home buyer Singapore"
+  canonical="https://projecthome.sg/7-steps-buyer-framework"
+  ogTitle="7 Steps Buyer Framework: Singapore Home Buying Roadmap"
+  ogDescription="The free 7-Steps Buyer Framework for Singapore property — from budget to handover."
+  ogType="article"
+  twitterTitle="7 Steps Buyer Framework: Singapore Home Buying Roadmap"
+  twitterDescription="The free 7-Steps Buyer Framework for Singapore property — from budget to handover."
+  schema={schema}
+>
+
+  <section class="page-banner">
+    <div class="page-banner-inner">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">›</span>
+        <span class="current" aria-current="page">7 Steps Buyer Framework</span>
+      </nav>
+      <span class="eyebrow">Self-Help Buyer Roadmap</span>
+      <h1>The 7 Steps Buyer Framework for Singapore Property</h1>
+      <p>A structured walkthrough designed to help you make confident decisions at every milestone — whether you're buying your first home or your fourth.</p>
+    </div>
+  </section>
+
+  <section class="guides">
+    <div class="container">
+      <div class="steps">
+        <article class="step" id="step-1">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>Define Your Why &amp; Budget</h3>
+            <p>Before browsing a single listing, get clear on intent and affordability. Owner-occupier and investor decisions look very different — and your budget isn't your loan ceiling.</p>
+            <ul>
+              <li>Calculate your TDSR (Total Debt Servicing Ratio) cap of 55%</li>
+              <li>Apply MSR (Mortgage Servicing Ratio) 30% if buying HDB or EC</li>
+              <li>Account for BSD, ABSD, legal fees, and renovation buffer (~5–7% on top)</li>
+              <li>Stress-test your monthly payment against a 4% interest scenario</li>
+            </ul>
+            <a href="/contact" class="step-link">Get personal help with this step <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="step" id="step-2">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>Understand HDB, EC, or Private</h3>
+            <p>Each property class has its own eligibility rules, financing, and resale dynamics. Choosing the wrong category early is one of the costliest mistakes Singaporean buyers make.</p>
+            <ul>
+              <li>HDB: BTO vs. resale, MOP, ethnic quotas, income ceilings</li>
+              <li>Executive Condo: <strong>10-year MOP, 15-year privatisation, no more Deferred Payment Scheme (DPS)</strong> under the 2026 ruling</li>
+              <li>Private: freehold vs. 99-year, ABSD considerations for second properties</li>
+              <li>Decoupling vs. selling — when each makes sense</li>
+            </ul>
+            <a href="/contact" class="step-link">Discuss your scenario <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="step" id="step-3">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h3>Shortlist by Location &amp; Lifestyle</h3>
+            <p>Don't fall for "hot district" lists — those are lagging indicators. Use a personal scoring framework that weighs your real life: commute, schools, family proximity, and future URA master plans.</p>
+            <ul>
+              <li>Map your top-3 daily routes against MRT and bus connectivity</li>
+              <li>Check the URA Master Plan for upcoming amenities and rezoning</li>
+              <li>Score each shortlist on: lifestyle, growth potential, exit liquidity</li>
+              <li>Visit the area at three different times (morning, evening, weekend)</li>
+            </ul>
+            <a href="/contact" class="step-link">Get a shortlist review <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="step" id="step-4">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h3>Evaluate Like an Investor</h3>
+            <p>Even if you'll live in the home for 30 years, life happens. Buying with an exit-aware mindset protects your downside and maximises optionality.</p>
+            <ul>
+              <li>Compare PSF against 5-year and 10-year district averages</li>
+              <li>Look at rental yield even if you won't rent — it's a signal of demand</li>
+              <li>Study unsold inventory and developer pricing power in the area</li>
+              <li>Identify two clear exit scenarios before signing the OTP</li>
+            </ul>
+            <a href="/contact" class="step-link">Run the numbers together <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="step" id="step-5">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h3>Inspect &amp; Compare: Showflats &amp; Actual Units</h3>
+            <p>New launch showflats are theatre, designed to inspire. Resale unit viewings are reality, designed to reveal. Different property types call for different inspection lenses — and the buyers who win are the ones who know which questions belong where.</p>
+            <ul>
+              <li>Know what the differences are between showflats and resale units</li>
+              <li>Walk around the 500m radius for both types of property</li>
+              <li>Know what to take note of when viewing either type of property</li>
+              <li>Do comparison beyond the purchase price alone</li>
+            </ul>
+            <a href="/contact" class="step-link">Want a second opinion on a launch or resale unit? <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="step" id="step-6">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <h3>Secure Financing &amp; OTP</h3>
+            <p>The Option-to-Purchase clock moves fast. Have your financing in place before you commit — not after.</p>
+            <ul>
+              <li>Get an In-Principle Approval (IPA) from at least two banks</li>
+              <li>Compare fixed vs. floating packages over 3-year and 5-year horizons</li>
+              <li>Understanding the OTP timeline: the difference between new launch and resale purchase</li>
+              <li>Engage a conveyancing lawyer early — don't wait for OTP signing</li>
+            </ul>
+            <a href="/contact" class="step-link">Need a financing comparison? <span class="arrow">→</span></a>
+          </div>
+        </article>
+
+        <article class="step" id="step-7">
+          <div class="step-num">7</div>
+          <div class="step-body">
+            <h3>Handover, Renovation &amp; Beyond</h3>
+            <p>The keys are just the start. The first 90 days set up the next 10 years of ownership cost and enjoyment.</p>
+            <ul>
+              <li>Run a thorough defects inspection — document everything in writing</li>
+              <li>Understand DLP (Defects Liability Period) and how to claim</li>
+              <li>Plan renovation in phases; avoid over-customising for resale</li>
+              <li>Set a 3-year and 5-year review point to reassess your hold strategy</li>
+            </ul>
+            <a href="/contact" class="step-link">Start your handover checklist <span class="arrow">→</span></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <h2>Stuck on a specific step?</h2>
+    <p>Real questions deserve real answers. WhatsApp us directly and we'll personally help you think it through.</p>
+    <a href="https://wa.me/6582822486?text=Hi%2C%20I%27m%20enquiring%20via%20ProjectHome.sg%2C%20regarding%20" target="_blank" rel="noopener" class="btn btn-secondary">Chat on WhatsApp</a>
+  </section>
+
+</BaseLayout>

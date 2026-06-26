@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
+        { '@type': 'ListItem', position: 2, name: 'About', item: 'https://projecthome.sg/about' },
+        { '@type': 'ListItem', position: 3, name: 'Renee Lim', item: 'https://projecthome.sg/renee-lim' },
+      ],
+    },
+    {
+      '@type': 'ProfilePage',
+      '@id': 'https://projecthome.sg/renee-lim#profilepage',
+      url: 'https://projecthome.sg/renee-lim',
+      name: 'Renee Lim — Co-Founder, ProjectHome.sg',
+      inLanguage: 'en-SG',
+      mainEntity: { '@id': 'https://projecthome.sg/renee-lim#person' },
+    },
+    {
+      '@type': 'Person',
+      '@id': 'https://projecthome.sg/renee-lim#person',
+      name: 'Renee Lim',
+      jobTitle: 'District Director',
+      image: 'https://projecthome.sg/assets/images/renee-lim.jpg',
+      url: 'https://projecthome.sg/renee-lim',
+      telephone: '+65 8827 5656',
+      description: "Co-founder of ProjectHome.sg. District Director at Huttons Asia with over 15 years of experience in Singapore's property market. Mentor of real estate professionals and strategist for clients across multiple market cycles.",
+      worksFor: { '@type': 'Organization', name: 'Huttons Asia Pte Ltd', identifier: 'L3008899K' },
+      identifier: 'R047234H',
+      knowsAbout: ['Singapore real estate', 'Property portfolio strategy', 'HDB upgrading', 'Private property', 'First-time buyer advisory', 'Team leadership', 'New launch advisory'],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Renee Lim | Co-Founder & District Director, Huttons Asia — ProjectHome.sg"
+  description="Meet Renee Lim, co-founder of ProjectHome.sg and District Director at Huttons Asia with over 15 years in Singapore's property market. Strategy, clarity, and trusted guidance for property buyers."
+  keywords="Renee Lim Huttons, District Director Huttons Asia, Singapore property advisor, R047234H, ProjectHome.sg founder, real estate mentor Singapore"
+  canonical="https://projecthome.sg/renee-lim"
+  ogTitle="Renee Lim | Co-Founder, ProjectHome.sg"
+  ogDescription="District Director at Huttons Asia. 15+ years in Singapore's property market. Co-founder of ProjectHome.sg."
+  ogImage="https://projecthome.sg/assets/images/renee-lim.jpg"
+  ogType="article"
+  twitterTitle="Renee Lim | Co-Founder, ProjectHome.sg"
+  twitterDescription="District Director at Huttons Asia. Independent Singapore property advisor with 15+ years in the market."
+  author="Renee Lim · ProjectHome.sg"
+  whatsappContext="Renee Lim's profile"
+  schema={schema}
+>
+
+  <section class="about-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">›</span>
+        <a href="/about">About</a>
+        <span class="sep" aria-hidden="true">›</span>
+        <span class="current" aria-current="page">Renee Lim</span>
+      </nav>
+    </div>
+    <div class="about-grid">
+      <div class="about-photo-frame">
+        <img src="/assets/images/renee-lim.jpg" alt="Renee Lim, Co-Founder of ProjectHome.sg and District Director at Huttons Asia" loading="eager" decoding="async" />
+      </div>
+      <div class="about-text">
+        <span class="eyebrow">Co-Founder · ProjectHome.sg</span>
+        <h1>Renee Lim</h1>
+        <div class="about-title">District Director · Huttons Asia</div>
+        <p>ProjectHome.sg is co-founded by Renee Lim, a seasoned real estate professional with more than <strong>15 years of experience</strong> in Singapore's property market.</p>
+        <p>Renee believes that successful property decisions begin with <strong>clarity</strong> — finding the right property that aligns with lifestyle goals, financial plans, and future aspirations.</p>
+        <div class="about-creds">
+          <div class="about-cred-item"><strong>Mobile · WhatsApp</strong><a href="https://wa.me/6588275656?text=Hi%20Renee%2C%20I%27d%20like%20to%20enquire%20about%20property%20in%20Singapore" target="_blank" rel="noopener" style="color:inherit;">+65 8827 5656</a></div>
+          <div class="about-cred-item"><strong>RES Reg No</strong>R047234H</div>
+          <div class="about-cred-item"><strong>Agency Licence No</strong>L3008899K</div>
+          <img src="/assets/images/huttons-logo.png" alt="Huttons Asia — Singapore's Largest Private Real Estate Agency" class="about-huttons-logo" loading="eager" decoding="async" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-body">
+    <div class="about-body-inner">
+      <h2>15+ years across changing market cycles</h2>
+      <p>Having guided numerous clients through different stages of their property journey, Renee has also led and mentored a team of like-minded real estate professionals who share the same commitment towards <strong>professionalism, integrity, and client success</strong>. Her experience across changing market cycles has shaped her strategic and grounded approach towards property planning and decision-making.</p>
+
+      <h2>Clarity over noise</h2>
+      <p>At ProjectHome.sg, Renee believes that successful property decisions begin with clarity. In an increasingly complex and competitive market, buyers often face information overload, uncertainty, and emotionally driven choices.</p>
+      <p>Through ProjectHome.sg's structured frameworks and clarity-driven principles, Renee helps clients simplify the decision-making process and focus on what truly matters — finding the right property that aligns with their lifestyle goals, financial plans, and future aspirations.</p>
+
+      <h2>Who Renee works with</h2>
+      <p>Whether clients are purchasing their first home, upgrading to accommodate a growing family, restructuring their portfolio, or exploring investment opportunities, Renee is dedicated to providing thoughtful guidance backed by experience, market understanding, and strategic planning.</p>
+      <ul>
+        <li>First-time buyers stepping into the property market</li>
+        <li>Growing families upgrading to accommodate the next chapter</li>
+        <li>Owners restructuring their portfolio for the next decade</li>
+        <li>Investors exploring opportunities across HDB, EC, and private</li>
+        <li>Professionals mentored within Renee's Huttons team</li>
+      </ul>
+
+      <h2>Real estate, beyond transactions</h2>
+      <p>For Renee, real estate is not simply about transactions — it is about helping people make confident decisions that create <strong>stability, growth, and a better future</strong> for themselves and their families.</p>
+      <p>Navigate Singapore's property market with a clearer strategy and structured guidance from Renee Lim and ProjectHome.sg.</p>
+
+      <h2>Get in touch with Renee</h2>
+      <p>The best way to reach Renee is WhatsApp at <a href="https://wa.me/6588275656?text=Hi%2C%20I%27m%20enquiring%20via%20ProjectHome.sg%2C%20regarding%20" target="_blank" rel="noopener">+65 8827 5656</a>. You can also <a href="/contact">drop a message</a> through the contact form, and Renee will personally respond.</p>
+
+      <div class="about-disclosure">
+        <strong>Professional Disclosure</strong>
+        Renee Lim is a registered Real Estate Salesperson with the Council for Estate Agencies (CEA), Singapore. RES Registration Number: R047234H. She is licensed to practise estate agency work under Huttons Asia Pte Ltd, Estate Agent Licence Number: L3008899K. Content on ProjectHome.sg is provided for educational and informational purposes and does not constitute personalised financial, legal, or investment advice. Property decisions should be made in consultation with qualified professionals based on your individual circumstances.
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <h2>Ready to start a conversation with Renee?</h2>
+    <p>WhatsApp is the fastest way to reach Renee for a real-person reply on a specific listing, launch, or decision.</p>
+    <a href="https://wa.me/6588275656?text=Hi%20Renee%2C%20I%27d%20like%20to%20talk%20through%20my%20Singapore%20property%20plans" target="_blank" rel="noopener" class="btn btn-secondary">Chat with Renee on WhatsApp</a>
+  </section>
+
+</BaseLayout>
