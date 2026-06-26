@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const ogImg = 'https://images.unsplash.com/photo-1601933973783-43cf8a7d4c5f?auto=format&fit=crop&w=1400&q=80';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: 'Should You Decouple? A Practical Guide for Married Couples in 2026',
+  description: 'The numbers, cooling measures, and risks of decoupling for couples eyeing a second property.',
+  image: ogImg,
+  datePublished: '2026-02-18T09:00:00+08:00',
+  articleSection: 'Buyer Guide',
+  inLanguage: 'en-SG',
+  author: { '@type': 'Organization', name: 'ProjectHome.sg', url: 'https://projecthome.sg/' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://projecthome.sg/blog/should-you-decouple-2026' },
+};
+---
+
+<BaseLayout
+  title="Should You Decouple? A Practical Guide for Married Couples 2026 | ProjectHome.sg"
+  description="The numbers, cooling measures, and often-overlooked risks of decoupling — a practical guide for married couples in Singapore considering a second property in 2026."
+  canonical="https://projecthome.sg/blog/should-you-decouple-2026"
+  ogTitle="Should You Decouple? A Practical Guide for Married Couples in 2026"
+  ogDescription="The numbers, cooling measures, and risks of decoupling."
+  ogImage={ogImg}
+  ogType="article"
+  publishedTime="2026-02-18T09:00:00+08:00"
+  articleSection="Buyer Guide"
+  whatsappContext="decoupling advice"
+  schema={schema}
+>
+
+  <link slot="head-extra" rel="preconnect" href="https://images.unsplash.com" />
+
+  <section class="post-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">›</span><a href="/blog">Insights &amp; News</a><span class="sep" aria-hidden="true">›</span><span class="current" aria-current="page">Decoupling 2026</span></nav>
+      <div class="post-meta">Buyer Guide · Feb 2026 · 6 min read</div>
+      <h1>Should You Decouple? A Practical Guide for Married Couples in 2026</h1>
+    </div>
+  </section>
+
+  <article class="post-content">
+    <p>Decoupling — where one spouse buys out the other's share of a jointly-owned property so the second spouse can buy a new one without ABSD — is back in conversation. With ABSD at 20% for citizens on a second residential property, the math can be compelling. It's also where the most expensive mistakes happen.</p>
+
+    <h2>When decoupling makes sense</h2>
+    <ul>
+      <li>The first property is meaningfully cash-flow positive or has substantial unrealised capital gain</li>
+      <li>Both spouses qualify on TDSR independently for their respective loans</li>
+      <li>You have a clear 7-to-10-year plan for both properties</li>
+    </ul>
+
+    <h2>When it usually doesn't</h2>
+    <ul>
+      <li>The transaction costs (BSD on the buyout, legal fees, stamp duty) eat 18 months of yield</li>
+      <li>One spouse can't service a mortgage independently</li>
+      <li>You're chasing a launch and treating decoupling as the funding mechanism</li>
+    </ul>
+
+    <h2>The cooling-measure landscape</h2>
+    <p>The 2023 ABSD hike pushed decoupling from "tax planning" to "near-mandatory" for couples wanting two properties. But cooling measures can move again — and any tightening typically applies to transactions in flight, not just future ones. Don't sign anything assuming today's rules persist for the full timeline.</p>
+
+    <h2>A useful sanity check</h2>
+    <p>Run this test: if ABSD were abolished tomorrow, would you still want the second property at the price you're considering? If yes, decouple thoughtfully. If no, you're letting tax planning drive a property decision — which rarely ends well.</p>
+    <p>Drop a message via <a href="/contact">the contact page</a> if you'd like to talk through your specific scenario with me.</p>
+
+    <div style="margin-top:50px; padding:32px; background:var(--paper); border-radius:var(--radius-lg); border-left:4px solid var(--copper); text-align:center;">
+      <h3 style="margin-bottom:10px;">Considering decoupling?</h3>
+      <p style="color:var(--muted); margin-bottom:24px;">WhatsApp us directly to walk through the numbers for your specific situation.</p>
+      <a href="https://wa.me/6582822486?text=Hi%2C%20I%27m%20enquiring%20via%20ProjectHome.sg%2C%20regarding%20decoupling%20advice" target="_blank" rel="noopener" class="btn btn-whatsapp">Chat on WhatsApp</a>
+      <a href="/contact" class="btn btn-outline" style="margin-left:8px;">Send Email Enquiry</a>
+    </div>
+  </article>
+
+</BaseLayout>

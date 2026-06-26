@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const ogImg = 'https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=1400&q=80';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: 'BTO vs. Resale HDB: A 2026 Decision Framework for Young Couples',
+  description: 'The four-axis comparison that actually clarifies the choice between BTO and resale HDB.',
+  image: ogImg,
+  datePublished: '2026-03-22T09:00:00+08:00',
+  articleSection: 'Buyer Guide',
+  inLanguage: 'en-SG',
+  author: { '@type': 'Organization', name: 'ProjectHome.sg', url: 'https://projecthome.sg/' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://projecthome.sg/blog/bto-vs-resale-2026' },
+};
+---
+
+<BaseLayout
+  title="BTO vs. Resale HDB: A 2026 Decision Framework | ProjectHome.sg"
+  description="Waiting time, location, grants, and lifestyle — the four-axis comparison that actually clarifies the choice between BTO and resale HDB for young couples."
+  canonical="https://projecthome.sg/blog/bto-vs-resale-2026"
+  ogTitle="BTO vs. Resale HDB: A 2026 Decision Framework"
+  ogDescription="The four-axis comparison that actually clarifies the choice."
+  ogImage={ogImg}
+  ogType="article"
+  publishedTime="2026-03-22T09:00:00+08:00"
+  articleSection="Buyer Guide"
+  whatsappContext="BTO vs Resale 2026"
+  schema={schema}
+>
+
+  <link slot="head-extra" rel="preconnect" href="https://images.unsplash.com" />
+
+  <section class="post-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">›</span><a href="/blog">Insights &amp; News</a><span class="sep" aria-hidden="true">›</span><span class="current" aria-current="page">BTO vs. Resale 2026</span></nav>
+      <div class="post-meta">Buyer Guide · Mar 2026 · 5 min read</div>
+      <h1>BTO vs. Resale HDB: A 2026 Decision Framework for Young Couples</h1>
+    </div>
+  </section>
+
+  <article class="post-content">
+    <p>For most young couples in Singapore, the BTO vs. resale question comes down to four axes — and ranking them in your own order of priority cuts through 80% of the noise.</p>
+
+    <h2>The four axes</h2>
+    <ol>
+      <li><strong>Waiting time.</strong> BTO can mean 3–4 years; resale is keys-in-hand within months. If you're planning kids in the next 18 months, this axis often dominates everything else.</li>
+      <li><strong>Location flexibility.</strong> Resale opens up mature estates that almost never appear in the BTO ballot.</li>
+      <li><strong>Grants and pricing.</strong> BTO benefits from launch pricing; resale can layer multiple CPF and Enhanced grants. Run both calculators side-by-side — the gap is often smaller than people assume.</li>
+      <li><strong>Lifestyle fit.</strong> New construction vs. mature neighbourhood character — be honest about which energy you actually want to live in.</li>
+    </ol>
+
+    <h2>The framework</h2>
+    <p>Rank those four axes 1 to 4 for <strong>your</strong> household. The route that wins on your top-ranked axis is usually the right answer — even if the other three slightly favour the alternative.</p>
+    <p>Where it gets nuanced: when waiting time and location are tied as your top concern, resale almost always wins. When grants and waiting are tied, BTO usually wins.</p>
+
+    <h2>What I'd add</h2>
+    <p>The often-missed factor: <strong>renovation runway</strong>. New BTOs need substantial first-year reno spend; older resales may need it eventually. Bake this into your total cost from day one, not as a "later" line item.</p>
+    <p>Want help running the numbers for your specific case? <a href="/contact">Drop a message</a> and we'll personally walk through your scenario.</p>
+
+    <div style="margin-top:50px; padding:32px; background:var(--paper); border-radius:var(--radius-lg); border-left:4px solid var(--copper); text-align:center;">
+      <h3 style="margin-bottom:10px;">Need help running your own numbers?</h3>
+      <p style="color:var(--muted); margin-bottom:24px;">WhatsApp us directly — happy to walk through the calculation with your specific budget and grant eligibility.</p>
+      <a href="https://wa.me/6582822486?text=Hi%2C%20I%27m%20enquiring%20via%20ProjectHome.sg%2C%20regarding%20BTO%20vs%20Resale%202026" target="_blank" rel="noopener" class="btn btn-whatsapp">Chat on WhatsApp</a>
+      <a href="/contact" class="btn btn-outline" style="margin-left:8px;">Send Email Enquiry</a>
+    </div>
+  </article>
+
+</BaseLayout>

@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const ogImg = 'https://projecthome.sg/assets/images/scribblinggeek-the-pinnacle-2640724.jpg';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: 'HDB Resale 2025 Recap: Million-Dollar Flats, MOP Supply, and the 2026 Outlook',
+  description: "What 2025 told us about Singapore's HDB resale market.",
+  image: ogImg,
+  datePublished: '2026-02-02T09:00:00+08:00',
+  articleSection: 'Market Report',
+  inLanguage: 'en-SG',
+  author: { '@type': 'Organization', name: 'ProjectHome.sg', url: 'https://projecthome.sg/' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://projecthome.sg/blog/hdb-resale-2025-recap' },
+};
+---
+
+<BaseLayout
+  title="HDB Resale 2025 Recap and 2026 Outlook | ProjectHome.sg"
+  description="What 2025 told us about Singapore's HDB resale market — million-dollar transactions, MOP supply waves, and what to expect in 2026."
+  canonical="https://projecthome.sg/blog/hdb-resale-2025-recap"
+  ogTitle="HDB Resale 2025 Recap and 2026 Outlook"
+  ogDescription="Million-dollar flats, MOP supply, and what to expect in 2026."
+  ogImage={ogImg}
+  ogType="article"
+  publishedTime="2026-02-02T09:00:00+08:00"
+  articleSection="Market Report"
+  whatsappContext="the HDB Resale 2025 Recap"
+  schema={schema}
+>
+
+  <link slot="head-extra" rel="preconnect" href="https://images.unsplash.com" />
+
+  <section class="post-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span class="sep" aria-hidden="true">›</span><a href="/blog">Insights &amp; News</a><span class="sep" aria-hidden="true">›</span><span class="current" aria-current="page">HDB 2025 Recap</span></nav>
+      <div class="post-meta">Market Report · Feb 2026 · 6 min read</div>
+      <h1>HDB Resale 2025 Recap: Million-Dollar Flats, MOP Supply, and the 2026 Outlook</h1>
+    </div>
+  </section>
+
+  <article class="post-content">
+    <img src="/assets/images/scribblinggeek-the-pinnacle-2640724.jpg" alt="The Pinnacle@Duxton — iconic Singapore HDB development representing the peak of public housing" loading="eager" decoding="async" />
+
+    <p>2025 was the year HDB resale stopped being a "ceiling" market and became a genuine supply-and-demand story. Million-dollar flats stopped making headlines because they stopped being unusual. Here's what actually happened — and what it means for 2026 buyers and sellers.</p>
+
+    <h2>The numbers</h2>
+    <ul>
+      <li><strong>Median resale price up ~5.4% YoY.</strong> A measured climb, not a runaway.</li>
+      <li><strong>Million-dollar transactions: roughly 2.8% of all resale volume.</strong> Up from 1.9% in 2024 — concentrated in mature estates and well-located 5-room/executive flats.</li>
+      <li><strong>MOP supply increased by ~12%.</strong> A wave of 2020-era BTOs hit the resale market as their MOP cleared.</li>
+      <li><strong>Average days-on-market dropped to ~38 days.</strong> Demand outpaced listing.</li>
+    </ul>
+
+    <h2>What's driving demand</h2>
+    <p>Three forces:</p>
+    <ol>
+      <li><strong>Upgraders timing the move.</strong> Many couples who got BTOs around 2020 are reaching the upgrade window — and a fair number are choosing to "upgrade in place" by selling and buying a larger resale rather than going private.</li>
+      <li><strong>Extended lease purchasers.</strong> With lease-decay concerns easing in selected mature estates (thanks to VERS and SERS clarity), buyers are returning to flats with 70-80 years remaining.</li>
+      <li><strong>Cash-rich downsizers.</strong> Right-sizers exiting larger private property for centrally-located resale with less maintenance overhead.</li>
+    </ol>
+
+    <h2>The 2026 outlook</h2>
+    <p>I expect:</p>
+    <ul>
+      <li><strong>Continued mid-single-digit price growth</strong> — barring a cooling-measure intervention</li>
+      <li><strong>MOP supply easing slightly</strong> — fewer 2021-era BTOs reach MOP in 2026</li>
+      <li><strong>Million-dollar share creeping up</strong> — likely toward 3.5–4% by year-end</li>
+      <li><strong>Increased policy attention</strong> if growth accelerates — watch the August NDR for any signal</li>
+    </ul>
+
+    <h2>What buyers should do</h2>
+    <p>If you're buying resale in 2026:</p>
+    <ul>
+      <li><strong>Don't anchor on 2024 prices.</strong> They're stale.</li>
+      <li><strong>Move on the right unit, not the cheapest.</strong> In a tight market, layout and location compound; PSF discounts on bad layouts don't.</li>
+      <li><strong>Have your IPA ready before you offer.</strong> Sellers in mature estates are seeing multiple offers and will favour buyers who can move fast.</li>
+    </ul>
+
+    <p>For a closer look at any specific estate, <a href="/contact">send a message</a> — happy to share what I'm seeing on the ground.</p>
+
+    <div style="margin-top:50px; padding:32px; background:var(--paper); border-radius:var(--radius-lg); border-left:4px solid var(--copper); text-align:center;">
+      <h3 style="margin-bottom:10px;">Looking at HDB resale in a specific estate?</h3>
+      <p style="color:var(--muted); margin-bottom:24px;">WhatsApp us directly for a real-time view on prices and supply in the area you're considering.</p>
+      <a href="https://wa.me/6582822486?text=Hi%2C%20I%27m%20enquiring%20via%20ProjectHome.sg%2C%20regarding%20HDB%20resale" target="_blank" rel="noopener" class="btn btn-whatsapp">Chat on WhatsApp</a>
+      <a href="/contact" class="btn btn-outline" style="margin-left:8px;">Send Email Enquiry</a>
+    </div>
+  </article>
+
+</BaseLayout>

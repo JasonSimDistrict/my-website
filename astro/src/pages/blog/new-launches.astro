@@ -1,0 +1,617 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
+        { '@type': 'ListItem', position: 2, name: 'Insights & News', item: 'https://projecthome.sg/blog' },
+        { '@type': 'ListItem', position: 3, name: 'New Launches', item: 'https://projecthome.sg/blog/new-launches' },
+      ],
+    },
+    {
+      '@type': 'CollectionPage',
+      '@id': 'https://projecthome.sg/blog/new-launches#collection',
+      url: 'https://projecthome.sg/blog/new-launches',
+      name: 'Singapore New Launch Calendar',
+      description: 'Upcoming Singapore property launches in the pipeline.',
+      inLanguage: 'en-SG',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Singapore New Launch Calendar | ProjectHome.sg"
+  description="The upcoming Singapore residential new launches we are tracking, with NAVIS PrimeKey-scored reviews on the projects we have covered."
+  keywords="Singapore new launch calendar, upcoming property launches Singapore, NAVIS PrimeKey, executive condo new launch, mixed-development launch Singapore"
+  canonical="https://projecthome.sg/blog/new-launches"
+  ogTitle="Singapore New Launch Calendar | ProjectHome.sg"
+  ogDescription="The upcoming Singapore residential new launches we are tracking, with NAVIS PrimeKey-scored reviews on the projects we have covered."
+  twitterTitle="Singapore New Launch Calendar"
+  twitterDescription="The upcoming Singapore new launches in the pipeline."
+  whatsappContext="a new launch"
+  schema={schema}
+>
+
+  <style is:global slot="head-extra">
+    .scored-strip { background: var(--paper); padding: 60px 0 64px; }
+    .scored-head h2 { color: var(--teal); margin: 8px 0 0; font-size: 1.7rem; }
+    .scored-head .scored-eyebrow { color: var(--copper); letter-spacing: 0.22em; text-transform: uppercase; font-size: 0.72rem; font-weight: 700; }
+    .scored-head .scored-sub { color: #3a4a4d; font-size: 0.95rem; margin: 8px 0 26px; max-width: 720px; }
+
+    .scored-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:18px; }
+    .scored-card {
+      background:#ffffff; border:1px solid var(--line); border-radius:var(--radius);
+      overflow:hidden; text-decoration:none; color:inherit;
+      display:flex; flex-direction:column;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .scored-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(6,57,67,0.10); }
+    .scored-card .scored-thumb { aspect-ratio: 16/10; background-size: cover; background-position: center; position: relative; }
+    .scored-card .scored-pin {
+      position: absolute; top: 10px; left: 10px;
+      background: var(--copper); color:#fff;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 4px 8px; border-radius: 4px;
+    }
+    .scored-card .scored-body { padding: 14px 16px 16px; }
+    .scored-card .scored-meta { color: #3a4a4d; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+    .scored-card .scored-name { color: var(--teal); font-weight: 700; font-size: 1.02rem; line-height: 1.25; }
+
+    .cal-body { padding: 84px 0 96px; background: var(--paper); }
+    .cal-section-head { max-width: 760px; margin: 0 auto 36px; text-align: center; }
+    .cal-section-head h2 { color: var(--teal); margin-top: 10px; font-size: 1.9rem; }
+    .cal-section-head p { color: #3a4a4d; margin-top: 12px; font-size: 0.98rem; }
+    .cal-section-eyebrow { color: var(--copper); letter-spacing: 0.22em; text-transform: uppercase; font-size: 0.72rem; font-weight: 700; }
+
+    .gantt-wrap { background:#ffffff; border:1px solid var(--line); border-radius: var(--radius-lg); padding: 22px 22px 28px; overflow-x: auto; margin-bottom: 56px; }
+    .gantt {
+      display: grid;
+      grid-template-columns: 270px repeat(6, minmax(70px, 1fr));
+      gap: 10px 0;
+      min-width: 760px;
+    }
+    .gantt-corner { grid-column: 1 / 2; grid-row: 1 / 3; }
+    .gantt-qhead {
+      text-align: center;
+      color: var(--cream);
+      background: var(--teal);
+      font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      font-size: 0.74rem;
+      padding: 8px 0;
+      border-radius: 6px 6px 0 0;
+    }
+    .gantt-q-q3 { grid-column: 2 / 5; grid-row: 1; }
+    .gantt-q-q4 { grid-column: 5 / 8; grid-row: 1; }
+    .gantt-month {
+      text-align: center;
+      color: var(--teal); font-weight: 700;
+      font-size: 0.82rem; letter-spacing: 0.08em;
+      padding: 10px 0 8px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(6,57,67,0.04);
+    }
+    .gantt-month.is-q4 { background: rgba(209,149,87,0.06); }
+
+    .gantt-label {
+      grid-column: 1 / 2;
+      padding: 14px 16px 14px 4px;
+      border-right: 1px solid var(--line);
+      display: flex; flex-direction: column; gap: 4px;
+      align-self: center;
+    }
+    .gantt-label .gl-name { color: var(--teal); font-weight: 700; font-size: 1rem; line-height: 1.25; }
+    .gantt-label .gl-name a { color: inherit; text-decoration: none; }
+    .gantt-label .gl-name a:hover { color: var(--copper); }
+    .gantt-label .gl-dev { color: #3a4a4d; font-size: 0.8rem; line-height: 1.4; }
+    .gantt-label .gl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; align-items: center; }
+    .gantt-label .gl-tag {
+      display: inline-block; padding: 2px 8px; border-radius: 999px;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .gl-tag.res { background: rgba(127,168,173,0.18); color: #2d6671; }
+    .gl-tag.ec  { background: rgba(185,136,212,0.22); color: #6b3d8c; }
+    .gl-tag.mu  { background: rgba(224,167,85,0.20); color: #8d5a14; }
+    .gl-tag.score { background: var(--copper); color: #ffffff; letter-spacing: 0.08em; }
+
+    .gantt-track {
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      align-items: center;
+      padding: 8px 0;
+      position: relative;
+      border-bottom: 1px dashed rgba(6,57,67,0.10);
+    }
+    .gantt-row:last-of-type .gantt-track { border-bottom: none; }
+
+    .gantt-bar {
+      grid-row: 1;
+      height: 28px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--teal-light, #0a525f) 0%, var(--teal) 100%);
+      color: #ffffff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.74rem; font-weight: 700; letter-spacing: 0.06em;
+      text-decoration: none;
+      padding: 0 10px;
+      box-shadow: 0 2px 8px rgba(6,57,67,0.18);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .gantt-bar.is-reviewed {
+      background: linear-gradient(90deg, #d19557 0%, #b07a3d 100%);
+      cursor: pointer;
+    }
+    .gantt-bar.is-reviewed:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(209,149,87,0.35); }
+    .gantt-bar.is-ec  { background: linear-gradient(90deg, #b988d4 0%, #8e62a8 100%); }
+    .gantt-bar.is-mu  { background: linear-gradient(90deg, #e0a755 0%, #c08838 100%); color: #fff; }
+
+    .gantt-row { display: contents; }
+    .gantt-row:hover .gantt-label { background: rgba(247,241,232,0.5); }
+
+    .quarter { margin-bottom: 56px; }
+    .quarter-head {
+      display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--teal);
+      margin-bottom: 24px;
+    }
+    .quarter-head .q-label { color: var(--teal); font-weight: 700; font-size: 1.6rem; letter-spacing: 0.02em; }
+    .quarter-head .q-months { color: #3a4a4d; font-size: 0.95rem; letter-spacing: 0.06em; }
+    .quarter-head .q-count {
+      margin-left: auto;
+      background: var(--teal); color: var(--cream);
+      padding: 4px 12px; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .month-row { margin-bottom: 24px; }
+    .month-label {
+      color: var(--copper); font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      font-size: 0.78rem; margin-bottom: 12px;
+      padding-left: 4px;
+    }
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .proj-card {
+      background: #ffffff; border: 1px solid var(--line); border-left: 4px solid #cfd9da;
+      border-radius: 10px; padding: 18px 20px;
+      display: flex; flex-direction: column; gap: 8px;
+      min-height: 150px;
+    }
+    .proj-name { color: var(--teal); font-weight: 700; font-size: 1.05rem; line-height: 1.3; margin: 0; }
+    .proj-dev { color: var(--ink); font-size: 0.88rem; line-height: 1.4; }
+    .proj-site { color: #5a6a6d; font-size: 0.82rem; font-style: italic; }
+    .proj-date { color: #3a4a4d; font-size: 0.82rem; font-weight: 600; margin-top: 4px; }
+    .proj-date .lbl { color: var(--copper); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.68rem; display: block; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 2px; }
+    .proj-tag {
+      display:inline-block; padding: 3px 9px; border-radius: 999px;
+      font-size: 0.66rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .tag-res { background: rgba(127,168,173,0.18); color: #2d6671; }
+    .tag-ec  { background: rgba(185,136,212,0.20); color: #6b3d8c; }
+    .tag-mu  { background: rgba(224,167,85,0.20); color: #8d5a14; }
+
+    .sub-band { background: var(--teal); padding: 70px 0; }
+    .sub-band .container { display:grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
+    @media (max-width: 880px) { .sub-band .container { grid-template-columns: 1fr; } }
+    .sub-band .eyebrow { color: var(--copper); letter-spacing: 0.22em; text-transform: uppercase; font-size: 0.78rem; font-weight: 700; }
+    .sub-band h2 { color: var(--cream); margin-top: 12px; }
+    .sub-band p { color: rgba(247,241,232,0.92); margin-top: 10px; }
+
+    @media (max-width: 540px) {
+      .quarter-head .q-label { font-size: 1.35rem; }
+      .scored-head h2 { font-size: 1.4rem; }
+      .cal-section-head h2 { font-size: 1.5rem; }
+    }
+  </style>
+
+  <section class="page-banner">
+    <div class="page-banner-inner">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">›</span>
+        <a href="/blog">Insights &amp; News</a>
+        <span class="sep" aria-hidden="true">›</span>
+        <span class="current" aria-current="page">New Launch Calendar</span>
+      </nav>
+      <span class="eyebrow">New Launch Calendar</span>
+      <h1>Let&rsquo;s check out the upcoming<br />new launches in the pipeline.</h1>
+    </div>
+  </section>
+
+  <section class="scored-strip">
+    <div class="container">
+      <div class="scored-head">
+        <div class="scored-eyebrow">Developments scored by NAVIS PrimeKey Analysis</div>
+        <h2>Full 8-pillar Investability Score breakdowns</h2>
+        <p class="scored-sub">Tap any card to read.</p>
+      </div>
+
+      <div class="scored-grid">
+        <a class="scored-card" href="/blog/lucerne-grand" aria-label="Lucerne Grand review — 4.8 stars on NAVIS PrimeKey">
+          <div class="scored-thumb" style="background-image:url('/assets/images/lucerne-grand-cover.jpg');"><span class="scored-pin">4.8&#9733; · 38/40</span></div>
+          <div class="scored-body">
+            <div class="scored-meta">Q3 2026 · CDL</div>
+            <div class="scored-name">Lucerne Grand</div>
+          </div>
+        </a>
+
+        <a class="scored-card" href="/blog/lentor-gardens-residences" aria-label="Lentor Gardens Residences review — 3.8 stars on NAVIS PrimeKey">
+          <div class="scored-thumb" style="background-image:url('/assets/images/lentor-gardens-cover.jpg');"><span class="scored-pin">3.8&#9733; · 30/40</span></div>
+          <div class="scored-body">
+            <div class="scored-meta">4 Jul 2026 · Kingsford</div>
+            <div class="scored-name">Lentor Gardens Residences</div>
+          </div>
+        </a>
+
+        <a class="scored-card" href="/blog/dunearn-house" aria-label="Dunearn House review — 4.4 stars on NAVIS PrimeKey">
+          <div class="scored-thumb" style="background-image:url('/assets/images/dunearn-house-cover.jpg');"><span class="scored-pin">4.4&#9733; · 35/40</span></div>
+          <div class="scored-body">
+            <div class="scored-meta">Mid Jul 2026 · Frasers / Sekisui / CSC</div>
+            <div class="scored-name">Dunearn House</div>
+          </div>
+        </a>
+
+        <a class="scored-card" href="/blog/amberwood-at-holland" aria-label="Amberwood at Holland review — 3.8 stars on NAVIS PrimeKey">
+          <div class="scored-thumb" style="background-image:url('/assets/images/amberwood-holland-cover.jpg');"><span class="scored-pin">3.8&#9733; · 30/40</span></div>
+          <div class="scored-body">
+            <div class="scored-meta">Q3 2026 · Sim Lian</div>
+            <div class="scored-name">Amberwood at Holland</div>
+          </div>
+        </a>
+
+        <a class="scored-card" href="/blog/thomson-reserve" aria-label="Thomson Reserve review — 4.1 stars on NAVIS PrimeKey">
+          <div class="scored-thumb" style="background-image:url('/assets/images/thomson-reserve-cover.jpg');"><span class="scored-pin">4.1&#9733; · 33/40</span></div>
+          <div class="scored-body">
+            <div class="scored-meta">Sep–Oct 2026 · UOL / SingLand / CapitaLand</div>
+            <div class="scored-name">Thomson Reserve</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cal-body">
+    <div class="container">
+
+      <div class="cal-section-head">
+        <span class="cal-section-eyebrow">The Calendar</span>
+        <h2>Q3 &amp; Q4 2026 — by launch window</h2>
+        <p>Each bar shows the targeted showflat preview window. Bars tinted <strong>copper</strong> link to a full NAVIS PrimeKey review.</p>
+      </div>
+
+      <div class="gantt-wrap" aria-label="Q3 and Q4 2026 launch calendar">
+        <div class="gantt">
+          <div class="gantt-corner"></div>
+          <div class="gantt-qhead gantt-q-q3">Q3 2026</div>
+          <div class="gantt-qhead gantt-q-q4">Q4 2026</div>
+
+          <div class="gantt-month" style="grid-column: 2; grid-row: 2;">Jul</div>
+          <div class="gantt-month" style="grid-column: 3; grid-row: 2;">Aug</div>
+          <div class="gantt-month" style="grid-column: 4; grid-row: 2;">Sep</div>
+          <div class="gantt-month is-q4" style="grid-column: 5; grid-row: 2;">Oct</div>
+          <div class="gantt-month is-q4" style="grid-column: 6; grid-row: 2;">Nov</div>
+          <div class="gantt-month is-q4" style="grid-column: 7; grid-row: 2;">Dec</div>
+
+          <div class="gantt-label" style="grid-row: 3;">
+            <div class="gl-name"><a href="/blog/lentor-gardens-residences">Lentor Gardens Residences</a></div>
+            <div class="gl-dev">Kingsford Group</div>
+            <div class="gl-tags"><span class="gl-tag res">Residential</span><span class="gl-tag score">3.8&#9733;</span></div>
+          </div>
+          <div class="gantt-track" style="grid-row: 3; grid-column: 2 / 8;">
+            <a class="gantt-bar is-reviewed" href="/blog/lentor-gardens-residences" style="grid-column: 1 / 2;" title="Lentor Gardens Residences — Showflat preview 4 July">4 Jul</a>
+          </div>
+
+          <div class="gantt-label" style="grid-row: 4;">
+            <div class="gl-name"><a href="/blog/dunearn-house">Dunearn House</a></div>
+            <div class="gl-dev">Frasers Property &times; Sekisui House &times; CSC Land</div>
+            <div class="gl-tags"><span class="gl-tag res">Residential</span><span class="gl-tag score">4.4&#9733;</span></div>
+          </div>
+          <div class="gantt-track" style="grid-row: 4; grid-column: 2 / 8;">
+            <a class="gantt-bar is-reviewed" href="/blog/dunearn-house" style="grid-column: 1 / 3;" title="Dunearn House — Mid-July through August">Mid Jul &rarr; Aug</a>
+          </div>
+
+          <div class="gantt-label" style="grid-row: 5;">
+            <div class="gl-name"><a href="/blog/thomson-reserve">Thomson Reserve</a></div>
+            <div class="gl-dev">UOL &times; Singapore Land &times; CapitaLand</div>
+            <div class="gl-tags"><span class="gl-tag res">Residential</span><span class="gl-tag score">4.1&#9733;</span></div>
+          </div>
+          <div class="gantt-track" style="grid-row: 5; grid-column: 2 / 8;">
+            <a class="gantt-bar is-reviewed" href="/blog/thomson-reserve" style="grid-column: 3 / 5;" title="Thomson Reserve — September through October">Sep &rarr; Oct</a>
+          </div>
+
+          <div class="gantt-label" style="grid-row: 6;">
+            <div class="gl-name"><a href="/blog/lucerne-grand">Lucerne Grand</a></div>
+            <div class="gl-dev">City Developments Limited (CDL)</div>
+            <div class="gl-tags"><span class="gl-tag mu">Mixed-Dev</span><span class="gl-tag score">4.8&#9733;</span></div>
+          </div>
+          <div class="gantt-track" style="grid-row: 6; grid-column: 2 / 8;">
+            <a class="gantt-bar is-mu" href="/blog/lucerne-grand" style="grid-column: 1 / 4;" title="Lucerne Grand — Q3 2026 (Jul–Sep)">Q3 2026</a>
+          </div>
+
+          <div class="gantt-label" style="grid-row: 7;">
+            <div class="gl-name"><a href="/blog/amberwood-at-holland">Amberwood at Holland</a></div>
+            <div class="gl-dev">Sim Lian Group</div>
+            <div class="gl-tags"><span class="gl-tag res">Residential</span><span class="gl-tag score">3.8&#9733;</span></div>
+          </div>
+          <div class="gantt-track" style="grid-row: 7; grid-column: 2 / 8;">
+            <a class="gantt-bar is-reviewed" href="/blog/amberwood-at-holland" style="grid-column: 1 / 4;" title="Amberwood at Holland — Q3 2026 (Jul–Sep)">Q3 2026</a>
+          </div>
+
+          <div class="gantt-label" style="grid-row: 8;">
+            <div class="gl-name">The Serra Residences</div>
+            <div class="gl-dev">Far East Organisation</div>
+            <div class="gl-tags"><span class="gl-tag res">Residential</span></div>
+          </div>
+          <div class="gantt-track" style="grid-row: 8; grid-column: 2 / 8;">
+            <div class="gantt-bar" style="grid-column: 1 / 4;" title="The Serra Residences — Q3 2026 (Jul–Sep)">Q3 2026</div>
+          </div>
+
+          <div class="gantt-label" style="grid-row: 9;">
+            <div class="gl-name">Telok Blangah Road</div>
+            <div class="gl-dev">Kingsford Group</div>
+            <div class="gl-tags"><span class="gl-tag res">Residential</span></div>
+          </div>
+          <div class="gantt-track" style="grid-row: 9; grid-column: 2 / 8;">
+            <div class="gantt-bar" style="grid-column: 5 / 6;" title="Telok Blangah Road — November 2026">Nov</div>
+          </div>
+
+          <div class="gantt-label" style="grid-row: 10;">
+            <div class="gl-name">Bukit Timah Road</div>
+            <div class="gl-dev">HH Investment</div>
+            <div class="gl-tags"><span class="gl-tag res">Residential</span></div>
+          </div>
+          <div class="gantt-track" style="grid-row: 10; grid-column: 2 / 8;">
+            <div class="gantt-bar" style="grid-column: 5 / 6;" title="Bukit Timah Road — November 2026">Nov</div>
+          </div>
+
+          <div class="gantt-label" style="grid-row: 11;">
+            <div class="gl-name">Bedok Rise</div>
+            <div class="gl-dev">Allgreen Properties</div>
+            <div class="gl-tags"><span class="gl-tag res">Residential</span></div>
+          </div>
+          <div class="gantt-track" style="grid-row: 11; grid-column: 2 / 8;">
+            <div class="gantt-bar" style="grid-column: 5 / 6;" title="Bedok Rise — November 2026">Nov</div>
+          </div>
+
+          <div class="gantt-label" style="grid-row: 12;">
+            <div class="gl-name">Woodlands Drive 17 (EC)</div>
+            <div class="gl-dev">City Developments Limited (CDL)</div>
+            <div class="gl-tags"><span class="gl-tag ec">Executive Condo</span></div>
+          </div>
+          <div class="gantt-track" style="grid-row: 12; grid-column: 2 / 8;">
+            <div class="gantt-bar is-ec" style="grid-column: 4 / 7;" title="Woodlands Drive 17 (EC) — Q4 2026">Q4 2026</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cal-section-head">
+        <span class="cal-section-eyebrow">Looking Further Ahead</span>
+        <h2>2027 launches in the pipeline</h2>
+        <p>The 2027 calendar is still firming up &mdash; we list each project with the window the developer is currently signalling.</p>
+      </div>
+
+      <div class="quarter" id="q1-2027">
+        <div class="quarter-head">
+          <span class="q-label">Q1 2027</span>
+          <span class="q-months">Jan · Feb · Mar</span>
+          <span class="q-count">9 launches tracked</span>
+        </div>
+
+        <div class="month-row">
+          <div class="month-label">January 2027</div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-res">Residential</span></div>
+              <h3 class="proj-name">Chuan Grove</h3>
+              <div class="proj-dev">Sing Holdings &amp; Sunway Developments</div>
+              <div class="proj-site">Chuan GLS &mdash; amalgamation of 2 sites · ~1,055 units</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>January 2027</div>
+            </div>
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-res">Residential</span></div>
+              <h3 class="proj-name">Dairy Farm Walk</h3>
+              <div class="proj-dev">Roxy-Pacific RP Ventures, Macly Capital, LWH Holdings &amp; ABR Holdings</div>
+              <div class="proj-site">Dairy Farm Walk GLS</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>January 2027</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="month-row">
+          <div class="month-label">February 2027</div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-res">Residential</span></div>
+              <h3 class="proj-name">Tanjong Rhu Road</h3>
+              <div class="proj-dev">CDL &amp; Woh Hup</div>
+              <div class="proj-site">Tanjong Rhu Road GLS · RCR</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>February 2027</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="month-row">
+          <div class="month-label">1Q 2027 (window TBA)</div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-res">Residential</span></div>
+              <h3 class="proj-name">Dorset Road</h3>
+              <div class="proj-dev">UOL, Singapore Land &amp; Kheng Leong</div>
+              <div class="proj-site">Dorset GLS</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>1Q 2027</div>
+            </div>
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-ec">Executive Condo</span></div>
+              <h3 class="proj-name">Sembawang Road (EC)</h3>
+              <div class="proj-dev">Oriental Pacific Development</div>
+              <div class="proj-site">Sembawang Road EC site</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>1Q 2027</div>
+            </div>
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-ec">Executive Condo</span></div>
+              <h3 class="proj-name">Senja Close (EC)</h3>
+              <div class="proj-dev">City Developments Limited (CDL)</div>
+              <div class="proj-site">Senja Close EC site</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>1Q 2027</div>
+            </div>
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-mu">Mixed-Dev</span></div>
+              <h3 class="proj-name">Chencharu Close</h3>
+              <div class="proj-dev">Evia Real Estate, Gamuda Land &amp; Ho Lee</div>
+              <div class="proj-site">Chencharu Close Mixed-Use GLS</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>1Q 2027</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="month-row">
+          <div class="month-label">March 2027</div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-res">Residential</span></div>
+              <h3 class="proj-name">Lentor Central</h3>
+              <div class="proj-dev">GuocoLand, Intrepid Investments &amp; TID Residential</div>
+              <div class="proj-site">Lentor Central GLS · OCR</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>March 2027</div>
+            </div>
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-mu">Mixed-Dev</span></div>
+              <h3 class="proj-name">Dover Drive</h3>
+              <div class="proj-dev">Qingjian Realty, Forsea Residence &amp; Jianan Realty</div>
+              <div class="proj-site">Dover Drive Mixed-Use GLS · RCR</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>March 2027</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="month-row">
+          <div class="month-label">March / April 2027</div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-mu">Mixed-Dev</span></div>
+              <h3 class="proj-name">Upper Thomson Road (Parcel A)</h3>
+              <div class="proj-dev">Wee Hur &amp; GSC Holdings</div>
+              <div class="proj-site">Upper Thomson Mixed-Use GLS</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>March / April 2027</div>
+            </div>
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-res">Residential</span></div>
+              <h3 class="proj-name">(Former) Chiku Mansions</h3>
+              <div class="proj-dev">Macly Group</div>
+              <div class="proj-site">5 to 9 Chiku Road (former Chiku Mansions en-bloc)</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>March / April 2027</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quarter" id="q2-2027">
+        <div class="quarter-head">
+          <span class="q-label">Q2 2027</span>
+          <span class="q-months">Apr · May · June</span>
+          <span class="q-count">5 launches tracked</span>
+        </div>
+
+        <div class="month-row">
+          <div class="month-label">April 2027</div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-res">Residential</span></div>
+              <h3 class="proj-name">Kallang Close</h3>
+              <div class="proj-dev">Frasers Property Phoenix &amp; MJR Investment</div>
+              <div class="proj-site">Kallang Close GLS · RCR</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>April 2027</div>
+            </div>
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-res">Residential</span></div>
+              <h3 class="proj-name">Dunearn Road</h3>
+              <div class="proj-dev">Wing Tai Holdings &amp; Metrobilt Construction</div>
+              <div class="proj-site">Dunearn Road GLS · CCR</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>April 2027</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="month-row">
+          <div class="month-label">2Q 2027 (window TBA)</div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-ec">Executive Condo</span></div>
+              <h3 class="proj-name">Woodlands Drive 17 (EC)</h3>
+              <div class="proj-dev">Sim Lian Group</div>
+              <div class="proj-site">Woodlands Drive 17 EC (Sim Lian parcel)</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>2Q 2027</div>
+            </div>
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-ec">Executive Condo</span></div>
+              <h3 class="proj-name">Miltonia Close (EC)</h3>
+              <div class="proj-dev">Hoi Hup Realty</div>
+              <div class="proj-site">Miltonia Close EC site</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>2Q 2027</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="month-row">
+          <div class="month-label">May 2027</div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-res">Residential</span></div>
+              <h3 class="proj-name">Holland Plain</h3>
+              <div class="proj-dev">Sim Lian Group</div>
+              <div class="proj-site">Holland Plain GLS · CCR</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>May 2027</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="quarter" id="h1-2027">
+        <div class="quarter-head">
+          <span class="q-label">1H 2027</span>
+          <span class="q-months">Window TBA</span>
+          <span class="q-count">1 launch tracked</span>
+        </div>
+
+        <div class="month-row">
+          <div class="month-label">1H 2027 (date TBA)</div>
+          <div class="proj-grid">
+            <div class="proj-card">
+              <div class="proj-tags"><span class="proj-tag tag-mu">Mixed-Dev</span></div>
+              <h3 class="proj-name">Hougang Avenue 10 / Hougang Central</h3>
+              <div class="proj-dev">CapitaLand &amp; UOL</div>
+              <div class="proj-site">Hougang Avenue 10 / Hougang Central Integrated GLS</div>
+              <div class="proj-date"><span class="lbl">Indicative window</span>1H 2027</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sub-band">
+    <div class="container">
+      <div>
+        <span class="eyebrow">Stay Informed</span>
+        <h2>Get launch alerts before they sell out</h2>
+        <p>One short note when we publish the next NAVIS PrimeKey-scored review. No spam, ever.</p>
+      </div>
+
+      <form id="lead-form" class="lead-form" novalidate>
+        <h3 style="color:var(--teal);">Subscribe to launch alerts</h3>
+        <p class="form-sub" style="color:#3a4a4d;">One email per new launch we cover, plus the quarterly market report.</p>
+        <div class="form-success" role="status" aria-live="polite"></div>
+        <div class="hp-field" aria-hidden="true"><label for="website">Don't fill this out if you're human</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off" /></div>
+        <div class="field"><label for="email">Email Address *</label><input type="email" id="email" name="email" required placeholder="you@example.com" /></div>
+        <div class="field"><label for="interest">Most interested in</label><select id="interest" name="interest"><option>New launch alerts</option><option>Quarterly market reports</option><option>Buyer guides &amp; how-tos</option><option>District spotlights</option><option>All of the above</option></select></div>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+</BaseLayout>
