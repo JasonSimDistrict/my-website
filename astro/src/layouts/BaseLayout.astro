@@ -27,7 +27,7 @@ interface Props {
   author?: string;
   publishedTime?: string;
   articleSection?: string;
-  /** JSON-LD schema graph injected as <script type="application/ld+json"> */
+  /** JSON-LD schema graph for structured data. */
   schema?: unknown;
   /** Optional context for the WhatsApp FAB landing message (e.g. "Lucerne Grand"). */
   whatsappContext?: string;
@@ -96,8 +96,7 @@ const {
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   )}
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKQP9ZPKLN"></script>
+  <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-EKQP9ZPKLN"></script>
   <script is:inline>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -118,6 +117,6 @@ const {
 
   <WhatsAppFab context={whatsappContext} />
 
-  <script src="/assets/js/main.js?v=144"></script>
+  <script is:inline src="/assets/js/main.js?v=144"></script>
 </body>
 </html>
