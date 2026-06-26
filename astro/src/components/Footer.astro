@@ -1,0 +1,81 @@
+---
+// Site footer. The copyright year is computed at build time so we no longer
+// need the runtime <script>document.getElementById('year').textContent = …</script>
+// that the legacy HTML used.
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/assets/images/logo.png" alt="ProjectHome.sg" loading="lazy" decoding="async" />
+        <p>Independent Singapore property guidance from ProjectHome.sg, co-founded by District Directors at Huttons Asia. Step-by-step buyer roadmaps, market reports, and honest take on every major launch.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li class="footer-nav-group">
+            <a href="/7-steps-buyer-framework">Buying Guides</a>
+            <ul class="footer-nav-sub">
+              <li><a href="/7-steps-buyer-framework">7 Steps Buyer Framework</a></li>
+              <li><a href="/navis-primekey-analysis">NAVIS PrimeKey Analysis</a></li>
+            </ul>
+          </li>
+          <li class="footer-nav-group">
+            <a href="/blog">Insights &amp; News</a>
+            <ul class="footer-nav-sub">
+              <li><a href="/blog">Insights &amp; News</a></li>
+              <li><a href="/blog/new-launches">New Launch</a></li>
+            </ul>
+          </li>
+          <li class="footer-nav-group">
+            <a href="/about">About</a>
+            <ul class="footer-nav-sub">
+              <li><a href="/about">ProjectHome.sg</a></li>
+              <li><a href="/our-services">Our Services</a></li>
+              <li><a href="/jason-sim">Jason Sim</a></li>
+              <li><a href="/renee-lim">Renee Lim</a></li>
+            </ul>
+          </li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Topics</h4>
+        <ul>
+          <li><a href="/blog/new-launches">New Launches</a></li>
+          <li><a href="/blog">Market Reports</a></li>
+          <li><a href="/blog">Buyer Guides</a></li>
+          <li><a href="/blog">District Spotlights</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Get In Touch</h4>
+        <ul>
+          <li><a href="https://wa.me/6582822486?text=Hi%2C%20I%27m%20enquiring%20via%20ProjectHome.sg%2C%20regarding%20" target="_blank" rel="noopener">WhatsApp +65 8282 2486</a></li>
+          <li><a href="https://wa.me/6588275656?text=Hi%2C%20I%27m%20enquiring%20via%20ProjectHome.sg%2C%20regarding%20" target="_blank" rel="noopener">WhatsApp +65 8827 5656</a></li>
+          <li><a href="/contact">Email Enquiry</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="legal-line">
+        <span>&copy; {year} ProjectHome.sg. All rights reserved.</span>
+        <span>For informational purposes only.</span>
+        <span><a href="/privacy-policy">Privacy Policy</a></span>
+        <span><a href="/disclaimer">Disclaimer</a></span>
+      </div>
+      <div class="legal-line">
+        <span>Jason Sim · District Director · RES Reg No: R052528Z</span>
+        <span>Renee Lim · District Director · RES Reg No: R047234H</span>
+        <span>Huttons Asia Pte Ltd · Agency Licence No: L3008899K</span>
+      </div>
+    </div>
+  </div>
+</footer>

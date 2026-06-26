@@ -1,0 +1,17 @@
+{
+  "name": "projecthome-sg-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Astro port of projecthome.sg — runs alongside the existing HTML build until cutover (see ../README.md).",
+  "scripts": {
+    "sync-public": "node scripts/sync-public.mjs",
+    "dev": "npm run sync-public && astro dev",
+    "build": "npm run sync-public && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.0.0"
+  }
+}
