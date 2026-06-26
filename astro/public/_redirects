@@ -1,0 +1,60 @@
+# Cloudflare Pages redirects — https://developers.cloudflare.com/pages/configuration/redirects/
+# Format: SOURCE DESTINATION [STATUS]
+# Status defaults to 302; use 301 for permanent redirects.
+#
+# Stage 3 cutover: legacy /page.html URLs that existed before the Astro
+# migration are 301'd to their clean equivalents so Google's index and any
+# inbound links carry over without ranking loss.
+# Root-level pages
+/index.html                                        /                                          301
+/about.html                                        /about                                     301
+/contact.html                                      /contact                                   301
+/our-services.html                                 /our-services                              301
+/jason-sim.html                                    /jason-sim                                 301
+/renee-lim.html                                    /renee-lim                                 301
+/privacy-policy.html                               /privacy-policy                            301
+/disclaimer.html                                   /disclaimer                                301
+/7-steps-buyer-framework.html                      /7-steps-buyer-framework                   301
+/navis-primekey-analysis.html                      /navis-primekey-analysis                   301
+/blog.html                                         /blog                                      301
+
+# /404.html is not redirected — Astro emits the 404 page as dist/404.html
+# directly, and Cloudflare Pages auto-serves it for any unmatched URL.
+
+# Blog — listing & calendar
+/blog/new-launches.html                            /blog/new-launches                         301
+
+# Blog — buyer guides
+/blog/7-step-buyers-framework-2026.html            /blog/7-step-buyers-framework-2026         301
+/blog/bto-vs-resale-2026.html                      /blog/bto-vs-resale-2026                   301
+/blog/first-time-homebuyer-singapore-2026.html     /blog/first-time-homebuyer-singapore-2026  301
+/blog/primekey-analysis-introduction.html          /blog/primekey-analysis-introduction       301
+/blog/should-you-decouple-2026.html                /blog/should-you-decouple-2026             301
+/blog/singapore-property-buying-guide-2026.html    /blog/singapore-property-buying-guide-2026 301
+
+# Blog — market reports
+/blog/ec-rule-changes-2026.html                    /blog/ec-rule-changes-2026                 301
+/blog/hdb-resale-2025-recap.html                   /blog/hdb-resale-2025-recap                301
+/blog/hdb-resale-q1-2026-first-price-dip.html      /blog/hdb-resale-q1-2026-first-price-dip   301
+/blog/q1-2026-private-property-review.html         /blog/q1-2026-private-property-review      301
+/blog/q2-2026-new-launch-watchlist.html            /blog/q2-2026-new-launch-watchlist         301
+
+# Blog — district spotlights
+/blog/district-19-spotlight.html                   /blog/district-19-spotlight                301
+
+# Blog — launch reviews
+/blog/amberwood-at-holland.html                    /blog/amberwood-at-holland                 301
+/blog/dunearn-house.html                           /blog/dunearn-house                        301
+/blog/lentor-gardens-residences.html               /blog/lentor-gardens-residences            301
+/blog/lucerne-grand.html                           /blog/lucerne-grand                        301
+/blog/thomson-reserve.html                         /blog/thomson-reserve                      301
+
+# Historical URL renames (preserved from the pre-Astro _redirects file)
+/guides.html                                       /7-steps-buyer-framework                   301
+/guides                                            /7-steps-buyer-framework                   301
+/guides/                                           /7-steps-buyer-framework                   301
+/blog/amberwood-at-holland-review.html             /blog/amberwood-at-holland                 301
+
+# Sitemap — @astrojs/sitemap emits /sitemap-index.xml. Anything still
+# referencing the legacy path lands on the new one.
+/sitemap.xml                                       /sitemap-index.xml                         301

@@ -1,27 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
-// Astro 5 config — projecthome.sg
-//
-// Notes:
-//  - `site`             — used by @astrojs/sitemap (when we add it in Stage 2) and any
-//                         build-time URL generation.
-//  - `build.format`     — `directory` outputs /disclaimer/index.html  →  clean URL /disclaimer.
-//                         The old HTML site lives in the parent folder until cutover.
-//  - `trailingSlash`    — `ignore` so Cloudflare serves both /disclaimer and /disclaimer/
-//                         without redirect chains. We canonicalise no-trailing-slash in <head>.
-//  - `publicDir`        — Astro copies the contents of /public/ to the build root verbatim.
-//                         We sync the parent /assets/ folder into /public/assets/ via
-//                         scripts/sync-public.mjs before every `dev`/`build` — that keeps
-//                         the existing absolute /assets/... references working in the
-//                         Astro build with zero edits to legacy CSS/JS.
-//
-// When we get to Stage 3 (cutover), we'll add:
-//   - @astrojs/sitemap   — auto-generated sitemap.xml from all routes
-//   - @astrojs/mdx       — blog posts as .mdx with frontmatter
-//   - redirects map      — /page.html → /page (301) inside this config
-//
-// For Stage 0 we're keeping it minimal.
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://projecthome.sg',
@@ -29,4 +8,36 @@ export default defineConfig({
     format: 'directory',
   },
   trailingSlash: 'ignore',
+  integrations: [
+    sitemap({
+      filter: (page) => !page.endsWith('/404/'),
+      changefreq: 'weekly',
+      priority: 0.7,
+      lastmod: new Date(),
+      serialize(item) {
+        // `directory` build format means every URL has a trailing slash.
+        const path = item.url.replace('https://projecthome.sg', '').replace(/\/$/, '') || '/';
+        if (path === '/') {
+          item.priority = 1.0;
+          item.changefreq = 'weekly';
+        } else if (
+          path === '/7-steps-buyer-framework' ||
+          path === '/navis-primekey-analysis' ||
+          path === '/our-services' ||
+          path === '/blog' ||
+          path === '/blog/new-launches'
+        ) {
+          item.priority = 0.9;
+          item.changefreq = 'weekly';
+        } else if (path.startsWith('/blog/')) {
+          item.priority = 0.8;
+          item.changefreq = 'monthly';
+        } else if (path === '/privacy-policy' || path === '/disclaimer') {
+          item.priority = 0.3;
+          item.changefreq = 'yearly';
+        }
+        return item;
+      },
+    }),
+  ],
 });
