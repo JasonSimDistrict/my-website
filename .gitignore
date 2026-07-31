@@ -10,3 +10,16 @@ desktop.ini
 # Environment
 .env
 .env.local
+
+# ---------------------------------------------------------------------------
+# Legacy hand-written HTML site — DO NOT restore into this repo.
+# Production is served exclusively from astro/dist/ (Cloudflare Pages).
+# A local-only backup snapshot of the pre-Astro HTML site lives at
+#   C:\Claude\projecthome-sg-html-backup\
+# Any edits go to astro/ pages, not to these paths.
+# ---------------------------------------------------------------------------
+/*.html
+/blog/
+/_redirects
+/robots.txt
+/sitemap.xml
