@@ -21,7 +21,7 @@ export default defineConfig({
           item.priority = 1.0;
           item.changefreq = 'weekly';
         } else if (
-          path === '/7-steps-buyer-framework' ||
+          path === '/property-wealth-planning' ||
           path === '/navis-primekey-analysis' ||
           path === '/our-services' ||
           path === '/blog' ||
