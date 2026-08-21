@@ -1,0 +1,646 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
+        { '@type': 'ListItem', position: 2, name: 'Property Wealth Planning', item: 'https://projecthome.sg/property-wealth-planning' },
+      ],
+    },
+    {
+      '@type': 'Service',
+      name: 'Property Wealth Planning Framework',
+      description: 'A three-stage advisory framework by ProjectHome.sg for Singapore property buyers. Plan, implement, and review your property portfolio with clarity.',
+      provider: {
+        '@type': 'RealEstateAgent',
+        name: 'ProjectHome.sg',
+        url: 'https://projecthome.sg/',
+        logo: 'https://projecthome.sg/assets/images/logo.png',
+      },
+      areaServed: { '@type': 'Country', name: 'Singapore' },
+      serviceType: 'Property advisory',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="The Property Wealth Planning Framework | ProjectHome.sg"
+  description="A three-stage advisory framework by ProjectHome.sg for Singapore property buyers. Plan, implement, and review your property portfolio with clarity, direction, and your new home."
+  keywords="Property Wealth Planning, PWP framework, Singapore property planning, portfolio approach property, ProjectHome.sg framework, three-stage property advisory, NAVIS PrimeKey Analysis"
+  canonical="https://projecthome.sg/property-wealth-planning"
+  ogTitle="The Property Wealth Planning Framework | ProjectHome.sg"
+  ogDescription="Property is a lifetime portfolio, not a single purchase. Three stages, one integrated advisory journey."
+  schema={schema}
+>
+
+  <link slot="head-extra" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" />
+
+  <style is:global slot="head-extra">
+    .pwp-page {
+      --pwp-teal: #063943;
+      --pwp-teal-deep: #04262d;
+      --pwp-teal-mid: #0a5560;
+      --pwp-gold: #D19557;
+      --pwp-gold-soft: #e0b17e;
+      --pwp-gold-pale: #f4e4d0;
+      --pwp-off-white: #faf7f2;
+      --pwp-paper: #ffffff;
+      --pwp-ink: #1a1a1a;
+      --pwp-ink-soft: #3a3a3a;
+      --pwp-muted: #6a6a6a;
+      --pwp-hairline: #e5e0d8;
+
+      font-family: 'Hanken Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-weight: 400;
+      color: var(--pwp-ink);
+      line-height: 1.65;
+      font-size: 17px;
+      background: var(--pwp-off-white);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .pwp-page h1, .pwp-page h2, .pwp-page h3, .pwp-page h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.15;
+      color: var(--pwp-teal);
+    }
+
+    .pwp-page .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .pwp-page .container-narrow {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .pwp-page .pwp-hero {
+      background: var(--pwp-teal);
+      color: var(--pwp-paper);
+      padding: 90px 0 110px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pwp-page .pwp-hero::before {
+      content: "";
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(209, 149, 87, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .pwp-page .pwp-hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .pwp-page .pwp-eyebrow {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--pwp-gold);
+      margin-bottom: 24px;
+    }
+
+    .pwp-page .pwp-hero h1 {
+      color: var(--pwp-paper);
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      max-width: 620px;
+      margin-bottom: 28px;
+    }
+
+    .pwp-page .pwp-hero .lead {
+      font-size: 19px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.82);
+      max-width: 560px;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .pwp-page .pwp-cta-primary {
+      display: inline-block;
+      background: var(--pwp-gold);
+      color: var(--pwp-teal-deep);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      padding: 16px 32px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .pwp-page .pwp-cta-primary:hover { background: var(--pwp-gold-soft); color: var(--pwp-teal-deep); }
+
+    .pwp-page .compass {
+      width: 200px;
+      height: 200px;
+      flex-shrink: 0;
+      opacity: 0.9;
+    }
+
+    .pwp-page .tagline-strip {
+      background: var(--pwp-teal-deep);
+      color: var(--pwp-gold);
+      text-align: center;
+      padding: 22px 40px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 0.06em;
+    }
+
+    .pwp-page .pwp-section {
+      padding: 90px 0;
+    }
+
+    .pwp-page .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .pwp-page .section-header .pwp-eyebrow {
+      color: var(--pwp-gold);
+      margin-bottom: 16px;
+    }
+
+    .pwp-page .section-header h2 {
+      font-size: 38px;
+      max-width: 720px;
+      margin: 0 auto 20px;
+    }
+
+    .pwp-page .section-header p {
+      font-size: 18px;
+      color: var(--pwp-muted);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .pwp-page .why-pwp {
+      background: var(--pwp-off-white);
+      padding: 90px 0 80px;
+    }
+
+    .pwp-page .why-content {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .pwp-page .why-content p {
+      font-size: 19px;
+      line-height: 1.75;
+      color: var(--pwp-ink-soft);
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+
+    .pwp-page .why-content p.highlight {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px;
+      color: var(--pwp-teal);
+      font-weight: 500;
+      line-height: 1.5;
+      margin: 32px auto;
+      max-width: 680px;
+    }
+
+    .pwp-page .framework {
+      background: var(--pwp-paper);
+      padding: 90px 0;
+      border-top: 1px solid var(--pwp-hairline);
+      border-bottom: 1px solid var(--pwp-hairline);
+    }
+
+    .pwp-page .diagram-wrap {
+      max-width: 960px;
+      margin: 40px auto 0;
+    }
+
+    .pwp-page .diagram-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .pwp-page .stages {
+      background: var(--pwp-off-white);
+      padding: 100px 0 60px;
+    }
+
+    .pwp-page .stage {
+      background: var(--pwp-paper);
+      border: 1px solid var(--pwp-hairline);
+      border-radius: 8px;
+      padding: 56px 60px;
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pwp-page .stage::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+      background: var(--pwp-gold);
+    }
+
+    .pwp-page .stage-header {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pwp-page .stage-number {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--pwp-gold);
+    }
+
+    .pwp-page .stage h3 {
+      font-size: 32px;
+      color: var(--pwp-teal);
+      margin: 0;
+    }
+
+    .pwp-page .stage-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--pwp-gold);
+      margin-left: auto;
+    }
+
+    .pwp-page .stage-intro {
+      font-size: 17px;
+      color: var(--pwp-muted);
+      margin-bottom: 32px;
+      max-width: 680px;
+      line-height: 1.7;
+    }
+
+    .pwp-page .stage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 24px;
+    }
+
+    .pwp-page .stage-col h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pwp-teal);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--pwp-hairline);
+    }
+
+    .pwp-page .stage-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .pwp-page .stage-col li {
+      padding: 10px 0 10px 22px;
+      position: relative;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--pwp-ink-soft);
+    }
+
+    .pwp-page .stage-col li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 20px;
+      width: 8px;
+      height: 8px;
+      background: var(--pwp-gold);
+      border-radius: 50%;
+    }
+
+    .pwp-page .stage-col li strong {
+      color: var(--pwp-teal);
+      font-weight: 600;
+    }
+
+    .pwp-page .navis {
+      background: var(--pwp-teal);
+      color: var(--pwp-paper);
+      padding: 90px 0;
+      text-align: center;
+    }
+
+    .pwp-page .navis .pwp-eyebrow { color: var(--pwp-gold); }
+
+    .pwp-page .navis h2 {
+      color: var(--pwp-paper);
+      font-size: 34px;
+      max-width: 760px;
+      margin: 0 auto 24px;
+    }
+
+    .pwp-page .navis p {
+      font-size: 18px;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 680px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    .pwp-page .navis p a {
+      color: var(--pwp-gold-soft);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .pwp-page .navis p a:hover { color: var(--pwp-gold); }
+
+    .pwp-page .navis-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--pwp-gold);
+      margin: 30px auto;
+    }
+
+    .pwp-page .final-cta {
+      background: var(--pwp-off-white);
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .pwp-page .final-cta h2 {
+      font-size: 40px;
+      max-width: 700px;
+      margin: 0 auto 24px;
+    }
+
+    .pwp-page .final-cta p {
+      font-size: 19px;
+      color: var(--pwp-muted);
+      max-width: 620px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+
+    .pwp-page .cta-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .pwp-page .pwp-hero { padding: 70px 0 80px; }
+      .pwp-page .pwp-hero-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+      .pwp-page .pwp-hero h1 { font-size: 38px; margin-left: auto; margin-right: auto; }
+      .pwp-page .pwp-hero .lead { margin-left: auto; margin-right: auto; }
+      .pwp-page .compass { margin: 0 auto; width: 160px; height: 160px; }
+      .pwp-page .stage { padding: 40px 32px; }
+      .pwp-page .stage-grid { grid-template-columns: 1fr; gap: 32px; }
+      .pwp-page .stage-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .pwp-page .stage-subtitle { margin-left: 0; }
+      .pwp-page .stage h3 { font-size: 26px; }
+      .pwp-page .pwp-section { padding: 70px 0; }
+      .pwp-page .section-header h2 { font-size: 30px; }
+      .pwp-page .final-cta h2 { font-size: 30px; }
+      .pwp-page .navis h2 { font-size: 26px; }
+      .pwp-page .container, .pwp-page .container-narrow { padding: 0 24px; }
+    }
+
+    @media (max-width: 500px) {
+      .pwp-page { font-size: 16px; }
+      .pwp-page .pwp-hero h1 { font-size: 32px; }
+      .pwp-page .pwp-hero .lead { font-size: 17px; }
+      .pwp-page .pwp-cta-primary { padding: 14px 24px; font-size: 14px; }
+      .pwp-page .stage-col li { font-size: 15px; }
+    }
+  </style>
+
+  <div class="pwp-page">
+
+    <header class="pwp-hero">
+      <div class="container">
+        <div class="pwp-hero-inner">
+          <div class="hero-copy">
+            <span class="pwp-eyebrow">The PWP Framework</span>
+            <h1>Property is a lifetime portfolio, not a single purchase.</h1>
+            <p class="lead">The Property Wealth Planning Framework is how ProjectHome.sg guides Singaporeans from their first property assessment to a portfolio that stays aligned with life. Three stages. One integrated advisory journey.</p>
+            <a href="/contact" class="pwp-cta-primary">Book a 30-minute Zoom consultation</a>
+          </div>
+          <svg class="compass" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="100" cy="100" r="95" fill="none" stroke="#D19557" stroke-width="1" opacity="0.5"/>
+            <circle cx="100" cy="100" r="78" fill="none" stroke="#D19557" stroke-width="0.5" opacity="0.4"/>
+            <polygon points="100,20 108,100 100,110 92,100" fill="#D19557"/>
+            <polygon points="100,180 108,100 100,90 92,100" fill="#D19557" opacity="0.6"/>
+            <polygon points="20,100 100,92 110,100 100,108" fill="#D19557" opacity="0.6"/>
+            <polygon points="180,100 100,92 90,100 100,108" fill="#D19557" opacity="0.6"/>
+            <polygon points="43,43 100,95 105,100 100,105" fill="#D19557" opacity="0.35"/>
+            <polygon points="157,43 100,95 95,100 100,105" fill="#D19557" opacity="0.35"/>
+            <polygon points="43,157 100,105 105,100 100,95" fill="#D19557" opacity="0.35"/>
+            <polygon points="157,157 100,105 95,100 100,95" fill="#D19557" opacity="0.35"/>
+            <circle cx="100" cy="100" r="6" fill="#D19557"/>
+            <circle cx="100" cy="100" r="3" fill="#063943"/>
+            <text x="100" y="14" text-anchor="middle" fill="#D19557" font-family="Montserrat" font-size="11" font-weight="600" letter-spacing="0.1em">N</text>
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <div class="tagline-strip">
+      We don&rsquo;t sell homes. We find yours.
+    </div>
+
+    <section class="why-pwp">
+      <div class="container">
+        <div class="section-header">
+          <span class="pwp-eyebrow">Why the framework exists</span>
+          <h2>Most property decisions are reactive. Yours don&rsquo;t have to be.</h2>
+        </div>
+        <div class="why-content">
+          <p>Most Singaporeans buy their first home reactively, then react again to every property decision that follows. A BTO becomes a resale. A resale becomes an upgrade. An upgrade becomes an investment. Each move handled in isolation, each decision made under time pressure.</p>
+          <p class="highlight">The PWP Framework replaces reaction with intention. It treats property as a portfolio to be planned, executed, and reviewed over a lifetime.</p>
+          <p>Every stage of the framework is designed to be assessed and guided by a ProjectHome.sg advisor. Because the cost of a wrong step at any stage compounds long after the transaction closes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="framework">
+      <div class="container">
+        <div class="section-header">
+          <span class="pwp-eyebrow">The Framework</span>
+          <h2>Three stages. One integrated advisory journey.</h2>
+          <p>Progression is linear. Review is continuous. Every stage is guided.</p>
+        </div>
+        <div class="diagram-wrap">
+          <img src="/assets/images/pwp-framework-diagram.png" alt="Property Wealth Planning Framework: Stage 1 Planning (Clarity — Define the portfolio) → Stage 2 Implementation (Direction — Execute the plan) → Stage 3 Review (Your new home — Recalibrate as needed), with a dashed feedback loop returning from Review to Planning. A ProjectHome.sg advisor guides at every stage." loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </section>
+
+    <section class="stages">
+      <div class="container">
+
+        <div class="stage" id="stage1">
+          <div class="stage-header">
+            <span class="stage-number">Stage 1</span>
+            <h3>The Planning Stage</h3>
+            <span class="stage-subtitle">Clarity</span>
+          </div>
+          <p class="stage-intro">For anyone new to property, or without a defined long-term property strategy. This is where the shape of your future portfolio is drawn before a single dollar is committed.</p>
+          <div class="stage-grid">
+            <div class="stage-col">
+              <h4>What we assess</h4>
+              <ul>
+                <li><strong>Portfolio vision.</strong> The intended end state (own-stay plus rental, legacy landed, retirement monetisation).</li>
+                <li><strong>Financial baseline.</strong> Income stability, CPF balances, cash reserves, debt load, risk tolerance.</li>
+                <li><strong>Life stage and timeline.</strong> Property moves mapped against career, family, and retirement milestones.</li>
+                <li><strong>Name and ownership structure.</strong> Single or joint name, decoupling readiness, ABSD exposure.</li>
+                <li><strong>Housing typology path.</strong> HDB, EC, private, landed, and the transitions between them.</li>
+                <li><strong>Stress-test scenarios.</strong> Interest rate rises, income disruption, market corrections.</li>
+              </ul>
+            </div>
+            <div class="stage-col">
+              <h4>Why this stage needs guidance</h4>
+              <ul>
+                <li>The most expensive property errors originate here, not at the transaction.</li>
+                <li>Decoupling costs and ABSD traps are near-impossible to unwind retrospectively.</li>
+                <li>A structured plan replaces emotional or reactive buying with intentional decisions.</li>
+                <li>Family alignment (spouse, parents, in-laws) is planned in, not fought over on balloting day.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage" id="stage2">
+          <div class="stage-header">
+            <span class="stage-number">Stage 2</span>
+            <h3>The Implementation Stage</h3>
+            <span class="stage-subtitle">Direction</span>
+          </div>
+          <p class="stage-intro">For buyers who have completed Stage 1 and are ready to transact. Execution with discipline, coordinated across financing, timing, and paperwork.</p>
+          <div class="stage-grid">
+            <div class="stage-col">
+              <h4>What we execute</h4>
+              <ul>
+                <li><strong>Route selection.</strong> New launch or resale, each with its own sub-guide.</li>
+                <li><strong>Financing execution.</strong> IPA, loan structuring, TDSR and MSR compliance.</li>
+                <li><strong>Offer and negotiation strategy.</strong> Entering at the developer&rsquo;s early-stage launch price, reading seller motivation, and counter-offer handling.</li>
+                <li><strong>Timing coordination.</strong> Sell-first or buy-first, bridging loans, temporary accommodation.</li>
+                <li><strong>Transaction milestones.</strong> Booking fee, OTP, Progressive Payment Scheme, TOP, CSC.</li>
+                <li><strong>Documentation and legal.</strong> Conveyancing, BSD and ABSD, CPF withdrawal, HFE compliance.</li>
+              </ul>
+            </div>
+            <div class="stage-col">
+              <h4>Why this stage needs guidance</h4>
+              <ul>
+                <li>Execution errors carry hard financial penalties (missed deadlines, wrong declarations).</li>
+                <li>Coordinated timing between sale and purchase directly reduces bridging and holding costs.</li>
+                <li>New launch preparation begins days or weeks before balloting day, not on it.</li>
+                <li>Sub-guides (like the pre-balloting readiness checklist) sit inside this stage as tactical playbooks.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage" id="stage3">
+          <div class="stage-header">
+            <span class="stage-number">Stage 3</span>
+            <h3>The Review Stage</h3>
+            <span class="stage-subtitle">Your new home</span>
+          </div>
+          <p class="stage-intro">For owners already progressing toward, or holding, their target portfolio. Recalibration when policy, circumstance, or performance shifts the ground beneath the original plan.</p>
+          <div class="stage-grid">
+            <div class="stage-col">
+              <h4>What we review</h4>
+              <ul>
+                <li><strong>Policy impact.</strong> Cooling measures, ABSD, LTV, CPF rule changes, EC privatisation timelines.</li>
+                <li><strong>Personal circumstance.</strong> Income shifts, career changes, family changes, health events.</li>
+                <li><strong>Portfolio performance.</strong> Here, we conduct a &ldquo;health check&rdquo; on the actual projected yield, appreciation, and holding cost.</li>
+                <li><strong>Financing cycles.</strong> Refinancing every 2 to 3 years, interest rate re-optimisation.</li>
+                <li><strong>Exit and monetisation.</strong> When to sell, downsize, right-size, or unlock equity for retirement.</li>
+                <li><strong>Legacy and succession.</strong> CPF nomination, wills, property succession considerations.</li>
+              </ul>
+            </div>
+            <div class="stage-col">
+              <h4>Why this stage needs guidance</h4>
+              <ul>
+                <li>External factors change faster than most owners can track independently.</li>
+                <li>A well-timed refinancing alone can save five-figure sums annually.</li>
+                <li>The plan set at Stage 1 must stay relevant across a 20 to 30 year horizon.</li>
+                <li>Review triggers (MOP, TOP, refinancing window, retirement, policy change) are anticipated, not missed.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="navis">
+      <div class="container-narrow">
+        <span class="pwp-eyebrow">Diagnostic Tool</span>
+        <h2>Powered by NAVIS PrimeKey Analysis</h2>
+        <div class="navis-divider"></div>
+        <p>Every planning conversation begins with <a href="/navis-primekey-analysis">NAVIS PrimeKey Analysis</a>, our proprietary 8-pillar diagnostic instrument. It translates your circumstances, goals, and constraints into a concrete portfolio plan at Stage 1, and re-runs at Stage 3 to check whether the original scoring still holds against a changed reality.</p>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="container-narrow">
+        <h2>Start with clarity.</h2>
+        <p>A 30-minute Zoom consultation is the first step of Stage 1. No sales pitch, no inventory push. Just a structured conversation about where you stand, and where you want your property portfolio to take you.</p>
+        <div class="cta-row">
+          <a href="/contact" class="pwp-cta-primary">Book a 30-minute Zoom consultation</a>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</BaseLayout>

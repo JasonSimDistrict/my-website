@@ -14,7 +14,9 @@
 /renee-lim.html                                    /renee-lim                                 301
 /privacy-policy.html                               /privacy-policy                            301
 /disclaimer.html                                   /disclaimer                                301
-/7-steps-buyer-framework.html                      /7-steps-buyer-framework                   301
+/7-steps-buyer-framework.html                      /property-wealth-planning                  301
+/7-steps-buyer-framework                           /property-wealth-planning                  301
+/7-steps-buyer-framework/                          /property-wealth-planning                  301
 /navis-primekey-analysis.html                      /navis-primekey-analysis                   301
 /blog.html                                         /blog                                      301
 
@@ -25,7 +27,9 @@
 /blog/new-launches.html                            /blog/new-launches                         301
 
 # Blog — buyer guides
-/blog/7-step-buyers-framework-2026.html            /blog/7-step-buyers-framework-2026         301
+/blog/7-step-buyers-framework-2026.html            /property-wealth-planning                  301
+/blog/7-step-buyers-framework-2026                 /property-wealth-planning                  301
+/blog/7-step-buyers-framework-2026/                /property-wealth-planning                  301
 /blog/bto-vs-resale-2026.html                      /blog/bto-vs-resale-2026                   301
 /blog/first-time-homebuyer-singapore-2026.html     /blog/first-time-homebuyer-singapore-2026  301
 /blog/primekey-analysis-introduction.html          /blog/primekey-analysis-introduction       301
@@ -50,9 +54,9 @@
 /blog/thomson-reserve.html                         /blog/thomson-reserve                      301
 
 # Historical URL renames (preserved from the pre-Astro _redirects file)
-/guides.html                                       /7-steps-buyer-framework                   301
-/guides                                            /7-steps-buyer-framework                   301
-/guides/                                           /7-steps-buyer-framework                   301
+/guides.html                                       /property-wealth-planning                  301
+/guides                                            /property-wealth-planning                  301
+/guides/                                           /property-wealth-planning                  301
 /blog/amberwood-at-holland-review.html             /blog/amberwood-at-holland                 301
 
 # Sitemap — @astrojs/sitemap emits /sitemap-index.xml. Anything still
