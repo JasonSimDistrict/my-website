@@ -160,11 +160,14 @@ const schema = {
 
     .pwp-page .pwp-cta-primary:hover { background: var(--pwp-gold-soft); color: var(--pwp-teal-deep); }
 
-    .pwp-page .compass {
-      width: 200px;
-      height: 200px;
+    .pwp-page .pwp-hero-art {
+      width: 360px;
+      max-width: 100%;
+      height: auto;
       flex-shrink: 0;
-      opacity: 0.9;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.35), 0 8px 16px -4px rgba(0, 0, 0, 0.25);
+      display: block;
     }
 
     .pwp-page .tagline-strip {
@@ -440,7 +443,7 @@ const schema = {
       .pwp-page .pwp-hero-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
       .pwp-page .pwp-hero h1 { font-size: 38px; margin-left: auto; margin-right: auto; }
       .pwp-page .pwp-hero .lead { margin-left: auto; margin-right: auto; }
-      .pwp-page .compass { margin: 0 auto; width: 160px; height: 160px; }
+      .pwp-page .pwp-hero-art { margin: 0 auto; width: 280px; }
       .pwp-page .stage { padding: 40px 32px; }
       .pwp-page .stage-grid { grid-template-columns: 1fr; gap: 32px; }
       .pwp-page .stage-header { flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -473,21 +476,8 @@ const schema = {
             <p class="lead">The Property Wealth Planning Framework is how ProjectHome.sg guides Singaporeans from their first property assessment to a portfolio that stays aligned with life. Three stages. One integrated advisory journey.</p>
             <a href="/contact" class="pwp-cta-primary">Book a 30-minute Zoom consultation</a>
           </div>
-          <svg class="compass" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="100" cy="100" r="95" fill="none" stroke="#D19557" stroke-width="1" opacity="0.5"/>
-            <circle cx="100" cy="100" r="78" fill="none" stroke="#D19557" stroke-width="0.5" opacity="0.4"/>
-            <polygon points="100,20 108,100 100,110 92,100" fill="#D19557"/>
-            <polygon points="100,180 108,100 100,90 92,100" fill="#D19557" opacity="0.6"/>
-            <polygon points="20,100 100,92 110,100 100,108" fill="#D19557" opacity="0.6"/>
-            <polygon points="180,100 100,92 90,100 100,108" fill="#D19557" opacity="0.6"/>
-            <polygon points="43,43 100,95 105,100 100,105" fill="#D19557" opacity="0.35"/>
-            <polygon points="157,43 100,95 95,100 100,105" fill="#D19557" opacity="0.35"/>
-            <polygon points="43,157 100,105 105,100 100,95" fill="#D19557" opacity="0.35"/>
-            <polygon points="157,157 100,105 95,100 100,95" fill="#D19557" opacity="0.35"/>
-            <circle cx="100" cy="100" r="6" fill="#D19557"/>
-            <circle cx="100" cy="100" r="3" fill="#063943"/>
-            <text x="100" y="14" text-anchor="middle" fill="#D19557" font-family="Montserrat" font-size="11" font-weight="600" letter-spacing="0.1em">N</text>
-          </svg>
+          <img class="pwp-hero-art" src="/assets/images/pwp-treasure-map.png" alt="A young Singaporean couple discovering their property journey together — poring over a treasure map with a magnifying glass, the X marking where their plan leads." width="800" height="640" loading="eager" decoding="async" />
+
         </div>
       </div>
     </header>
