@@ -25,7 +25,8 @@ export default defineConfig({
           path === '/navis-primekey-analysis' ||
           path === '/our-services' ||
           path === '/blog' ||
-          path === '/blog/new-launches'
+          path === '/blog/new-launches' ||
+          path === '/blog/huttons-update'
         ) {
           item.priority = 0.9;
           item.changefreq = 'weekly';
