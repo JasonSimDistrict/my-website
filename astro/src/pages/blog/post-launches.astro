@@ -19,13 +19,27 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 //   mrt        Nearest MRT per the development's material reference.
 //   mrtNote    Optional walk time / distance shown on hover.
 //   launched   Launch date, ISO 'YYYY-MM-DD'. This drives the ordering inside
-//              each district: newest launch first. Where only the month is
-//              known, use the 1st ('2026-09-01') — but note that two projects
-//              in the same month then tie and fall back to A–Z, so give the
-//              exact day whenever you have it.
-//   launchLabel Display text under the name, e.g. '25 Jul 2026' or 'Sep 2026'.
+//              each district: newest launch first. For a launch weekend, use
+//              the FIRST day here and show the span in launchLabel. If only
+//              the month is known, use the 1st — but two projects in the same
+//              month then tie and fall back to A–Z, so prefer the exact day.
+//   launchLabel Display text under the name: '16 May 2026', '25–26 Jul 2026'.
 //
 const projects = [
+  {
+    name: 'Hudson Place Residences',
+    slug: '/blog/hudson-place-residences',
+    region: 'RCR',
+    district: 5,
+    tenure: '99LH',
+    tenureNote: '99-year leasehold from 13 March 2025 — ~98 years remaining',
+    units: 327,
+    unitMix: '2Br to 4Br Suite + PH',
+    mrt: 'one-north (CC23)',
+    mrtNote: '~18-min walk; Buona Vista interchange 1 stop away',
+    launched: '2026-05-16',
+    launchLabel: '16 May 2026',
+  },
   {
     name: 'The Serra Residences',
     slug: '/blog/the-serra-residences',
@@ -37,8 +51,8 @@ const projects = [
     unitMix: '2Br+S to 5Br Premium / PH',
     mrt: 'Novena (NS20)',
     mrtNote: '9-min walk, ~742 m',
-    launched: '2026-10-01',
-    launchLabel: 'Oct 2026',
+    launched: '2026-10-16',
+    launchLabel: '16 Oct 2026',
   },
   {
     name: 'Dunearn House',
@@ -52,7 +66,7 @@ const projects = [
     mrt: 'Sixth Avenue (DTL)',
     mrtNote: '~476 m to Exit B, ~4–5 min walk',
     launched: '2026-07-25',
-    launchLabel: '25 Jul 2026',
+    launchLabel: '25–26 Jul 2026',
   },
   {
     name: 'Amberwood at Holland',
@@ -65,8 +79,8 @@ const projects = [
     unitMix: 'TBC',
     mrt: 'King Albert Park (DTL)',
     mrtNote: '~11-min walk (~1,013 m); CRL interchange by 2032',
-    launched: '2026-09-01',
-    launchLabel: 'Sep 2026',
+    launched: '2026-09-26',
+    launchLabel: '26 Sep 2026',
   },
   {
     name: 'Thomson Reserve',
@@ -79,8 +93,8 @@ const projects = [
     unitMix: '1Br to 5Br',
     mrt: 'Upper Thomson (TE8)',
     mrtNote: '~261–407 m, ~3-min walk',
-    launched: '2026-10-17',
-    launchLabel: '17 Oct 2026',
+    launched: '2026-10-30',
+    launchLabel: '30–31 Oct 2026',
   },
   {
     name: 'Lucerne Grand',
@@ -93,8 +107,8 @@ const projects = [
     unitMix: '2Br to 4Br Premium + Ent',
     mrt: 'Lakeside (EW26)',
     mrtNote: '1-min walk, 87 m to Exit A',
-    launched: '2026-09-01',
-    launchLabel: 'Sep 2026',
+    launched: '2026-10-03',
+    launchLabel: '3 Oct 2026',
   },
   {
     name: 'Lentor Gardens Residences',
