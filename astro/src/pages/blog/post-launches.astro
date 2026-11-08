@@ -15,9 +15,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 //   tenure     '99LH' | 'FH' | '999LH' — rendered as a badge.
 //   tenureNote Optional detail shown on hover (e.g. lease commencement).
 //   units      Total units. Number, or a string like '370–380' if a range.
-//   unitMix    Short form, e.g. '1Br+S to 5Br'. Use 'TBC' until confirmed.
+//   beds       Bedroom types offered, as search tags. ONLY these values, in
+//              this order: '1Br', '2Br', '3Br', '4Br', '5Br', 'PH'. Strip the
+//              marketing suffixes — a 2-Bedroom Premium + Study is just '2Br',
+//              a 4-Bedroom Suite + Flexi is just '4Br'. List every type the
+//              project actually offers, not just the ends of the range. Leave
+//              it as [] until the mix is confirmed; the row then shows TBC.
+//   mixNote    Optional full mix wording, shown on hover over the tags.
 //   mrt        Nearest MRT per the development's material reference.
-//   mrtNote    Optional walk time / distance shown on hover.
 //   launched   Launch date, ISO 'YYYY-MM-DD'. This drives the ordering inside
 //              each district: newest launch first. For a launch weekend, use
 //              the FIRST day here and show the span in launchLabel. If only
@@ -34,9 +39,9 @@ const projects = [
     tenure: '99LH',
     tenureNote: '99-year leasehold from 13 March 2025 — ~98 years remaining',
     units: 327,
-    unitMix: '2Br to 4Br Suite + PH',
+    beds: ['2Br', '3Br', '4Br', 'PH'],
+    mixNote: '2-Br Premium 646 sqft through 4-Br Suite + Flexi 1,432 sqft; 5 penthouses 1,744–2,196 sqft',
     mrt: 'one-north (CC23)',
-    mrtNote: '~18-min walk; Buona Vista interchange 1 stop away',
     launched: '2026-05-16',
     launchLabel: '16 May 2026',
   },
@@ -48,9 +53,9 @@ const projects = [
     tenure: 'FH',
     tenureNote: 'Freehold',
     units: 133,
-    unitMix: '2Br+S to 5Br Premium / PH',
+    beds: ['2Br', '3Br', '4Br', '5Br', 'PH'],
+    mixNote: '2-Br + Study 710 sqft through 5-Br Premium 1,755 sqft; penthouses 2,670–2,820 sqft',
     mrt: 'Novena (NS20)',
-    mrtNote: '9-min walk, ~742 m',
     launched: '2026-10-16',
     launchLabel: '16 Oct 2026',
   },
@@ -62,9 +67,8 @@ const projects = [
     tenure: '99LH',
     tenureNote: '99-year leasehold — ~98 years remaining',
     units: '370–380',
-    unitMix: 'TBC',
+    beds: [],
     mrt: 'Sixth Avenue (DTL)',
-    mrtNote: '~476 m to Exit B, ~4–5 min walk',
     launched: '2026-07-25',
     launchLabel: '25–26 Jul 2026',
   },
@@ -76,9 +80,8 @@ const projects = [
     tenure: '99LH',
     tenureNote: '99-year leasehold — lease begins 7 August 2025',
     units: 212,
-    unitMix: 'TBC',
+    beds: [],
     mrt: 'King Albert Park (DTL)',
-    mrtNote: '~11-min walk (~1,013 m); CRL interchange by 2032',
     launched: '2026-09-26',
     launchLabel: '26 Sep 2026',
   },
@@ -90,9 +93,9 @@ const projects = [
     tenure: '99LH',
     tenureNote: '99-year leasehold — ~98 years remaining (from Nov 2025)',
     units: 1240,
-    unitMix: '1Br to 5Br',
+    beds: ['1Br', '2Br', '3Br', '4Br', '5Br'],
+    mixNote: '1-Br ~506 sqft through 5-Br ~1,679 sqft',
     mrt: 'Upper Thomson (TE8)',
-    mrtNote: '~261–407 m, ~3-min walk',
     launched: '2026-10-30',
     launchLabel: '30–31 Oct 2026',
   },
@@ -104,9 +107,9 @@ const projects = [
     tenure: '99LH',
     tenureNote: '99-year leasehold from June 2025 — ~98 years remaining',
     units: 575,
-    unitMix: '2Br to 4Br Premium + Ent',
+    beds: ['2Br', '3Br', '4Br'],
+    mixNote: '2-Br ~620–710 sqft through 4-Br Premium + Entertainment ~1,140–1,430 sqft',
     mrt: 'Lakeside (EW26)',
-    mrtNote: '1-min walk, 87 m to Exit A',
     launched: '2026-10-03',
     launchLabel: '3 Oct 2026',
   },
@@ -118,9 +121,8 @@ const projects = [
     tenure: '99LH',
     tenureNote: '99-year leasehold — ~98 years remaining (from April 2025)',
     units: 500,
-    unitMix: 'TBC',
+    beds: [],
     mrt: 'Lentor (TE5)',
-    mrtNote: '~7-min walk',
     launched: '2026-07-18',
     launchLabel: '18 Jul 2026',
   },
@@ -402,11 +404,28 @@ const schema = {
     .pl-badge.is-lh { background: rgba(127, 168, 173, 0.2); color: #2d6671; }
     .pl-badge.is-fh { background: rgba(209, 149, 87, 0.2); color: #8d5a14; }
 
-    .pl-mix { color: #3a4a4d; line-height: 1.45; }
     .pl-mix.is-tbc { color: var(--muted); font-style: italic; }
 
+    .pl-beds { display: flex; flex-wrap: wrap; gap: 5px; }
+    .pl-bed {
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 3px 8px; border-radius: 5px;
+      background: rgba(6, 57, 67, 0.07);
+      color: #2d5560;
+      white-space: nowrap;
+    }
+    .pl-bed.is-ph { background: rgba(209, 149, 87, 0.18); color: #8d5a14; }
+
+    /* Tenure badge and bedroom tags double as one-click filters. */
+    button.pl-badge, button.pl-bed {
+      font-family: inherit; border: none; cursor: pointer;
+      transition: filter 0.16s ease, transform 0.16s ease;
+    }
+    button.pl-badge:hover, button.pl-bed:hover { filter: brightness(0.94); transform: translateY(-1px); }
+    button.pl-badge:focus-visible, button.pl-bed:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+
     .pl-mrt { line-height: 1.4; }
-    .pl-mrt .pl-mrt-note { display: block; color: var(--muted); font-size: 0.76rem; margin-top: 2px; }
 
     /* ---- Empty state --------------------------------------------------- */
     .pl-empty {
@@ -497,8 +516,8 @@ const schema = {
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
             <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path>
           </svg>
-          <label class="pl-sr" for="pl-q">Search post launches by development, district or MRT</label>
-          <input type="search" id="pl-q" placeholder="Search development, district or MRT…" autocomplete="off" />
+          <label class="pl-sr" for="pl-q">Search post launches by development, district, MRT, tenure or bedroom type</label>
+          <input type="search" id="pl-q" placeholder="Search name, district, MRT, tenure (99LH, FH) or bedrooms (3Br, PH)…" autocomplete="off" />
         </div>
 
         <div class="pl-chips" role="group" aria-label="Filter by region">
@@ -554,6 +573,8 @@ const schema = {
                       data-district={pad(p.district)}
                       data-mrt={p.mrt.toLowerCase()}
                       data-launched={(p.launchLabel ?? '').toLowerCase()}
+                      data-tenure={p.tenure.toLowerCase()}
+                      data-beds={p.beds.join(' ').toLowerCase()}
                     >
                       <td class="pl-cell-name">
                         <div class="pl-name">
@@ -563,13 +584,21 @@ const schema = {
                       </td>
                       <td data-label="District"><span class="pl-dist-cell">D{pad(p.district)}</span></td>
                       <td data-label="Tenure">
-                        <span class={`pl-badge ${p.tenure === 'FH' ? 'is-fh' : 'is-lh'}`} title={p.tenureNote ?? p.tenure}>{p.tenure}</span>
+                        <button type="button" class={`pl-badge ${p.tenure === 'FH' ? 'is-fh' : 'is-lh'}`} data-tag={p.tenure} title={`${p.tenureNote ?? p.tenure} — click to filter`}>{p.tenure}</button>
                       </td>
                       <td class="pl-num" data-label="Total Units">{typeof p.units === 'number' ? p.units.toLocaleString('en-SG') : p.units}</td>
-                      <td data-label="Unit Mix"><span class={`pl-mix ${p.unitMix === 'TBC' ? 'is-tbc' : ''}`}>{p.unitMix}</span></td>
-                      <td data-label="Nearest MRT">
-                        <span class="pl-mrt">{p.mrt}{p.mrtNote && <span class="pl-mrt-note">{p.mrtNote}</span>}</span>
+                      <td data-label="Unit Mix">
+                        {p.beds.length ? (
+                          <span class="pl-beds" title={p.mixNote ?? undefined}>
+                            {p.beds.map((b) => (
+                              <button type="button" class={`pl-bed ${b === 'PH' ? 'is-ph' : ''}`} data-tag={b}>{b}</button>
+                            ))}
+                          </span>
+                        ) : (
+                          <span class="pl-mix is-tbc">TBC</span>
+                        )}
                       </td>
+                      <td data-label="Nearest MRT"><span class="pl-mrt">{p.mrt}</span></td>
                     </tr>
                   ))}
                 </tbody>
@@ -639,7 +668,9 @@ const schema = {
                 'd' + row.getAttribute('data-district') + ' ' +
                 row.getAttribute('data-district') + ' ' +
                 row.getAttribute('data-mrt') + ' ' +
-                (row.getAttribute('data-launched') || '');
+                (row.getAttribute('data-launched') || '') + ' ' +
+                (row.getAttribute('data-tenure') || '') + ' ' +
+                (row.getAttribute('data-beds') || '');
               var hit = regionMatch && (term === '' || hay.indexOf(term) !== -1);
               row.hidden = !hit;
               if (hit) groupCount++;
@@ -685,6 +716,16 @@ const schema = {
         q.addEventListener('input', apply);
         q.addEventListener('search', apply);
       }
+
+      // Clicking a tenure badge or a bedroom tag searches for that tag.
+      document.addEventListener('click', function (e) {
+        var tagEl = e.target.closest ? e.target.closest('[data-tag]') : null;
+        if (!tagEl || !q) return;
+        var tag = tagEl.getAttribute('data-tag');
+        q.value = q.value.trim().toLowerCase() === tag.toLowerCase() ? '' : tag;
+        apply();
+        q.focus();
+      });
 
       apply();
     })();
