@@ -1,0 +1,681 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// ---------------------------------------------------------------------------
+// POST LAUNCHES — the only block you need to edit
+// ---------------------------------------------------------------------------
+// One object per development. Everything below this array (grouping, district
+// headings, region counts, sorting, filtering) is computed automatically.
+//
+//   name       Development name, as marketed.
+//   slug       Link to its blog page. Leave out (or null) and the row renders
+//              as plain text — add the slug once the write-up is published.
+//   region     'CCR' | 'RCR' | 'OCR'  — drives the main grouping.
+//   district   Number 1–28 (write 1, not '01'; it is zero-padded on render).
+//   tenure     '99LH' | 'FH' | '999LH' — rendered as a badge.
+//   tenureNote Optional detail shown on hover (e.g. lease commencement).
+//   units      Total units. Number, or a string like '370–380' if a range.
+//   unitMix    Short form, e.g. '1Br+S to 5Br'. Use 'TBC' until confirmed.
+//   mrt        Nearest MRT per the development's material reference.
+//   mrtNote    Optional walk time / distance shown on hover.
+//   launched   Launch date, ISO 'YYYY-MM-DD'. This drives the ordering inside
+//              each district: newest launch first. Where only the month is
+//              known, use the 1st ('2026-09-01') — but note that two projects
+//              in the same month then tie and fall back to A–Z, so give the
+//              exact day whenever you have it.
+//   launchLabel Display text under the name, e.g. '25 Jul 2026' or 'Sep 2026'.
+//
+const projects = [
+  {
+    name: 'The Serra Residences',
+    slug: '/blog/the-serra-residences',
+    region: 'CCR',
+    district: 11,
+    tenure: 'FH',
+    tenureNote: 'Freehold',
+    units: 133,
+    unitMix: '2Br+S to 5Br Premium / PH',
+    mrt: 'Novena (NS20)',
+    mrtNote: '9-min walk, ~742 m',
+    launched: '2026-10-01',
+    launchLabel: 'Oct 2026',
+  },
+  {
+    name: 'Dunearn House',
+    slug: '/blog/dunearn-house',
+    region: 'CCR',
+    district: 11,
+    tenure: '99LH',
+    tenureNote: '99-year leasehold — ~98 years remaining',
+    units: '370–380',
+    unitMix: 'TBC',
+    mrt: 'Sixth Avenue (DTL)',
+    mrtNote: '~476 m to Exit B, ~4–5 min walk',
+    launched: '2026-07-25',
+    launchLabel: '25 Jul 2026',
+  },
+  {
+    name: 'Amberwood at Holland',
+    slug: '/blog/amberwood-at-holland',
+    region: 'CCR',
+    district: 10,
+    tenure: '99LH',
+    tenureNote: '99-year leasehold — lease begins 7 August 2025',
+    units: 212,
+    unitMix: 'TBC',
+    mrt: 'King Albert Park (DTL)',
+    mrtNote: '~11-min walk (~1,013 m); CRL interchange by 2032',
+    launched: '2026-09-01',
+    launchLabel: 'Sep 2026',
+  },
+  {
+    name: 'Thomson Reserve',
+    slug: '/blog/thomson-reserve',
+    region: 'RCR',
+    district: 20,
+    tenure: '99LH',
+    tenureNote: '99-year leasehold — ~98 years remaining (from Nov 2025)',
+    units: 1240,
+    unitMix: '1Br to 5Br',
+    mrt: 'Upper Thomson (TE8)',
+    mrtNote: '~261–407 m, ~3-min walk',
+    launched: '2026-10-17',
+    launchLabel: '17 Oct 2026',
+  },
+  {
+    name: 'Lucerne Grand',
+    slug: '/blog/lucerne-grand',
+    region: 'OCR',
+    district: 22,
+    tenure: '99LH',
+    tenureNote: '99-year leasehold from June 2025 — ~98 years remaining',
+    units: 575,
+    unitMix: '2Br to 4Br Premium + Ent',
+    mrt: 'Lakeside (EW26)',
+    mrtNote: '1-min walk, 87 m to Exit A',
+    launched: '2026-09-01',
+    launchLabel: 'Sep 2026',
+  },
+  {
+    name: 'Lentor Gardens Residences',
+    slug: '/blog/lentor-gardens-residences',
+    region: 'OCR',
+    district: 26,
+    tenure: '99LH',
+    tenureNote: '99-year leasehold — ~98 years remaining (from April 2025)',
+    units: 500,
+    unitMix: 'TBC',
+    mrt: 'Lentor (TE5)',
+    mrtNote: '~7-min walk',
+    launched: '2026-07-18',
+    launchLabel: '18 Jul 2026',
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Grouping — Region (main category) → District (01 → 28)
+// ---------------------------------------------------------------------------
+const REGIONS = [
+  {
+    code: 'CCR',
+    name: 'Core Central Region',
+    blurb:
+      'Districts 9, 10 and 11, the Downtown Core and Sentosa — Singapore’s prime address belt.',
+  },
+  {
+    code: 'RCR',
+    name: 'Rest of Central Region',
+    blurb:
+      'The city-fringe ring immediately outside the prime districts — central access without CCR pricing.',
+  },
+  {
+    code: 'OCR',
+    name: 'Outside Central Region',
+    blurb:
+      'The suburban mass market, where owner-occupier demand and new-town transformation drive value.',
+  },
+];
+
+const pad = (n: number) => String(n).padStart(2, '0');
+
+const regionGroups = REGIONS.map((region) => {
+  const inRegion = projects.filter((p) => p.region === region.code);
+
+  const districts = [...new Set(inRegion.map((p) => p.district))]
+    .sort((a, b) => a - b)
+    .map((district) => ({
+      district,
+      label: `District ${pad(district)}`,
+      // Within a district: newest launch first, then A–Z as the tie-break
+      // (and for anything still missing a launch date, which sorts last).
+      items: inRegion
+        .filter((p) => p.district === district)
+        .sort(
+          (a, b) =>
+            (b.launched ?? '').localeCompare(a.launched ?? '') ||
+            a.name.localeCompare(b.name),
+        ),
+    }));
+
+  return { ...region, count: inRegion.length, districts };
+});
+
+const totalProjects = projects.length;
+const totalDistricts = new Set(projects.map((p) => p.district)).size;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://projecthome.sg/' },
+        { '@type': 'ListItem', position: 2, name: 'Insights & News', item: 'https://projecthome.sg/blog' },
+        { '@type': 'ListItem', position: 3, name: 'Post Launches', item: 'https://projecthome.sg/blog/post-launches' },
+      ],
+    },
+    {
+      '@type': 'CollectionPage',
+      '@id': 'https://projecthome.sg/blog/post-launches#collection',
+      url: 'https://projecthome.sg/blog/post-launches',
+      name: 'Singapore Post Launches — Projects by Region & District',
+      description:
+        'Launched Singapore residential developments with units still available, organised by region (CCR, RCR, OCR) and postal district 01–28.',
+      inLanguage: 'en-SG',
+      mainEntity: {
+        '@type': 'ItemList',
+        numberOfItems: totalProjects,
+        itemListElement: projects.map((p, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: p.name,
+          ...(p.slug ? { url: `https://projecthome.sg${p.slug}` } : {}),
+        })),
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Post Launches: Singapore Projects by Region & District | ProjectHome.sg"
+  description="Launched Singapore residential developments with units still available — organised by region (CCR, RCR, OCR) and postal district 01 to 28, with tenure, total units, unit mix and nearest MRT at a glance."
+  keywords="post launch Singapore, Singapore condo available units, CCR RCR OCR projects, Singapore new project by district, launched condo Singapore, unit mix nearest MRT Singapore"
+  canonical="https://projecthome.sg/blog/post-launches"
+  ogTitle="Post Launches: Singapore Projects by Region & District"
+  ogDescription="Every launched development we track, grouped by CCR / RCR / OCR and district 01–28 — tenure, total units, unit mix and nearest MRT in one row each."
+  twitterTitle="Post Launches: Singapore Projects by Region & District"
+  twitterDescription="Launched Singapore developments by region and district, at a glance."
+  whatsappContext="a post launch project"
+  schema={schema}
+>
+
+  <style is:global slot="head-extra">
+    .pl-body { background: var(--paper); padding: 64px 0 96px; }
+
+    .pl-sr {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+    }
+
+    /* ---- Toolbar ------------------------------------------------------- */
+    .pl-toolbar {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px 24px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 860px) { .pl-toolbar { grid-template-columns: 1fr; } }
+
+    .pl-search { position: relative; }
+    .pl-search input {
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--ink);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 11px 18px 11px 42px;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .pl-search input:focus {
+      outline: none;
+      border-color: var(--copper);
+      box-shadow: var(--shadow-ring);
+    }
+    .pl-search svg {
+      position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+      color: var(--muted); pointer-events: none;
+    }
+
+    .pl-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pl-chip {
+      font-family: inherit;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      background: rgba(6, 57, 67, 0.06);
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 9px 16px;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+    .pl-chip:hover { background: rgba(209, 149, 87, 0.16); color: var(--teal); }
+    .pl-chip.is-active { background: var(--teal); color: var(--cream); }
+    .pl-chip .pl-chip-n { opacity: 0.6; margin-left: 6px; letter-spacing: 0.04em; }
+
+    .pl-tally {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+    .pl-tally strong { color: var(--teal); }
+
+    /* ---- Region block -------------------------------------------------- */
+    .pl-region { margin-bottom: 64px; scroll-margin-top: 90px; }
+    .pl-region[hidden] { display: none; }
+
+    .pl-region-head {
+      display: flex; align-items: flex-end; gap: 18px; flex-wrap: wrap;
+      padding-bottom: 14px;
+      border-bottom: 2px solid var(--teal);
+      margin-bottom: 26px;
+    }
+    .pl-region-code {
+      background: var(--teal); color: var(--cream);
+      font-weight: 700; font-size: 1.05rem; letter-spacing: 0.14em;
+      padding: 7px 14px; border-radius: 6px;
+      line-height: 1;
+    }
+    .pl-region-titles { flex: 1 1 320px; }
+    .pl-region-titles h2 {
+      color: var(--teal); font-size: 1.5rem; margin: 0; line-height: 1.2;
+    }
+    .pl-region-titles p {
+      color: #3a4a4d; font-size: 0.9rem; margin: 6px 0 0; max-width: 70ch;
+    }
+    .pl-region-count {
+      margin-left: auto;
+      background: rgba(209, 149, 87, 0.14);
+      color: #8d5a14;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 6px 13px; border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    /* ---- Table --------------------------------------------------------- */
+    .pl-table-wrap {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+    .pl-table { width: 100%; border-collapse: collapse; }
+
+    .pl-table thead th {
+      background: rgba(6, 57, 67, 0.05);
+      color: var(--teal);
+      font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      text-align: left;
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+    .pl-table thead th.pl-num { text-align: right; }
+
+    .pl-district-row th {
+      background: var(--cream);
+      color: var(--copper);
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      text-align: left;
+      padding: 11px 18px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .pl-district-row th .pl-district-n { color: var(--muted); letter-spacing: 0.06em; font-weight: 600; margin-left: 10px; }
+
+    .pl-row { border-bottom: 1px solid rgba(229, 223, 212, 0.7); transition: background 0.16s ease; }
+    .pl-row:last-child { border-bottom: none; }
+    .pl-row:hover { background: rgba(247, 241, 232, 0.55); }
+    .pl-row[hidden] { display: none; }
+
+    .pl-table td { padding: 15px 18px; font-size: 0.88rem; color: var(--ink); vertical-align: middle; }
+    .pl-table td.pl-num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+
+    .pl-name { font-weight: 700; font-size: 0.97rem; line-height: 1.3; color: var(--teal); }
+    .pl-name a { color: var(--teal); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.18s ease, border-color 0.18s ease; }
+    .pl-name a:hover { color: var(--copper); border-bottom-color: var(--copper); }
+    .pl-launched {
+      display: block; margin-top: 4px;
+      color: var(--muted); font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.08em;
+    }
+
+    .pl-name .pl-soon {
+      display: block; margin-top: 3px;
+      color: var(--muted); font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+
+    .pl-dist-cell { font-weight: 700; color: #3a4a4d; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+    .pl-badge {
+      display: inline-block;
+      font-size: 0.66rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 999px;
+      white-space: nowrap;
+      cursor: help;
+    }
+    .pl-badge.is-lh { background: rgba(127, 168, 173, 0.2); color: #2d6671; }
+    .pl-badge.is-fh { background: rgba(209, 149, 87, 0.2); color: #8d5a14; }
+
+    .pl-mix { color: #3a4a4d; line-height: 1.45; }
+    .pl-mix.is-tbc { color: var(--muted); font-style: italic; }
+
+    .pl-mrt { line-height: 1.4; }
+    .pl-mrt .pl-mrt-note { display: block; color: var(--muted); font-size: 0.76rem; margin-top: 2px; }
+
+    /* ---- Empty state --------------------------------------------------- */
+    .pl-empty {
+      display: none;
+      text-align: center;
+      background: #ffffff;
+      border: 1px dashed var(--line);
+      border-radius: var(--radius-lg);
+      padding: 56px 24px;
+      color: var(--muted);
+    }
+    .pl-empty.is-on { display: block; }
+    .pl-empty strong { display: block; color: var(--teal); font-size: 1.1rem; margin-bottom: 8px; }
+
+    /* ---- Mobile: table → stacked cards -------------------------------- */
+    @media (max-width: 900px) {
+      .pl-table-wrap { border: none; background: transparent; box-shadow: none; overflow: visible; }
+      .pl-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+      .pl-table, .pl-table tbody, .pl-table tr, .pl-table td { display: block; width: 100%; }
+
+      .pl-district-row { display: block; margin: 26px 0 10px; }
+      .pl-district-row th {
+        display: block; background: transparent; border: none;
+        border-left: 3px solid var(--copper);
+        padding: 0 0 0 12px;
+      }
+
+      .pl-row {
+        background: #ffffff;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow-sm);
+        margin-bottom: 14px;
+        padding: 6px 2px 10px;
+      }
+      .pl-row:hover { background: #ffffff; }
+
+      .pl-table td { padding: 7px 16px; font-size: 0.88rem; }
+      .pl-table td.pl-num { text-align: left; }
+
+      .pl-table td[data-label]::before {
+        content: attr(data-label);
+        display: block;
+        color: var(--copper);
+        font-size: 0.62rem; font-weight: 700;
+        letter-spacing: 0.16em; text-transform: uppercase;
+        margin-bottom: 2px;
+      }
+      .pl-table td.pl-cell-name { padding-top: 14px; }
+      .pl-table td.pl-cell-name::before { display: none; }
+      .pl-name { font-size: 1.04rem; }
+    }
+
+    /* ---- CTA band ------------------------------------------------------ */
+    .pl-band { background: var(--teal); padding: 70px 0; }
+    .pl-band .container { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
+    @media (max-width: 880px) { .pl-band .container { grid-template-columns: 1fr; } }
+    .pl-band .eyebrow { color: var(--copper); letter-spacing: 0.22em; text-transform: uppercase; font-size: 0.78rem; font-weight: 700; }
+    .pl-band h2 { color: var(--cream); margin-top: 12px; }
+    .pl-band p { color: rgba(247, 241, 232, 0.92); margin-top: 10px; }
+
+    @media (max-width: 540px) {
+      .pl-region-titles h2 { font-size: 1.28rem; }
+      .pl-region-count { margin-left: 0; }
+    }
+  </style>
+
+  <section class="page-banner">
+    <div class="page-banner-inner">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep" aria-hidden="true">›</span>
+        <a href="/blog">Insights &amp; News</a>
+        <span class="sep" aria-hidden="true">›</span>
+        <span class="current" aria-current="page">Post Launches</span>
+      </nav>
+      <span class="eyebrow">Post Launches</span>
+      <h1>Post Launches</h1>
+      <p>Developments that have already launched and still have units available &mdash; grouped by region, then by postal district. One row per project: tenure, total units, unit mix and the nearest MRT as stated in the development&rsquo;s material reference.</p>
+    </div>
+  </section>
+
+  <section class="pl-body">
+    <div class="container">
+
+      <div class="pl-toolbar">
+        <div class="pl-search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path>
+          </svg>
+          <label class="pl-sr" for="pl-q">Search post launches by development, district or MRT</label>
+          <input type="search" id="pl-q" placeholder="Search development, district or MRT…" autocomplete="off" />
+        </div>
+
+        <div class="pl-chips" role="group" aria-label="Filter by region">
+          <button type="button" class="pl-chip is-active" data-region="all">All Regions<span class="pl-chip-n">{totalProjects}</span></button>
+          {regionGroups.map((r) => (
+            <button type="button" class="pl-chip" data-region={r.code}>{r.code}<span class="pl-chip-n">{r.count}</span></button>
+          ))}
+        </div>
+
+        <p class="pl-tally" id="pl-tally" aria-live="polite">
+          Showing <strong>{totalProjects}</strong> developments across <strong>{totalDistricts}</strong> districts.
+        </p>
+      </div>
+
+      {regionGroups.map((region) => (
+        <div class="pl-region" id={`region-${region.code.toLowerCase()}`} data-region={region.code} hidden={region.count === 0}>
+          <div class="pl-region-head">
+            <span class="pl-region-code">{region.code}</span>
+            <div class="pl-region-titles">
+              <h2>{region.name}</h2>
+              <p>{region.blurb}</p>
+            </div>
+            <span class="pl-region-count" data-region-count>{region.count} {region.count === 1 ? 'project' : 'projects'}</span>
+          </div>
+
+          <div class="pl-table-wrap">
+            <table class="pl-table">
+              <caption class="pl-sr">{region.name} ({region.code}) post launches, grouped by postal district</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Development</th>
+                  <th scope="col">District</th>
+                  <th scope="col">Tenure</th>
+                  <th scope="col" class="pl-num">Total Units</th>
+                  <th scope="col">Unit Mix</th>
+                  <th scope="col">Nearest MRT</th>
+                </tr>
+              </thead>
+
+              {region.districts.map((group) => (
+                <tbody data-district-group={group.district}>
+                  <tr class="pl-district-row">
+                    <th scope="colgroup" colspan="6">
+                      {group.label}
+                      <span class="pl-district-n">{group.items.length} {group.items.length === 1 ? 'project' : 'projects'}</span>
+                    </th>
+                  </tr>
+
+                  {group.items.map((p) => (
+                    <tr
+                      class="pl-row"
+                      data-name={p.name.toLowerCase()}
+                      data-district={pad(p.district)}
+                      data-mrt={p.mrt.toLowerCase()}
+                      data-launched={(p.launchLabel ?? '').toLowerCase()}
+                    >
+                      <td class="pl-cell-name">
+                        <div class="pl-name">
+                          {p.slug ? <a href={p.slug}>{p.name}</a> : <>{p.name}<span class="pl-soon">Write-up coming soon</span></>}
+                        </div>
+                        {p.launchLabel && <time class="pl-launched" datetime={p.launched}>Launched {p.launchLabel}</time>}
+                      </td>
+                      <td data-label="District"><span class="pl-dist-cell">D{pad(p.district)}</span></td>
+                      <td data-label="Tenure">
+                        <span class={`pl-badge ${p.tenure === 'FH' ? 'is-fh' : 'is-lh'}`} title={p.tenureNote ?? p.tenure}>{p.tenure}</span>
+                      </td>
+                      <td class="pl-num" data-label="Total Units">{typeof p.units === 'number' ? p.units.toLocaleString('en-SG') : p.units}</td>
+                      <td data-label="Unit Mix"><span class={`pl-mix ${p.unitMix === 'TBC' ? 'is-tbc' : ''}`}>{p.unitMix}</span></td>
+                      <td data-label="Nearest MRT">
+                        <span class="pl-mrt">{p.mrt}{p.mrtNote && <span class="pl-mrt-note">{p.mrtNote}</span>}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              ))}
+            </table>
+          </div>
+        </div>
+      ))}
+
+      <div class="pl-empty" id="pl-empty">
+        <strong>No developments match that search.</strong>
+        Try a different development name, district number (e.g. 11) or MRT station.
+      </div>
+
+    </div>
+  </section>
+
+  <section class="pl-band">
+    <div class="container">
+      <div>
+        <span class="eyebrow">Still Available</span>
+        <h2>Want the current availability on any of these?</h2>
+        <p>Unit availability, remaining stack choices and the latest developer pricing change week to week. Send us the project and we&rsquo;ll come back with what is actually left.</p>
+      </div>
+
+      <form id="lead-form" class="lead-form" novalidate>
+        <h3 style="color:var(--teal);">Ask about a post launch</h3>
+        <p class="form-sub" style="color:#3a4a4d;">We&rsquo;ll reply with current availability and the unit mix still on the table.</p>
+        <div class="form-success" role="status" aria-live="polite"></div>
+        <div class="hp-field" aria-hidden="true"><label for="website">Don't fill this out if you're human</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off" /></div>
+        <div class="field"><label for="email">Email Address *</label><input type="email" id="email" name="email" required placeholder="you@example.com" /></div>
+        <div class="field"><label for="interest">Most interested in</label><select id="interest" name="interest"><option>Post launch availability</option><option>New launch alerts</option><option>Quarterly market reports</option><option>Buyer guides &amp; how-tos</option><option>District spotlights</option><option>All of the above</option></select></div>
+        <button type="submit" class="btn btn-primary">Send enquiry</button>
+      </form>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var q = document.getElementById('pl-q');
+      var chips = Array.prototype.slice.call(document.querySelectorAll('.pl-chip[data-region]'));
+      var regions = Array.prototype.slice.call(document.querySelectorAll('.pl-region[data-region]'));
+      var empty = document.getElementById('pl-empty');
+      var tally = document.getElementById('pl-tally');
+      if (!regions.length) return;
+
+      var activeRegion = 'all';
+
+      function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
+
+      function apply() {
+        var term = (q && q.value || '').trim().toLowerCase();
+        var shownProjects = 0;
+        var shownDistricts = 0;
+
+        regions.forEach(function (region) {
+          var regionMatch = activeRegion === 'all' || region.getAttribute('data-region') === activeRegion;
+          var regionCount = 0;
+
+          Array.prototype.forEach.call(region.querySelectorAll('tbody[data-district-group]'), function (group) {
+            var rows = Array.prototype.slice.call(group.querySelectorAll('.pl-row'));
+            var groupCount = 0;
+
+            rows.forEach(function (row) {
+              var hay =
+                row.getAttribute('data-name') + ' ' +
+                'd' + row.getAttribute('data-district') + ' ' +
+                row.getAttribute('data-district') + ' ' +
+                row.getAttribute('data-mrt') + ' ' +
+                (row.getAttribute('data-launched') || '');
+              var hit = regionMatch && (term === '' || hay.indexOf(term) !== -1);
+              row.hidden = !hit;
+              if (hit) groupCount++;
+            });
+
+            group.hidden = groupCount === 0;
+            if (groupCount > 0) {
+              shownDistricts++;
+              regionCount += groupCount;
+              var n = group.querySelector('.pl-district-n');
+              if (n) n.textContent = plural(groupCount, 'project');
+            }
+          });
+
+          region.hidden = regionCount === 0;
+          shownProjects += regionCount;
+
+          var badge = region.querySelector('[data-region-count]');
+          if (badge) badge.textContent = plural(regionCount, 'project');
+        });
+
+        if (empty) empty.classList.toggle('is-on', shownProjects === 0);
+        if (tally) {
+          tally.innerHTML = shownProjects === 0
+            ? 'No developments match the current filter.'
+            : 'Showing <strong>' + shownProjects + '</strong> ' +
+              (shownProjects === 1 ? 'development' : 'developments') +
+              ' across <strong>' + shownDistricts + '</strong> ' +
+              (shownDistricts === 1 ? 'district' : 'districts') + '.';
+        }
+      }
+
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          chips.forEach(function (c) { c.classList.remove('is-active'); });
+          chip.classList.add('is-active');
+          activeRegion = chip.getAttribute('data-region');
+          apply();
+        });
+      });
+
+      if (q) {
+        q.addEventListener('input', apply);
+        q.addEventListener('search', apply);
+      }
+
+      apply();
+    })();
+  </script>
+
+</BaseLayout>
+</content>
+</invoke>

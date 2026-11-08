@@ -26,6 +26,7 @@ export default defineConfig({
           path === '/our-services' ||
           path === '/blog' ||
           path === '/blog/new-launches' ||
+          path === '/blog/post-launches' ||
           path === '/blog/huttons-update'
         ) {
           item.priority = 0.9;
