@@ -14,7 +14,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 //   district   Number 1–28 (write 1, not '01'; it is zero-padded on render).
 //   tenure     '99LH' | 'FH' | '999LH' — rendered as a badge.
 //   tenureNote Optional detail shown on hover (e.g. lease commencement).
-//   units      Total units. Number, or a string like '370–380' if a range.
+//   units      Residential units for sale — the headline figure. Take it from
+//              the developer's official factsheet, not the PrimeKey report,
+//              which is written early and can be out of date.
+//   commercial Optional. Mixed developments only: the non-residential units,
+//              e.g. '3 retail + 1 childcare'. Shown as a separate line under
+//              the unit count, never added into it.
 //   beds       Bedroom types offered, as search tags. ONLY these values, in
 //              this order: '1Br', '2Br', '3Br', '4Br', '5Br', 'PH'. Strip the
 //              marketing suffixes — a 2-Bedroom Premium + Study is just '2Br',
@@ -66,7 +71,7 @@ const projects = [
     district: 11,
     tenure: '99LH',
     tenureNote: '99-year leasehold — ~98 years remaining',
-    units: '370–380',
+    units: 380,
     beds: [],
     mrt: 'Sixth Avenue (DTL)',
     launched: '2026-07-25',
@@ -92,7 +97,7 @@ const projects = [
     district: 20,
     tenure: '99LH',
     tenureNote: '99-year leasehold — ~98 years remaining (from Nov 2025)',
-    units: 1240,
+    units: 1268,
     beds: ['1Br', '2Br', '3Br', '4Br', '5Br'],
     mixNote: '1-Br ~506 sqft through 5-Br ~1,679 sqft',
     mrt: 'Upper Thomson (TE8)',
@@ -106,7 +111,7 @@ const projects = [
     district: 22,
     tenure: '99LH',
     tenureNote: '99-year leasehold from June 2025 — ~98 years remaining',
-    units: 575,
+    units: 570,
     beds: ['2Br', '3Br', '4Br'],
     mixNote: '2-Br ~620–710 sqft through 4-Br Premium + Entertainment ~1,140–1,430 sqft',
     mrt: 'Lakeside (EW26)',
@@ -120,7 +125,8 @@ const projects = [
     district: 26,
     tenure: '99LH',
     tenureNote: '99-year leasehold — ~98 years remaining (from April 2025)',
-    units: 500,
+    units: 499,
+    commercial: '3 retail + 1 childcare',
     beds: [],
     mrt: 'Lentor (TE5)',
     launched: '2026-07-18',
@@ -406,6 +412,12 @@ const schema = {
 
     .pl-mix.is-tbc { color: var(--muted); font-style: italic; }
 
+    .pl-commercial {
+      display: block; margin-top: 3px;
+      color: var(--muted); font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.04em; white-space: nowrap;
+    }
+
     .pl-beds { display: flex; flex-wrap: wrap; gap: 5px; }
     .pl-bed {
       font-size: 0.68rem; font-weight: 700;
@@ -586,7 +598,10 @@ const schema = {
                       <td data-label="Tenure">
                         <button type="button" class={`pl-badge ${p.tenure === 'FH' ? 'is-fh' : 'is-lh'}`} data-tag={p.tenure} title={`${p.tenureNote ?? p.tenure} — click to filter`}>{p.tenure}</button>
                       </td>
-                      <td class="pl-num" data-label="Total Units">{typeof p.units === 'number' ? p.units.toLocaleString('en-SG') : p.units}</td>
+                      <td class="pl-num" data-label="Total Units">
+                        {typeof p.units === 'number' ? p.units.toLocaleString('en-SG') : p.units}
+                        {p.commercial && <span class="pl-commercial">+ {p.commercial}</span>}
+                      </td>
                       <td data-label="Unit Mix">
                         {p.beds.length ? (
                           <span class="pl-beds" title={p.mixNote ?? undefined}>
